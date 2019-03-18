@@ -2,6 +2,10 @@
 # Compiled class file
 *.class
 
+SqlMapConfig.xml
+*.properties
+applicationContext-*
+
 # Log file
 *.log
 
