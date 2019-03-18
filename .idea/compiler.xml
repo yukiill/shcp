@@ -9,6 +9,7 @@
         <module name="shcp" />
         <module name="shcp-client" />
         <module name="shcp-common" />
+        <module name="shcp-device" />
         <module name="shcp-manager" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
       <module name="shcp" target="1.5" />
       <module name="shcp-client" target="1.8" />
       <module name="shcp-common" target="1.8" />
+      <module name="shcp-device" target="1.8" />
       <module name="shcp-manager" target="1.8" />
       <module name="shcp-parent" target="1.5" />
     </bytecodeTargetLevel>

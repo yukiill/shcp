@@ -11,6 +11,7 @@
         <module>shcp-manager</module>
         <module>shcp-client</module>
         <module>shcp-common</module>
+        <module>shcp-device</module>
     </modules>
 
 

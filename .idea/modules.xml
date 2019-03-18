@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/shcp-client/shcp-client.iml" filepath="$PROJECT_DIR$/shcp-client/shcp-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/shcp-common/shcp-common.iml" filepath="$PROJECT_DIR$/shcp-common/shcp-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shcp-device/shcp-device.iml" filepath="$PROJECT_DIR$/shcp-device/shcp-device.iml" />
       <module fileurl="file://$PROJECT_DIR$/shcp-manager/shcp-manager.iml" filepath="$PROJECT_DIR$/shcp-manager/shcp-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/shcp-parent.iml" filepath="$PROJECT_DIR$/shcp-parent.iml" />
     </modules>
