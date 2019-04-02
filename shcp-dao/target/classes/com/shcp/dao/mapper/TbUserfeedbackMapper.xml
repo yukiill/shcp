@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shcp.dao.mapper.TbUserfeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbUserfeedback">
+    <id column="FID" jdbcType="BIGINT" property="fid" />
+    <result column="DID" jdbcType="BIGINT" property="did" />
+    <result column="UID" jdbcType="BIGINT" property="uid" />
+    <result column="FDATETIME" jdbcType="TIMESTAMP" property="fdatetime" />
+    <result column="FCHECK" jdbcType="TINYINT" property="fcheck" />
+    <result column="FREPLY" jdbcType="TINYINT" property="freply" />
+    <result column="FUTYPE" jdbcType="SMALLINT" property="futype" />
+    <result column="FDUID" jdbcType="INTEGER" property="fduid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.shcp.pojo.TbUserfeedback">
+    <result column="FCONTENT" jdbcType="LONGVARCHAR" property="fcontent" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FID, DID, UID, FDATETIME, FCHECK, FREPLY, FUTYPE, FDUID
+  </sql>
+  <sql id="Blob_Column_List">
+    FCONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.shcp.pojo.TbUserfeedbackExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_userfeedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.shcp.pojo.TbUserfeedbackExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_userfeedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_userfeedback
+    where FID = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_userfeedback
+    where FID = #{fid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbUserfeedbackExample">
+    delete from tb_userfeedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.TbUserfeedback">
+    insert into tb_userfeedback (FID, DID, UID, FDATETIME, 
+      FCHECK, FREPLY, FUTYPE, 
+      FDUID, FCONTENT)
+    values (#{fid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{fdatetime,jdbcType=TIMESTAMP}, 
+      #{fcheck,jdbcType=TINYINT}, #{freply,jdbcType=TINYINT}, #{futype,jdbcType=SMALLINT}, 
+      #{fduid,jdbcType=INTEGER}, #{fcontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TbUserfeedback">
+    insert into tb_userfeedback
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        FID,
+      </if>
+      <if test="did != null">
+        DID,
+      </if>
+      <if test="uid != null">
+        UID,
+      </if>
+      <if test="fdatetime != null">
+        FDATETIME,
+      </if>
+      <if test="fcheck != null">
+        FCHECK,
+      </if>
+      <if test="freply != null">
+        FREPLY,
+      </if>
+      <if test="futype != null">
+        FUTYPE,
+      </if>
+      <if test="fduid != null">
+        FDUID,
+      </if>
+      <if test="fcontent != null">
+        FCONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="did != null">
+        #{did,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="fdatetime != null">
+        #{fdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcheck != null">
+        #{fcheck,jdbcType=TINYINT},
+      </if>
+      <if test="freply != null">
+        #{freply,jdbcType=TINYINT},
+      </if>
+      <if test="futype != null">
+        #{futype,jdbcType=SMALLINT},
+      </if>
+      <if test="fduid != null">
+        #{fduid,jdbcType=INTEGER},
+      </if>
+      <if test="fcontent != null">
+        #{fcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.TbUserfeedbackExample" resultType="java.lang.Integer">
+    select count(*) from tb_userfeedback
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_userfeedback
+    <set>
+      <if test="record.fid != null">
+        FID = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.did != null">
+        DID = #{record.did,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null">
+        UID = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fdatetime != null">
+        FDATETIME = #{record.fdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcheck != null">
+        FCHECK = #{record.fcheck,jdbcType=TINYINT},
+      </if>
+      <if test="record.freply != null">
+        FREPLY = #{record.freply,jdbcType=TINYINT},
+      </if>
+      <if test="record.futype != null">
+        FUTYPE = #{record.futype,jdbcType=SMALLINT},
+      </if>
+      <if test="record.fduid != null">
+        FDUID = #{record.fduid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcontent != null">
+        FCONTENT = #{record.fcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tb_userfeedback
+    set FID = #{record.fid,jdbcType=BIGINT},
+      DID = #{record.did,jdbcType=BIGINT},
+      UID = #{record.uid,jdbcType=BIGINT},
+      FDATETIME = #{record.fdatetime,jdbcType=TIMESTAMP},
+      FCHECK = #{record.fcheck,jdbcType=TINYINT},
+      FREPLY = #{record.freply,jdbcType=TINYINT},
+      FUTYPE = #{record.futype,jdbcType=SMALLINT},
+      FDUID = #{record.fduid,jdbcType=INTEGER},
+      FCONTENT = #{record.fcontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_userfeedback
+    set FID = #{record.fid,jdbcType=BIGINT},
+      DID = #{record.did,jdbcType=BIGINT},
+      UID = #{record.uid,jdbcType=BIGINT},
+      FDATETIME = #{record.fdatetime,jdbcType=TIMESTAMP},
+      FCHECK = #{record.fcheck,jdbcType=TINYINT},
+      FREPLY = #{record.freply,jdbcType=TINYINT},
+      FUTYPE = #{record.futype,jdbcType=SMALLINT},
+      FDUID = #{record.fduid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbUserfeedback">
+    update tb_userfeedback
+    <set>
+      <if test="did != null">
+        DID = #{did,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null">
+        UID = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="fdatetime != null">
+        FDATETIME = #{fdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcheck != null">
+        FCHECK = #{fcheck,jdbcType=TINYINT},
+      </if>
+      <if test="freply != null">
+        FREPLY = #{freply,jdbcType=TINYINT},
+      </if>
+      <if test="futype != null">
+        FUTYPE = #{futype,jdbcType=SMALLINT},
+      </if>
+      <if test="fduid != null">
+        FDUID = #{fduid,jdbcType=INTEGER},
+      </if>
+      <if test="fcontent != null">
+        FCONTENT = #{fcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where FID = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shcp.pojo.TbUserfeedback">
+    update tb_userfeedback
+    set DID = #{did,jdbcType=BIGINT},
+      UID = #{uid,jdbcType=BIGINT},
+      FDATETIME = #{fdatetime,jdbcType=TIMESTAMP},
+      FCHECK = #{fcheck,jdbcType=TINYINT},
+      FREPLY = #{freply,jdbcType=TINYINT},
+      FUTYPE = #{futype,jdbcType=SMALLINT},
+      FDUID = #{fduid,jdbcType=INTEGER},
+      FCONTENT = #{fcontent,jdbcType=LONGVARCHAR}
+    where FID = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbUserfeedback">
+    update tb_userfeedback
+    set DID = #{did,jdbcType=BIGINT},
+      UID = #{uid,jdbcType=BIGINT},
+      FDATETIME = #{fdatetime,jdbcType=TIMESTAMP},
+      FCHECK = #{fcheck,jdbcType=TINYINT},
+      FREPLY = #{freply,jdbcType=TINYINT},
+      FUTYPE = #{futype,jdbcType=SMALLINT},
+      FDUID = #{fduid,jdbcType=INTEGER}
+    where FID = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

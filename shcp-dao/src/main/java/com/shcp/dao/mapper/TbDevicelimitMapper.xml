@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shcp.dao.mapper.TbDevicelimitMapper">
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDevicelimit">
+    <id column="DSLID" jdbcType="BIGINT" property="dslid" />
+    <result column="DSLNAME" jdbcType="VARCHAR" property="dslname" />
+    <result column="DSLKEY" jdbcType="VARCHAR" property="dslkey" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    DSLID, DSLNAME, DSLKEY
+  </sql>
+  <select id="selectByExample" parameterType="com.shcp.pojo.TbDevicelimitExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_devicelimit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_devicelimit
+    where DSLID = #{dslid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_devicelimit
+    where DSLID = #{dslid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDevicelimitExample">
+    delete from tb_devicelimit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.TbDevicelimit">
+    insert into tb_devicelimit (DSLID, DSLNAME, DSLKEY
+      )
+    values (#{dslid,jdbcType=BIGINT}, #{dslname,jdbcType=VARCHAR}, #{dslkey,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDevicelimit">
+    insert into tb_devicelimit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dslid != null">
+        DSLID,
+      </if>
+      <if test="dslname != null">
+        DSLNAME,
+      </if>
+      <if test="dslkey != null">
+        DSLKEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dslid != null">
+        #{dslid,jdbcType=BIGINT},
+      </if>
+      <if test="dslname != null">
+        #{dslname,jdbcType=VARCHAR},
+      </if>
+      <if test="dslkey != null">
+        #{dslkey,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.TbDevicelimitExample" resultType="java.lang.Integer">
+    select count(*) from tb_devicelimit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_devicelimit
+    <set>
+      <if test="record.dslid != null">
+        DSLID = #{record.dslid,jdbcType=BIGINT},
+      </if>
+      <if test="record.dslname != null">
+        DSLNAME = #{record.dslname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dslkey != null">
+        DSLKEY = #{record.dslkey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_devicelimit
+    set DSLID = #{record.dslid,jdbcType=BIGINT},
+      DSLNAME = #{record.dslname,jdbcType=VARCHAR},
+      DSLKEY = #{record.dslkey,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDevicelimit">
+    update tb_devicelimit
+    <set>
+      <if test="dslname != null">
+        DSLNAME = #{dslname,jdbcType=VARCHAR},
+      </if>
+      <if test="dslkey != null">
+        DSLKEY = #{dslkey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DSLID = #{dslid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDevicelimit">
+    update tb_devicelimit
+    set DSLNAME = #{dslname,jdbcType=VARCHAR},
+      DSLKEY = #{dslkey,jdbcType=VARCHAR}
+    where DSLID = #{dslid,jdbcType=BIGINT}
+  </update>
+</mapper>

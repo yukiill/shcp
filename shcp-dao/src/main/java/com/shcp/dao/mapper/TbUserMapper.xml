@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shcp.dao.mapper.TbUserMapper">
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbUser">
+    <id column="UID" jdbcType="BIGINT" property="uid" />
+    <result column="DID" jdbcType="BIGINT" property="did" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="UINTRODUCE" jdbcType="VARCHAR" property="uintroduce" />
+    <result column="UEMAIL" jdbcType="VARCHAR" property="uemail" />
+    <result column="CDATE" jdbcType="TIMESTAMP" property="cdate" />
+    <result column="UHIMG" jdbcType="VARCHAR" property="uhimg" />
+    <result column="UBIRTH" jdbcType="DATE" property="ubirth" />
+    <result column="UTYPE" jdbcType="TINYINT" property="utype" />
+    <result column="ULIMIT" jdbcType="SMALLINT" property="ulimit" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UID, DID, USERNAME, PASSWORD, UINTRODUCE, UEMAIL, CDATE, UHIMG, UBIRTH, UTYPE, ULIMIT
+  </sql>
+  <select id="selectByExample" parameterType="com.shcp.pojo.TbUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where UID = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_user
+    where UID = #{uid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbUserExample">
+    delete from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.TbUser">
+    insert into tb_user (UID, DID, USERNAME, 
+      PASSWORD, UINTRODUCE, UEMAIL, 
+      CDATE, UHIMG, UBIRTH, 
+      UTYPE, ULIMIT)
+    values (#{uid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{uintroduce,jdbcType=VARCHAR}, #{uemail,jdbcType=VARCHAR}, 
+      #{cdate,jdbcType=TIMESTAMP}, #{uhimg,jdbcType=VARCHAR}, #{ubirth,jdbcType=DATE}, 
+      #{utype,jdbcType=TINYINT}, #{ulimit,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TbUser">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        UID,
+      </if>
+      <if test="did != null">
+        DID,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="uintroduce != null">
+        UINTRODUCE,
+      </if>
+      <if test="uemail != null">
+        UEMAIL,
+      </if>
+      <if test="cdate != null">
+        CDATE,
+      </if>
+      <if test="uhimg != null">
+        UHIMG,
+      </if>
+      <if test="ubirth != null">
+        UBIRTH,
+      </if>
+      <if test="utype != null">
+        UTYPE,
+      </if>
+      <if test="ulimit != null">
+        ULIMIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="did != null">
+        #{did,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="uintroduce != null">
+        #{uintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="uemail != null">
+        #{uemail,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uhimg != null">
+        #{uhimg,jdbcType=VARCHAR},
+      </if>
+      <if test="ubirth != null">
+        #{ubirth,jdbcType=DATE},
+      </if>
+      <if test="utype != null">
+        #{utype,jdbcType=TINYINT},
+      </if>
+      <if test="ulimit != null">
+        #{ulimit,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.TbUserExample" resultType="java.lang.Integer">
+    select count(*) from tb_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_user
+    <set>
+      <if test="record.uid != null">
+        UID = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.did != null">
+        DID = #{record.did,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null">
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uintroduce != null">
+        UINTRODUCE = #{record.uintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uemail != null">
+        UEMAIL = #{record.uemail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdate != null">
+        CDATE = #{record.cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uhimg != null">
+        UHIMG = #{record.uhimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ubirth != null">
+        UBIRTH = #{record.ubirth,jdbcType=DATE},
+      </if>
+      <if test="record.utype != null">
+        UTYPE = #{record.utype,jdbcType=TINYINT},
+      </if>
+      <if test="record.ulimit != null">
+        ULIMIT = #{record.ulimit,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_user
+    set UID = #{record.uid,jdbcType=BIGINT},
+      DID = #{record.did,jdbcType=BIGINT},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      UINTRODUCE = #{record.uintroduce,jdbcType=VARCHAR},
+      UEMAIL = #{record.uemail,jdbcType=VARCHAR},
+      CDATE = #{record.cdate,jdbcType=TIMESTAMP},
+      UHIMG = #{record.uhimg,jdbcType=VARCHAR},
+      UBIRTH = #{record.ubirth,jdbcType=DATE},
+      UTYPE = #{record.utype,jdbcType=TINYINT},
+      ULIMIT = #{record.ulimit,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbUser">
+    update tb_user
+    <set>
+      <if test="did != null">
+        DID = #{did,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="uintroduce != null">
+        UINTRODUCE = #{uintroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="uemail != null">
+        UEMAIL = #{uemail,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        CDATE = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uhimg != null">
+        UHIMG = #{uhimg,jdbcType=VARCHAR},
+      </if>
+      <if test="ubirth != null">
+        UBIRTH = #{ubirth,jdbcType=DATE},
+      </if>
+      <if test="utype != null">
+        UTYPE = #{utype,jdbcType=TINYINT},
+      </if>
+      <if test="ulimit != null">
+        ULIMIT = #{ulimit,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where UID = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbUser">
+    update tb_user
+    set DID = #{did,jdbcType=BIGINT},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      UINTRODUCE = #{uintroduce,jdbcType=VARCHAR},
+      UEMAIL = #{uemail,jdbcType=VARCHAR},
+      CDATE = #{cdate,jdbcType=TIMESTAMP},
+      UHIMG = #{uhimg,jdbcType=VARCHAR},
+      UBIRTH = #{ubirth,jdbcType=DATE},
+      UTYPE = #{utype,jdbcType=TINYINT},
+      ULIMIT = #{ulimit,jdbcType=SMALLINT}
+    where UID = #{uid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByUsername" parameterType="string" resultType="string">
+    select username from tb_user where username = #{username}
+  </select>
+</mapper>

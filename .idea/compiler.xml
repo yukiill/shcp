@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="shcp" />
+        <module name="shcp-client" />
+        <module name="shcp-common" />
+        <module name="shcp-dao" />
+        <module name="shcp-manager" />
+        <module name="shcp-pojo" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="shcp" target="1.5" />
+      <module name="shcp-client" target="1.8" />
+      <module name="shcp-common" target="1.8" />
+      <module name="shcp-dao" target="1.8" />
+      <module name="shcp-manager" target="1.8" />
+      <module name="shcp-parent" target="1.5" />
+      <module name="shcp-pojo" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

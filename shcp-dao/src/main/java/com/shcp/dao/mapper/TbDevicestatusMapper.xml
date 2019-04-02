@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shcp.dao.mapper.TbDevicestatusMapper">
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDevicestatus">
+    <id column="DESID" jdbcType="BIGINT" property="desid" />
+    <result column="DESNAME" jdbcType="VARCHAR" property="desname" />
+    <result column="DESTYPE" jdbcType="VARCHAR" property="destype" />
+    <result column="DESDEFAULTVALUE" jdbcType="VARCHAR" property="desdefaultvalue" />
+    <result column="DESMINVALUE" jdbcType="VARCHAR" property="desminvalue" />
+    <result column="DESMAXVALUE" jdbcType="VARCHAR" property="desmaxvalue" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    DESID, DESNAME, DESTYPE, DESDEFAULTVALUE, DESMINVALUE, DESMAXVALUE
+  </sql>
+  <select id="selectByExample" parameterType="com.shcp.pojo.TbDevicestatusExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_devicestatus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_devicestatus
+    where DESID = #{desid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_devicestatus
+    where DESID = #{desid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDevicestatusExample">
+    delete from tb_devicestatus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.TbDevicestatus">
+    insert into tb_devicestatus (DESID, DESNAME, DESTYPE, 
+      DESDEFAULTVALUE, DESMINVALUE, DESMAXVALUE
+      )
+    values (#{desid,jdbcType=BIGINT}, #{desname,jdbcType=VARCHAR}, #{destype,jdbcType=VARCHAR}, 
+      #{desdefaultvalue,jdbcType=VARCHAR}, #{desminvalue,jdbcType=VARCHAR}, #{desmaxvalue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDevicestatus">
+    insert into tb_devicestatus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="desid != null">
+        DESID,
+      </if>
+      <if test="desname != null">
+        DESNAME,
+      </if>
+      <if test="destype != null">
+        DESTYPE,
+      </if>
+      <if test="desdefaultvalue != null">
+        DESDEFAULTVALUE,
+      </if>
+      <if test="desminvalue != null">
+        DESMINVALUE,
+      </if>
+      <if test="desmaxvalue != null">
+        DESMAXVALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="desid != null">
+        #{desid,jdbcType=BIGINT},
+      </if>
+      <if test="desname != null">
+        #{desname,jdbcType=VARCHAR},
+      </if>
+      <if test="destype != null">
+        #{destype,jdbcType=VARCHAR},
+      </if>
+      <if test="desdefaultvalue != null">
+        #{desdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="desminvalue != null">
+        #{desminvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="desmaxvalue != null">
+        #{desmaxvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.TbDevicestatusExample" resultType="java.lang.Integer">
+    select count(*) from tb_devicestatus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_devicestatus
+    <set>
+      <if test="record.desid != null">
+        DESID = #{record.desid,jdbcType=BIGINT},
+      </if>
+      <if test="record.desname != null">
+        DESNAME = #{record.desname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.destype != null">
+        DESTYPE = #{record.destype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.desdefaultvalue != null">
+        DESDEFAULTVALUE = #{record.desdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.desminvalue != null">
+        DESMINVALUE = #{record.desminvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.desmaxvalue != null">
+        DESMAXVALUE = #{record.desmaxvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_devicestatus
+    set DESID = #{record.desid,jdbcType=BIGINT},
+      DESNAME = #{record.desname,jdbcType=VARCHAR},
+      DESTYPE = #{record.destype,jdbcType=VARCHAR},
+      DESDEFAULTVALUE = #{record.desdefaultvalue,jdbcType=VARCHAR},
+      DESMINVALUE = #{record.desminvalue,jdbcType=VARCHAR},
+      DESMAXVALUE = #{record.desmaxvalue,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDevicestatus">
+    update tb_devicestatus
+    <set>
+      <if test="desname != null">
+        DESNAME = #{desname,jdbcType=VARCHAR},
+      </if>
+      <if test="destype != null">
+        DESTYPE = #{destype,jdbcType=VARCHAR},
+      </if>
+      <if test="desdefaultvalue != null">
+        DESDEFAULTVALUE = #{desdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="desminvalue != null">
+        DESMINVALUE = #{desminvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="desmaxvalue != null">
+        DESMAXVALUE = #{desmaxvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DESID = #{desid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDevicestatus">
+    update tb_devicestatus
+    set DESNAME = #{desname,jdbcType=VARCHAR},
+      DESTYPE = #{destype,jdbcType=VARCHAR},
+      DESDEFAULTVALUE = #{desdefaultvalue,jdbcType=VARCHAR},
+      DESMINVALUE = #{desminvalue,jdbcType=VARCHAR},
+      DESMAXVALUE = #{desmaxvalue,jdbcType=VARCHAR}
+    where DESID = #{desid,jdbcType=BIGINT}
+  </update>
+</mapper>
