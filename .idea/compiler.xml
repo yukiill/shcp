@@ -10,6 +10,7 @@
         <module name="shcp-client" />
         <module name="shcp-common" />
         <module name="shcp-dao" />
+        <module name="shcp-developer" />
         <module name="shcp-manager" />
         <module name="shcp-pojo" />
       </profile>
@@ -19,6 +20,7 @@
       <module name="shcp-client" target="1.8" />
       <module name="shcp-common" target="1.8" />
       <module name="shcp-dao" target="1.8" />
+      <module name="shcp-developer" target="1.8" />
       <module name="shcp-manager" target="1.8" />
       <module name="shcp-parent" target="1.5" />
       <module name="shcp-pojo" target="1.8" />

@@ -2,6 +2,7 @@ package com.shcp.client.service;
 
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.pojo.TbDevice;
+import com.shcp.pojo.TbUser;
 
 import java.util.List;
 
@@ -12,4 +13,8 @@ import java.util.List;
 public interface DeviceService {
 
     ShcpResult getDeviceListByUserId(Long userId);
+
+    ShcpResult bindDevice(Long dstID, TbUser tbUser);
+
+    ShcpResult getDeviceStatus(Long deviceID);
 }

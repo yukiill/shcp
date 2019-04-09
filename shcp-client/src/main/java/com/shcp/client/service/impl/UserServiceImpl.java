@@ -1,20 +1,26 @@
 package com.shcp.client.service.impl;
 
 import com.shcp.client.service.UserService;
+import com.shcp.client.utils.FileUtil;
 import com.shcp.client.utils.IdGenerator;
 import com.shcp.common.pojo.ShcpResult;
+import com.shcp.dao.mapper.TbReplyMapper;
 import com.shcp.dao.mapper.TbUserMapper;
 import com.shcp.dao.mapper.TbUserfeedbackMapper;
+import com.shcp.pojo.TbReply;
 import com.shcp.pojo.TbUser;
 import com.shcp.pojo.TbUserExample;
 import com.shcp.pojo.TbUserfeedback;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,15 +32,12 @@ import java.util.Objects;
 @Service("userService")
 public class UserServiceImpl implements UserService{
 
-    private static final String DEFAULT_IMAGE_URL= "C:/Users/Yuki/Desktop/photo/default.jpg";
-
+    @Resource
     private TbUserMapper tbUserMapper;
+    @Resource
     private TbUserfeedbackMapper tbUserfeedbackMapper;
-
-    @Autowired
-    public UserServiceImpl(TbUserMapper tbUserMapper){
-        this.tbUserMapper = tbUserMapper;
-    }
+    @Resource
+    private TbReplyMapper tbReplyMapper;
 
     @Override
     public TbUser login(String userName, String password, String TerID) {
@@ -57,7 +60,7 @@ public class UserServiceImpl implements UserService{
         tbUser.setPassword(password);
         tbUser.setUemail(email);
         tbUser.setDid((long) 0);
-        tbUser.setUhimg(DEFAULT_IMAGE_URL);
+        tbUser.setUhimg(FileUtil.DEFAULT_IMAGE_URL);
         tbUser.setUbirth(null);
         tbUser.setUlimit((short) 11);
         tbUser.setUtype((byte) 0);
@@ -69,23 +72,37 @@ public class UserServiceImpl implements UserService{
     @Override
     public Boolean usernameIsPresent(String username) {
         String result = tbUserMapper.selectByUsername(username);
-        return !Objects.isNull(result) && ! Objects.equals("", username);
+        return !StringUtils.isEmpty(result);
     }
 
     @Override
-    public Boolean changeInfo(Long userId, String email, String birthday, String introduction, String sex) {
+    public Boolean changeInfo(TbUser tbUser, String email, String birthday, String introduction, String sex) {
+        boolean isChanged = false;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        TbUser tbUser = new TbUser();
-        tbUser.setUid(userId);
-        tbUser.setUemail(email);
-        tbUser.setUintroduce(introduction);
-        try {
-            tbUser.setUbirth(dateFormat.parse(birthday));
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if(!StringUtils.isEmpty(email) && !Objects.equals(email, tbUser.getUemail())){
+            isChanged = true;
+            tbUser.setUemail(email);
         }
-        log.info("userId:{} change userinfo success", userId);
-        return tbUserMapper.updateByPrimaryKeySelective(tbUser) == 1;
+        if(!StringUtils.isEmpty(introduction) && !Objects.equals(introduction, tbUser.getUintroduce())){
+            isChanged = true;
+            tbUser.setUintroduce(introduction);
+        }
+        Date newBirth = null;
+        try {
+            newBirth = dateFormat.parse(birthday);
+        } catch (ParseException e) {
+            newBirth = tbUser.getUbirth();
+            log.info("format date has occurred error message:{}", e.getMessage());
+        }
+        if(!StringUtils.isEmpty(birthday) && Objects.equals(tbUser.getUbirth().toString(), birthday)){
+            isChanged = true;
+            tbUser.setUbirth(newBirth);
+        }
+        if(isChanged){
+            tbUserMapper.updateByPrimaryKeySelective(tbUser);
+            log.info("userId:{} change userinfo success", tbUser.getUid());
+        }
+        return true;
     }
 
     @Override
@@ -101,9 +118,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ShcpResult submitFeedback(TbUser tbUser, String contet, String title, Short type) {
+    public ShcpResult submitFeedback(TbUser tbUser, String content, String title, Short type) {
         TbUserfeedback tbUserfeedback = new TbUserfeedback();
-        tbUserfeedback.setFcontent(contet);
+        tbUserfeedback.setFcontent(content);
         tbUserfeedback.setDid(tbUser.getDid());
         tbUserfeedback.setFid(IdGenerator.generateFeedbackId());
         tbUserfeedback.setFutype(type);
@@ -126,9 +143,40 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ShcpResult changePwd(TbUser tbUser) {
+    public ShcpResult changePwd(TbUser tbUser, String nPwd) {
+        tbUser.setPassword(nPwd);
         tbUserMapper.updateByPrimaryKeySelective(tbUser);
         log.info("userId:{} change pwd success", tbUser.getUid());
         return ShcpResult.ok();
+    }
+
+    @Override
+    public ShcpResult forgetPwd(String newPass, String email) {
+        TbUserExample example = new TbUserExample();
+        example.createCriteria()
+                .andUemailEqualTo(email);
+        TbUser tbUser = tbUserMapper.selectByExample(example).get(0);
+        if(Objects.isNull(tbUser))
+        {
+            log.info("email:{} haven't opposite user", email);
+            return ShcpResult.build(659, "用户未注册");
+        }
+        return ShcpResult.ok();
+    }
+
+    @Override
+    public ShcpResult getAllReplies(Long UID, String UfbID) {
+        Long FID = null;
+        if(!StringUtils.isEmpty(UfbID)){
+            FID = Long.parseLong(UfbID);
+        }
+        List<TbReply> tbReplies = tbReplyMapper.getAllRepliesWithBLOBs(UID, FID);
+        log.info("UID:{} query replyID:{} success", UID, UfbID);
+        return ShcpResult.ok(tbReplies);
+    }
+
+    @Override
+    public Boolean emailIsPresent(String email) {
+        return !StringUtils.isEmpty(tbUserMapper.selectByEmail(email));
     }
 }

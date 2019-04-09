@@ -15,15 +15,21 @@ public interface UserService {
 
     Boolean usernameIsPresent(String username);
 
-    Boolean changeInfo(Long userId, String email, String birthday, String introduction, String sex);
+    Boolean emailIsPresent(String email);
+
+    Boolean changeInfo(TbUser tbUser, String email, String birthday, String introduction, String sex);
 
     Boolean changeImg(TbUser tbUser);
 
     Boolean cancellation(Long userId);
 
-    ShcpResult submitFeedback(TbUser tbUser, String contet, String title, Short type);
+    ShcpResult submitFeedback(TbUser tbUser, String content, String title, Short type);
 
     ShcpResult getUserInfo(Long userId);
 
-    ShcpResult changePwd(TbUser tbUser);
+    ShcpResult changePwd(TbUser tbUser, String nPwd);
+
+    ShcpResult forgetPwd(String newPass, String email);
+
+    ShcpResult getAllReplies(Long UID, String UfbID);
 }

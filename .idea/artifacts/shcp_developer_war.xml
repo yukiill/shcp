@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="shcp-developer:war">
+    <output-path>$PROJECT_DIR$/shcp-developer/target</output-path>
+    <root id="archive" name="shcp-developer-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="shcp-developer:war exploded" />
+    </root>
+  </artifact>
+</component>

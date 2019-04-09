@@ -15,6 +15,8 @@ import java.util.UUID;
 @Slf4j
 public class FileUtil {
 
+    public static final String DEFAULT_IMAGE_URL= "C:/Users/Yuki/Desktop/photo/default.jpg";
+
     private static final String FILESYSTEM_ROOT = "C:/Users/Yuki/Desktop/users/";
 
     /**

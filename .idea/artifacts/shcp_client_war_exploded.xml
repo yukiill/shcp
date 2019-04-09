@@ -48,9 +48,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.15.RELEASE" />
           <element id="library" level="project" name="Maven: aspectj:aspectjrt:1.5.3" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.13" />
-          <element id="archive" name="shcp-manager-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="shcp-manager" />
-          </element>
+          <element id="library" level="project" name="Maven: STAssociation:cpcsconn:1.0-SNAPSHOT" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:20.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.2" />

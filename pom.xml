@@ -13,8 +13,8 @@
         <module>shcp-common</module>
         <module>shcp-pojo</module>
         <module>shcp-dao</module>
+        <module>shcp-developer</module>
     </modules>
-
 
     <packaging>pom</packaging>
 
@@ -37,6 +37,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>STAssociation</groupId>
+            <artifactId>cpcsconn</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- 邮件 -->
         <dependency>
             <groupId>javax.mail</groupId>

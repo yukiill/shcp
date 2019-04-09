@@ -29,4 +29,6 @@ public interface TbUserMapper {
     int updateByPrimaryKey(TbUser record);
 
     String selectByUsername(@Param("username") String username);
+
+    String selectByEmail(@Param("email") String email);
 }

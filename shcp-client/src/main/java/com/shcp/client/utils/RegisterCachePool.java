@@ -2,6 +2,7 @@ package com.shcp.client.utils;
 
 import com.shcp.pojo.TbUser;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -10,19 +11,20 @@ import java.util.*;
  * @date 2019/3/26 21:16
  */
 @Slf4j
-public class RegisterCachePool {
+public class RegisterCachePool{
 
     private static Map<Long, TbUser> registerCache = Collections.synchronizedMap(new HashMap<>());
+    private static Set<String> usernameCache = Collections.synchronizedSet(new HashSet<>());
 
     private static final Class CLASS_LOCK = RegisterCachePool.class;
 
-    private static RegisterCachePool registerCachePool;
+    private volatile static RegisterCachePool registerCachePool;
 
     private RegisterCachePool(){}
 
     public static RegisterCachePool getInstance(){
-        synchronized (CLASS_LOCK){
-            if(registerCachePool == null){
+        if(registerCachePool == null){
+            synchronized (CLASS_LOCK){
                 registerCachePool = new RegisterCachePool();
             }
         }
@@ -40,7 +42,8 @@ public class RegisterCachePool {
             throw new RuntimeException("the instance or time is null");
         }
         registerCache.put(time, tbUser);
-        log.info("put userId:{} into registerCache", tbUser.getUid());
+        usernameCache.add(tbUser.getUsername());
+        log.info("put userId:{} into registerCache and usernameCache", tbUser.getUid());
         return true;
     }
 
@@ -57,7 +60,16 @@ public class RegisterCachePool {
             return false;
         }
         log.info("key:{} remove from registerCache", time);
-        registerCache.remove(time);
+        TbUser tbUser = registerCache.remove(time);
+        usernameCache.remove(tbUser.getUsername());
         return true;
     }
+
+    public synchronized boolean isUsernameExistInCache(String username){
+        if(StringUtils.isEmpty(username)){
+            throw new IllegalArgumentException("username is null or no length");
+        }
+        return usernameCache.contains(username);
+    }
+
 }

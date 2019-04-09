@@ -8,8 +8,13 @@ import org.springframework.mail.javamail.JavaMailSender;
  */
 public interface EmailService {
 
-    Boolean check(Integer userId, Long time);
+    Boolean check(Long userId, Long time);
 
-    String sendEmail(Integer userId, Long time, String text, String subject, String emailAddress, Boolean type);
+    Boolean checkForgetPass(Long time);
 
+    boolean sendCheckEmail(Long userId, Long time, String email, boolean type);
+
+    boolean sendForgetPassEmail(Long time, String email, boolean type);
+
+    boolean sendEmail(String text, String subject, String emailAddress, boolean type);
 }
