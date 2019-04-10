@@ -27,11 +27,12 @@
     <mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:resources mapping="/plugins/**" location="/plugins/"/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/WEB-INF/html/**" location="/WEB-INF/html/"/>
 
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="/WEB-INF/html/"/>
+        <property name="suffix" value=".html"/>
     </bean>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

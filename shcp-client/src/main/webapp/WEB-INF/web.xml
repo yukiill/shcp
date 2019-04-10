@@ -20,7 +20,6 @@
     <!-- 默认dispatcherServlet屏蔽了html页面的访问 -->
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>*.html</url-pattern>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 

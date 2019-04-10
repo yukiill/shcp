@@ -1,5 +1,6 @@
 package com.shcp.client.utils;
 
+import com.shcp.client.pojo.CacheUser;
 import com.shcp.pojo.TbUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +14,7 @@ import java.util.*;
 @Slf4j
 public class RegisterCachePool{
 
-    private static Map<Long, TbUser> registerCache = Collections.synchronizedMap(new HashMap<>());
+    private static Map<Long, CacheUser> registerCache = Collections.synchronizedMap(new HashMap<>());
     private static Set<String> usernameCache = Collections.synchronizedSet(new HashSet<>());
 
     private static final Class CLASS_LOCK = RegisterCachePool.class;
@@ -37,17 +38,20 @@ public class RegisterCachePool{
      * @param time 当前时间戳,纳秒级
      * @return 是否插入成功
      */
-    public synchronized boolean add(TbUser tbUser, Long time){
+    public synchronized CacheUser add(TbUser tbUser, Long time){
         if(tbUser == null || time == null){
             throw new RuntimeException("the instance or time is null");
         }
-        registerCache.put(time, tbUser);
+        CacheUser cacheUser = get(time);
+        if(Objects.isNull(cacheUser)){
+            cacheUser = registerCache.put(time, new CacheUser(tbUser, new Date()));
+        }
         usernameCache.add(tbUser.getUsername());
         log.info("put userId:{} into registerCache and usernameCache", tbUser.getUid());
-        return true;
+        return cacheUser;
     }
 
-    public synchronized TbUser get(Long time){
+    public synchronized CacheUser get(Long time){
         if(time == null){
             log.error("time is null");
             return null;
@@ -60,8 +64,8 @@ public class RegisterCachePool{
             return false;
         }
         log.info("key:{} remove from registerCache", time);
-        TbUser tbUser = registerCache.remove(time);
-        usernameCache.remove(tbUser.getUsername());
+        CacheUser cacheUser = registerCache.remove(time);
+        usernameCache.remove(cacheUser.getTbUser().getUsername());
         return true;
     }
 

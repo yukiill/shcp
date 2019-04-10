@@ -1,5 +1,6 @@
 package com.shcp.client.service;
 
+import com.shcp.common.pojo.ShcpResult;
 import org.springframework.mail.javamail.JavaMailSender;
 
 /**
@@ -8,13 +9,13 @@ import org.springframework.mail.javamail.JavaMailSender;
  */
 public interface EmailService {
 
-    Boolean check(Long userId, Long time);
+    ShcpResult check(Long userId, Long time);
 
-    Boolean checkForgetPass(Long time);
+    ShcpResult checkForgetPass(Long time);
 
-    boolean sendCheckEmail(Long userId, Long time, String email, boolean type);
+    ShcpResult sendCheckEmail(Long userId, Long time, String email, boolean type);
 
-    boolean sendForgetPassEmail(Long time, String email, boolean type);
+    ShcpResult sendForgetPassEmail(Long time, String email, String password, boolean type);
 
     boolean sendEmail(String text, String subject, String emailAddress, boolean type);
 }

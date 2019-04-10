@@ -1,9 +1,9 @@
 package com.shcp.client.service.impl;
 
+import com.shcp.client.pojo.CacheUser;
 import com.shcp.client.service.EmailService;
-import com.shcp.client.utils.FileUtil;
-import com.shcp.client.utils.RegisterCachePool;
-import com.shcp.client.utils.TextTemplate;
+import com.shcp.client.utils.*;
+import com.shcp.common.pojo.ShcpResult;
 import com.shcp.dao.mapper.TbUserMapper;
 import com.shcp.pojo.TbUser;
 import com.shcp.pojo.TbUserExample;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.xml.soap.Text;
 import java.io.IOException;
 import java.util.Objects;
@@ -34,56 +35,90 @@ public class EmailServiceImpl implements EmailService{
     private TbUserMapper tbUserMapper;
 
     @Override
-    public Boolean checkForgetPass(Long time) {
-        if(Objects.isNull(time)){
-            return false;
+    public ShcpResult checkForgetPass(Long time) {
+        ForgetPasswordPool forgetPasswordPool = ForgetPasswordPool.getInstance();
+        CacheUser cacheUser = forgetPasswordPool.get(time);
+        if(Objects.isNull(cacheUser)){
+            log.info("this is no corresponding object time:{}", time);
+            return ShcpResult.build(714, "验证失败");
         }
-        System.err.println("完成的进入的该方法中");
-        return true;
+        if(cacheUser.isExpired()){
+            log.info("verify forgetPass email expired");
+            return ShcpResult.build(655, "超过验证时限，请重新发送验证邮件");
+        }
+        tbUserMapper.updateByPrimaryKeySelective(cacheUser.getTbUser());
+        return ShcpResult.ok();
     }
 
     @Override
-    public Boolean check(Long userId, Long time) {
-        if(Objects.isNull(userId) || Objects.isNull(time)){
-            return false;
-        }
+    public ShcpResult check(Long userId, Long time) {
         RegisterCachePool registerCachePool = RegisterCachePool.getInstance();
-        TbUser tbUser = registerCachePool.get(time);
+        CacheUser cacheUser  = registerCachePool.get(time);
+        if(Objects.isNull(cacheUser)){
+            log.info("this is no corresponding object userId:{} time:{}", userId, time);
+            return ShcpResult.build(714, "验证失败");
+        }
+        if(cacheUser.isExpired()){
+            log.info("userId:{} verify email expired", userId);
+            return ShcpResult.build(655, "超过验证时限，请重新发送验证邮件");
+        }
+        TbUser tbUser = cacheUser.getTbUser();
         if(Objects.equals(tbUser.getUid(), userId)) {
             tbUserMapper.insertSelective(tbUser);
             FileUtil.mkdirForUser(tbUser.getUsername());
             log.info("userId:{} time:{} check successful verification", userId, time);
             registerCachePool.remove(time);
-            return true;
+            return ShcpResult.ok();
         }
-        return false;
+        return ShcpResult.build(714, "验证失败");
     }
 
     @Override
-    public boolean sendCheckEmail(Long userId, Long time, String email, boolean type){
+    public ShcpResult sendCheckEmail(Long userId, Long time, String email, boolean type){
+        RegisterCachePool registerCachePool = RegisterCachePool.getInstance();
+        CacheUser cacheUser = registerCachePool.get(time);
+        if(cacheUser.isAllowToSend()){
+            cacheUser.setExpiredTimeAndDecrCount();
             log.info("send check email to userID:{}, email:{}", userId, email);
             if(sendEmail(TextTemplate.getCheckEmailTemplate(userId, time), TextTemplate.getCheckEmailSubject(), email, type)){
                 log.info("send check email to userId:{} successed", userId);
-                return true;
+                return ShcpResult.ok();
             }
-            return false;
+            return ShcpResult.build(711, "邮件发送失败");
+        }
+        log.info("this userId:{} excess to send check email", userId);
+        return ShcpResult.build(712, "在短时间内请求过多，请等一段时间后再尝试");
     }
 
     @Override
-    public boolean sendForgetPassEmail(Long time, String email, boolean type) {
-        log.info("send forgetpass email to email:{}", email);
-        TbUserExample tbUserExample = new TbUserExample();
-        tbUserExample.createCriteria()
-                .andUemailEqualTo(email);
-        if(Objects.isNull(tbUserMapper.selectByExample(tbUserExample).get(0))){
-            log.info("email:{} haven't opposite user", email);
-            return false;
+    public ShcpResult sendForgetPassEmail(Long time, String email, String password, boolean type) {
+        ForgetPasswordPool forgetPasswordPool = ForgetPasswordPool.getInstance();
+        CacheUser cacheUser = forgetPasswordPool.get(time);
+        if(Objects.isNull(cacheUser)){
+            log.info("send forgetPass email to email:{}", email);
+            TbUserExample tbUserExample = new TbUserExample();
+            tbUserExample.createCriteria()
+                    .andUemailEqualTo(email);
+            TbUser tbUser = tbUserMapper.selectByExample(tbUserExample).get(0);
+            if(Objects.isNull(tbUser)){
+                log.info("email:{} haven't opposite user", email);
+                return ShcpResult.build(715, "邮箱未绑定");
+            }
+            tbUser.setPassword(password);
+            cacheUser = forgetPasswordPool.add(tbUser, time);
         }
-        if(sendEmail(TextTemplate.getForgetPassEmailTemplate(time), TextTemplate.getCheckEmailSubject(), email, type)){
-            log.info("send check email to email:{} successed", email);
-            return true;
+        if(cacheUser.isAllowToSend()){
+            if(sendEmail(TextTemplate.getForgetPassEmailTemplate(time), TextTemplate.getCheckEmailSubject(), email, type)){
+                log.info("send check forgetPass email to email:{} successed", email);
+                cacheUser.setExpiredTimeAndDecrCount();
+                return ShcpResult.ok();
+            } else {
+                return ShcpResult.build(657, "邮件发送失败");
+            }
+
         }
-        return false;
+        log.info("excess to send forgetPass email");
+        return ShcpResult.build(712, "在短时间内请求过多，请等一段时间后再尝试");
     }
 
     @Override

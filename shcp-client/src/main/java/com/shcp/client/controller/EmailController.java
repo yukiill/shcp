@@ -6,15 +6,18 @@ import com.shcp.client.utils.RegisterCachePool;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.pojo.TbUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * @author Yuki
  * @date 2019/3/25 22:47
  */
+@Slf4j
 @Controller
 @RequestMapping("/email")
 public class EmailController {
@@ -40,24 +43,27 @@ public class EmailController {
 
     @RequestMapping("/check")
     @ResponseBody
-    public String emailCheck(@RequestParam Long userId, @RequestParam Long time, @RequestParam Integer eCode){
-        if(emailService.check(userId, time)){
-            System.err.println("check successfully");
+    public ShcpResult emailCheck(@RequestParam Long userId, @RequestParam Long time, @RequestParam Integer eCode){
+        if(Objects.isNull(userId) || Objects.isNull(time)){
+            return ShcpResult.build(713, "缺乏必要的信息，邮箱验证失败");
         }
-        return "";
+        return emailService.check(userId, time);
     }
 
     @RequestMapping("/sendForget")
     @ResponseBody
-    public Object sendForget(@RequestParam Long time, @RequestParam String email, @RequestParam Boolean type){
-        emailService.sendForgetPassEmail(time, email, type);
+    public Object sendForget(@RequestParam Long time, @RequestParam String email, @RequestParam String password, @RequestParam Boolean type){
+        emailService.sendForgetPassEmail(time, email, password, type);
         return CorsUtil.format(ShcpResult.ok());
     }
 
     @RequestMapping("/checkForget")
     @ResponseBody
     public Object checkForget(@RequestParam Long time){
-        emailService.checkForgetPass(time);
-        return CorsUtil.format(ShcpResult.ok());
+        if(Objects.isNull(time)){
+            log.info("checkForget time is null");
+            return ShcpResult.build(714, "验证失败");
+        }
+        return emailService.checkForgetPass(time);
     }
 }

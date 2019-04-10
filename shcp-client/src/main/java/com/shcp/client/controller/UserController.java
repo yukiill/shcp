@@ -3,6 +3,7 @@ package com.shcp.client.controller;
 import com.shcp.client.service.DeviceService;
 import com.shcp.client.service.EmailService;
 import com.shcp.client.service.UserService;
+import com.shcp.client.utils.CookieUtil;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.client.utils.FileUtil;
 import com.shcp.client.utils.RegisterCachePool;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
@@ -104,7 +106,7 @@ public class UserController {
     @RequestMapping(value = "/forgetPwd")
     @ResponseBody
     public Object forgetPwd(@RequestParam String nPwd, @RequestParam String rPwd, @RequestParam String email,
-                            @RequestParam(required = false) Object bw){
+                            @RequestParam(required = false) Object bw, HttpServletRequest request, HttpServletResponse response){
         if(!Objects.equals(nPwd, rPwd)){
             return CorsUtil.format(ShcpResult.build(653, "密码和重复密码不一致"));
         }
@@ -113,9 +115,10 @@ public class UserController {
                 return CorsUtil.format(ShcpResult.build(654, "邮箱格式错误"));
             }
         }
-        if(!emailService.sendForgetPassEmail(System.nanoTime(), email, false)){
-            return CorsUtil.format(ShcpResult.build(711, "邮件发送失败"));
+        if(!userService.emailIsPresent(email)){
+            return CorsUtil.format(ShcpResult.build(715, "邮箱未绑定"));
         }
-        return CorsUtil.format(ShcpResult.ok());
+        CookieUtil.addCookie(request, response);
+        return emailService.sendForgetPassEmail(Long.parseLong(CookieUtil.getCookieValue(request)), email, nPwd, false);
     }
 }

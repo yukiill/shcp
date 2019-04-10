@@ -81,9 +81,6 @@ public class LoginController {
         TbUser tbUser = userService.register(userName, password, email, TerID);
         long time = System.nanoTime();
         registerCachePool.add(tbUser, time);
-        if(!emailService.sendCheckEmail(tbUser.getUid(), time, tbUser.getUemail(), false)){
-            return CorsUtil.format(ShcpResult.build(711, "邮件发送失败"));
-        }
-        return CorsUtil.format(ShcpResult.ok());
+        return emailService.sendCheckEmail(tbUser.getUid(), time, tbUser.getUemail(), false);
     }
 }
