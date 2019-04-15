@@ -252,6 +252,66 @@ public class TbUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andLidIsNull() {
+            addCriterion("LID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidIsNotNull() {
+            addCriterion("LID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidEqualTo(Short value) {
+            addCriterion("LID =", value, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidNotEqualTo(Short value) {
+            addCriterion("LID <>", value, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidGreaterThan(Short value) {
+            addCriterion("LID >", value, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidGreaterThanOrEqualTo(Short value) {
+            addCriterion("LID >=", value, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidLessThan(Short value) {
+            addCriterion("LID <", value, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidLessThanOrEqualTo(Short value) {
+            addCriterion("LID <=", value, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidIn(List<Short> values) {
+            addCriterion("LID in", values, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidNotIn(List<Short> values) {
+            addCriterion("LID not in", values, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidBetween(Short value1, Short value2) {
+            addCriterion("LID between", value1, value2, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLidNotBetween(Short value1, Short value2) {
+            addCriterion("LID not between", value1, value2, "lid");
+            return (Criteria) this;
+        }
+
         public Criteria andUsernameIsNull() {
             addCriterion("USERNAME is null");
             return (Criteria) this;
@@ -719,126 +779,6 @@ public class TbUserExample {
 
         public Criteria andUbirthNotBetween(Date value1, Date value2) {
             addCriterionForJDBCDate("UBIRTH not between", value1, value2, "ubirth");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeIsNull() {
-            addCriterion("UTYPE is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeIsNotNull() {
-            addCriterion("UTYPE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeEqualTo(Byte value) {
-            addCriterion("UTYPE =", value, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeNotEqualTo(Byte value) {
-            addCriterion("UTYPE <>", value, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeGreaterThan(Byte value) {
-            addCriterion("UTYPE >", value, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeGreaterThanOrEqualTo(Byte value) {
-            addCriterion("UTYPE >=", value, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeLessThan(Byte value) {
-            addCriterion("UTYPE <", value, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeLessThanOrEqualTo(Byte value) {
-            addCriterion("UTYPE <=", value, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeIn(List<Byte> values) {
-            addCriterion("UTYPE in", values, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeNotIn(List<Byte> values) {
-            addCriterion("UTYPE not in", values, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeBetween(Byte value1, Byte value2) {
-            addCriterion("UTYPE between", value1, value2, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUtypeNotBetween(Byte value1, Byte value2) {
-            addCriterion("UTYPE not between", value1, value2, "utype");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitIsNull() {
-            addCriterion("ULIMIT is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitIsNotNull() {
-            addCriterion("ULIMIT is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitEqualTo(Short value) {
-            addCriterion("ULIMIT =", value, "ulimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitNotEqualTo(Short value) {
-            addCriterion("ULIMIT <>", value, "ulimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitGreaterThan(Short value) {
-            addCriterion("ULIMIT >", value, "ulimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitGreaterThanOrEqualTo(Short value) {
-            addCriterion("ULIMIT >=", value, "ulimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitLessThan(Short value) {
-            addCriterion("ULIMIT <", value, "ulimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitLessThanOrEqualTo(Short value) {
-            addCriterion("ULIMIT <=", value, "ulimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitIn(List<Short> values) {
-            addCriterion("ULIMIT in", values, "ulimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitNotIn(List<Short> values) {
-            addCriterion("ULIMIT not in", values, "ulimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitBetween(Short value1, Short value2) {
-            addCriterion("ULIMIT between", value1, value2, "ulimit");
-            return (Criteria) this;
-        }
-
-        public Criteria andUlimitNotBetween(Short value1, Short value2) {
-            addCriterion("ULIMIT not between", value1, value2, "ulimit");
             return (Criteria) this;
         }
     }

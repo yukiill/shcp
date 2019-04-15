@@ -17,7 +17,7 @@ public class TbUserfeedback {
 
     private Short futype;
 
-    private Integer fduid;
+    private Long fduid;
 
     private String fcontent;
 
@@ -77,11 +77,11 @@ public class TbUserfeedback {
         this.futype = futype;
     }
 
-    public Integer getFduid() {
+    public Long getFduid() {
         return fduid;
     }
 
-    public void setFduid(Integer fduid) {
+    public void setFduid(Long fduid) {
         this.fduid = fduid;
     }
 

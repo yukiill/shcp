@@ -1,37 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shcp.dao.mapper.TbDeviceMapper">
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDevice">
-    <id column="DSTID" jdbcType="BIGINT" property="dstid" />
-    <result column="DID" jdbcType="BIGINT" property="did" />
-    <result column="TID" jdbcType="BIGINT" property="tid" />
-    <result column="UID" jdbcType="BIGINT" property="uid" />
-    <result column="DSTNAME" jdbcType="VARCHAR" property="dstname" />
-    <result column="DSTTYPE" jdbcType="INTEGER" property="dsttype" />
-    <result column="DSDATETIME" jdbcType="TIMESTAMP" property="dsdatetime" />
-    <result column="DSIPADDR" jdbcType="CHAR" property="dsipaddr" />
-    <result column="DSPORT" jdbcType="INTEGER" property="dsport" />
-    <result column="DSMAC" jdbcType="CHAR" property="dsmac" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shcp.dao.mapper.TbDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDevice" >
+    <id column="DSTID" property="dstid" jdbcType="BIGINT" />
+    <result column="DID" property="did" jdbcType="BIGINT" />
+    <result column="TID" property="tid" jdbcType="BIGINT" />
+    <result column="UID" property="uid" jdbcType="BIGINT" />
+    <result column="DSTNAME" property="dstname" jdbcType="VARCHAR" />
+    <result column="DSDATETIME" property="dsdatetime" jdbcType="TIMESTAMP" />
+    <result column="DSIPADDR" property="dsipaddr" jdbcType="CHAR" />
+    <result column="DSPORT" property="dsport" jdbcType="INTEGER" />
+    <result column="DSMAC" property="dsmac" jdbcType="CHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -42,25 +41,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -71,216 +70,200 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    DSTID, DID, TID, UID, DSTNAME, DSTTYPE, DSDATETIME, DSIPADDR, DSPORT, DSMAC
+  <sql id="Base_Column_List" >
+    DSTID, DID, TID, UID, DSTNAME, DSDATETIME, DSIPADDR, DSPORT, DSMAC
   </sql>
-  <select id="selectByExample" parameterType="com.shcp.pojo.TbDeviceExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbDeviceExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from tb_device
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from tb_device
     where DSTID = #{dstid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tb_device
     where DSTID = #{dstid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDeviceExample">
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDeviceExample" >
     delete from tb_device
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbDevice">
+  <insert id="insert" parameterType="com.shcp.pojo.TbDevice" >
     insert into tb_device (DSTID, DID, TID, 
-      UID, DSTNAME, DSTTYPE, 
-      DSDATETIME, DSIPADDR, DSPORT, 
-      DSMAC)
+      UID, DSTNAME, DSDATETIME, 
+      DSIPADDR, DSPORT, DSMAC)
     values (#{dstid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{tid,jdbcType=BIGINT}, 
-      #{uid,jdbcType=BIGINT}, #{dstname,jdbcType=VARCHAR}, #{dsttype,jdbcType=INTEGER}, 
-      #{dsdatetime,jdbcType=TIMESTAMP}, #{dsipaddr,jdbcType=CHAR}, #{dsport,jdbcType=INTEGER}, 
-      #{dsmac,jdbcType=CHAR})
+      #{uid,jdbcType=BIGINT}, #{dstname,jdbcType=VARCHAR}, #{dsdatetime,jdbcType=TIMESTAMP}, 
+      #{dsipaddr,jdbcType=CHAR}, #{dsport,jdbcType=INTEGER}, #{dsmac,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDevice">
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDevice" >
     insert into tb_device
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="dstid != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dstid != null" >
         DSTID,
       </if>
-      <if test="did != null">
+      <if test="did != null" >
         DID,
       </if>
-      <if test="tid != null">
+      <if test="tid != null" >
         TID,
       </if>
-      <if test="uid != null">
+      <if test="uid != null" >
         UID,
       </if>
-      <if test="dstname != null">
+      <if test="dstname != null" >
         DSTNAME,
       </if>
-      <if test="dsttype != null">
-        DSTTYPE,
-      </if>
-      <if test="dsdatetime != null">
+      <if test="dsdatetime != null" >
         DSDATETIME,
       </if>
-      <if test="dsipaddr != null">
+      <if test="dsipaddr != null" >
         DSIPADDR,
       </if>
-      <if test="dsport != null">
+      <if test="dsport != null" >
         DSPORT,
       </if>
-      <if test="dsmac != null">
+      <if test="dsmac != null" >
         DSMAC,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="dstid != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dstid != null" >
         #{dstid,jdbcType=BIGINT},
       </if>
-      <if test="did != null">
+      <if test="did != null" >
         #{did,jdbcType=BIGINT},
       </if>
-      <if test="tid != null">
+      <if test="tid != null" >
         #{tid,jdbcType=BIGINT},
       </if>
-      <if test="uid != null">
+      <if test="uid != null" >
         #{uid,jdbcType=BIGINT},
       </if>
-      <if test="dstname != null">
+      <if test="dstname != null" >
         #{dstname,jdbcType=VARCHAR},
       </if>
-      <if test="dsttype != null">
-        #{dsttype,jdbcType=INTEGER},
-      </if>
-      <if test="dsdatetime != null">
+      <if test="dsdatetime != null" >
         #{dsdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="dsipaddr != null">
+      <if test="dsipaddr != null" >
         #{dsipaddr,jdbcType=CHAR},
       </if>
-      <if test="dsport != null">
+      <if test="dsport != null" >
         #{dsport,jdbcType=INTEGER},
       </if>
-      <if test="dsmac != null">
+      <if test="dsmac != null" >
         #{dsmac,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbDeviceExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.shcp.pojo.TbDeviceExample" resultType="java.lang.Integer" >
     select count(*) from tb_device
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update tb_device
-    <set>
-      <if test="record.dstid != null">
+    <set >
+      <if test="record.dstid != null" >
         DSTID = #{record.dstid,jdbcType=BIGINT},
       </if>
-      <if test="record.did != null">
+      <if test="record.did != null" >
         DID = #{record.did,jdbcType=BIGINT},
       </if>
-      <if test="record.tid != null">
+      <if test="record.tid != null" >
         TID = #{record.tid,jdbcType=BIGINT},
       </if>
-      <if test="record.uid != null">
+      <if test="record.uid != null" >
         UID = #{record.uid,jdbcType=BIGINT},
       </if>
-      <if test="record.dstname != null">
+      <if test="record.dstname != null" >
         DSTNAME = #{record.dstname,jdbcType=VARCHAR},
       </if>
-      <if test="record.dsttype != null">
-        DSTTYPE = #{record.dsttype,jdbcType=INTEGER},
-      </if>
-      <if test="record.dsdatetime != null">
+      <if test="record.dsdatetime != null" >
         DSDATETIME = #{record.dsdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.dsipaddr != null">
+      <if test="record.dsipaddr != null" >
         DSIPADDR = #{record.dsipaddr,jdbcType=CHAR},
       </if>
-      <if test="record.dsport != null">
+      <if test="record.dsport != null" >
         DSPORT = #{record.dsport,jdbcType=INTEGER},
       </if>
-      <if test="record.dsmac != null">
+      <if test="record.dsmac != null" >
         DSMAC = #{record.dsmac,jdbcType=CHAR},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update tb_device
     set DSTID = #{record.dstid,jdbcType=BIGINT},
       DID = #{record.did,jdbcType=BIGINT},
       TID = #{record.tid,jdbcType=BIGINT},
       UID = #{record.uid,jdbcType=BIGINT},
       DSTNAME = #{record.dstname,jdbcType=VARCHAR},
-      DSTTYPE = #{record.dsttype,jdbcType=INTEGER},
       DSDATETIME = #{record.dsdatetime,jdbcType=TIMESTAMP},
       DSIPADDR = #{record.dsipaddr,jdbcType=CHAR},
       DSPORT = #{record.dsport,jdbcType=INTEGER},
       DSMAC = #{record.dsmac,jdbcType=CHAR}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDevice">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDevice" >
     update tb_device
-    <set>
-      <if test="did != null">
+    <set >
+      <if test="did != null" >
         DID = #{did,jdbcType=BIGINT},
       </if>
-      <if test="tid != null">
+      <if test="tid != null" >
         TID = #{tid,jdbcType=BIGINT},
       </if>
-      <if test="uid != null">
+      <if test="uid != null" >
         UID = #{uid,jdbcType=BIGINT},
       </if>
-      <if test="dstname != null">
+      <if test="dstname != null" >
         DSTNAME = #{dstname,jdbcType=VARCHAR},
       </if>
-      <if test="dsttype != null">
-        DSTTYPE = #{dsttype,jdbcType=INTEGER},
-      </if>
-      <if test="dsdatetime != null">
+      <if test="dsdatetime != null" >
         DSDATETIME = #{dsdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="dsipaddr != null">
+      <if test="dsipaddr != null" >
         DSIPADDR = #{dsipaddr,jdbcType=CHAR},
       </if>
-      <if test="dsport != null">
+      <if test="dsport != null" >
         DSPORT = #{dsport,jdbcType=INTEGER},
       </if>
-      <if test="dsmac != null">
+      <if test="dsmac != null" >
         DSMAC = #{dsmac,jdbcType=CHAR},
       </if>
     </set>
     where DSTID = #{dstid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDevice">
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDevice" >
     update tb_device
     set DID = #{did,jdbcType=BIGINT},
       TID = #{tid,jdbcType=BIGINT},
       UID = #{uid,jdbcType=BIGINT},
       DSTNAME = #{dstname,jdbcType=VARCHAR},
-      DSTTYPE = #{dsttype,jdbcType=INTEGER},
       DSDATETIME = #{dsdatetime,jdbcType=TIMESTAMP},
       DSIPADDR = #{dsipaddr,jdbcType=CHAR},
       DSPORT = #{dsport,jdbcType=INTEGER},

@@ -435,66 +435,6 @@ public class TbDeveloperExample {
             return (Criteria) this;
         }
 
-        public Criteria andDsubIsNull() {
-            addCriterion("DSUB is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubIsNotNull() {
-            addCriterion("DSUB is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubEqualTo(Integer value) {
-            addCriterion("DSUB =", value, "dsub");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubNotEqualTo(Integer value) {
-            addCriterion("DSUB <>", value, "dsub");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubGreaterThan(Integer value) {
-            addCriterion("DSUB >", value, "dsub");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubGreaterThanOrEqualTo(Integer value) {
-            addCriterion("DSUB >=", value, "dsub");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubLessThan(Integer value) {
-            addCriterion("DSUB <", value, "dsub");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubLessThanOrEqualTo(Integer value) {
-            addCriterion("DSUB <=", value, "dsub");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubIn(List<Integer> values) {
-            addCriterion("DSUB in", values, "dsub");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubNotIn(List<Integer> values) {
-            addCriterion("DSUB not in", values, "dsub");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubBetween(Integer value1, Integer value2) {
-            addCriterion("DSUB between", value1, value2, "dsub");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsubNotBetween(Integer value1, Integer value2) {
-            addCriterion("DSUB not between", value1, value2, "dsub");
-            return (Criteria) this;
-        }
-
         public Criteria andDstatusIsNull() {
             addCriterion("DSTATUS is null");
             return (Criteria) this;

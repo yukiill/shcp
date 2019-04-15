@@ -535,52 +535,52 @@ public class TbUserfeedbackExample {
             return (Criteria) this;
         }
 
-        public Criteria andFduidEqualTo(Integer value) {
+        public Criteria andFduidEqualTo(Long value) {
             addCriterion("FDUID =", value, "fduid");
             return (Criteria) this;
         }
 
-        public Criteria andFduidNotEqualTo(Integer value) {
+        public Criteria andFduidNotEqualTo(Long value) {
             addCriterion("FDUID <>", value, "fduid");
             return (Criteria) this;
         }
 
-        public Criteria andFduidGreaterThan(Integer value) {
+        public Criteria andFduidGreaterThan(Long value) {
             addCriterion("FDUID >", value, "fduid");
             return (Criteria) this;
         }
 
-        public Criteria andFduidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andFduidGreaterThanOrEqualTo(Long value) {
             addCriterion("FDUID >=", value, "fduid");
             return (Criteria) this;
         }
 
-        public Criteria andFduidLessThan(Integer value) {
+        public Criteria andFduidLessThan(Long value) {
             addCriterion("FDUID <", value, "fduid");
             return (Criteria) this;
         }
 
-        public Criteria andFduidLessThanOrEqualTo(Integer value) {
+        public Criteria andFduidLessThanOrEqualTo(Long value) {
             addCriterion("FDUID <=", value, "fduid");
             return (Criteria) this;
         }
 
-        public Criteria andFduidIn(List<Integer> values) {
+        public Criteria andFduidIn(List<Long> values) {
             addCriterion("FDUID in", values, "fduid");
             return (Criteria) this;
         }
 
-        public Criteria andFduidNotIn(List<Integer> values) {
+        public Criteria andFduidNotIn(List<Long> values) {
             addCriterion("FDUID not in", values, "fduid");
             return (Criteria) this;
         }
 
-        public Criteria andFduidBetween(Integer value1, Integer value2) {
+        public Criteria andFduidBetween(Long value1, Long value2) {
             addCriterion("FDUID between", value1, value2, "fduid");
             return (Criteria) this;
         }
 
-        public Criteria andFduidNotBetween(Integer value1, Integer value2) {
+        public Criteria andFduidNotBetween(Long value1, Long value2) {
             addCriterion("FDUID not between", value1, value2, "fduid");
             return (Criteria) this;
         }

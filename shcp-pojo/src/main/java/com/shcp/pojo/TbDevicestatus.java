@@ -3,6 +3,8 @@ package com.shcp.pojo;
 public class TbDevicestatus {
     private Long desid;
 
+    private Long tid;
+
     private String desname;
 
     private String destype;
@@ -19,6 +21,14 @@ public class TbDevicestatus {
 
     public void setDesid(Long desid) {
         this.desid = desid;
+    }
+
+    public Long getTid() {
+        return tid;
+    }
+
+    public void setTid(Long tid) {
+        this.tid = tid;
     }
 
     public String getDesname() {

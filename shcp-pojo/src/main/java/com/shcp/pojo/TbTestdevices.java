@@ -9,17 +9,11 @@ public class TbTestdevices {
 
     private String dstname;
 
-    private Integer dsttype;
-
     private String dsipaddr;
 
     private Integer dsport;
 
     private String dsmac;
-
-    private Short dsstatus;
-
-    private Short dslimit;
 
     public Long getDsexid() {
         return dsexid;
@@ -53,14 +47,6 @@ public class TbTestdevices {
         this.dstname = dstname == null ? null : dstname.trim();
     }
 
-    public Integer getDsttype() {
-        return dsttype;
-    }
-
-    public void setDsttype(Integer dsttype) {
-        this.dsttype = dsttype;
-    }
-
     public String getDsipaddr() {
         return dsipaddr;
     }
@@ -83,21 +69,5 @@ public class TbTestdevices {
 
     public void setDsmac(String dsmac) {
         this.dsmac = dsmac == null ? null : dsmac.trim();
-    }
-
-    public Short getDsstatus() {
-        return dsstatus;
-    }
-
-    public void setDsstatus(Short dsstatus) {
-        this.dsstatus = dsstatus;
-    }
-
-    public Short getDslimit() {
-        return dslimit;
-    }
-
-    public void setDslimit(Short dslimit) {
-        this.dslimit = dslimit;
     }
 }

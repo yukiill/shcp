@@ -1,6 +1,5 @@
 package com.shcp.client.pojo;
 
-import com.shcp.pojo.TbUser;
 import lombok.Data;
 
 import java.util.Date;

@@ -164,6 +164,66 @@ public class TbDectrlExample {
             return (Criteria) this;
         }
 
+        public Criteria andTidIsNull() {
+            addCriterion("TID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidIsNotNull() {
+            addCriterion("TID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidEqualTo(Long value) {
+            addCriterion("TID =", value, "tid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidNotEqualTo(Long value) {
+            addCriterion("TID <>", value, "tid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidGreaterThan(Long value) {
+            addCriterion("TID >", value, "tid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidGreaterThanOrEqualTo(Long value) {
+            addCriterion("TID >=", value, "tid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidLessThan(Long value) {
+            addCriterion("TID <", value, "tid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidLessThanOrEqualTo(Long value) {
+            addCriterion("TID <=", value, "tid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidIn(List<Long> values) {
+            addCriterion("TID in", values, "tid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidNotIn(List<Long> values) {
+            addCriterion("TID not in", values, "tid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidBetween(Long value1, Long value2) {
+            addCriterion("TID between", value1, value2, "tid");
+            return (Criteria) this;
+        }
+
+        public Criteria andTidNotBetween(Long value1, Long value2) {
+            addCriterion("TID not between", value1, value2, "tid");
+            return (Criteria) this;
+        }
+
         public Criteria andDecnameIsNull() {
             addCriterion("DECNAME is null");
             return (Criteria) this;

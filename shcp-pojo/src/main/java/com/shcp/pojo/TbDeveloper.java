@@ -13,8 +13,6 @@ public class TbDeveloper {
 
     private String demail;
 
-    private Integer dsub;
-
     private Byte dstatus;
 
     private String dhimg;
@@ -61,14 +59,6 @@ public class TbDeveloper {
 
     public void setDemail(String demail) {
         this.demail = demail == null ? null : demail.trim();
-    }
-
-    public Integer getDsub() {
-        return dsub;
-    }
-
-    public void setDsub(Integer dsub) {
-        this.dsub = dsub;
     }
 
     public Byte getDstatus() {

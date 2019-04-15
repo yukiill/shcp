@@ -1,18 +1,13 @@
 package com.shcp.client.controller;
 
-import com.shcp.client.service.DeviceService;
 import com.shcp.client.service.EmailService;
 import com.shcp.client.service.UserService;
 import com.shcp.client.utils.CookieUtil;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.client.utils.FileUtil;
-import com.shcp.client.utils.RegisterCachePool;
-import com.shcp.client.utils.URLUtil;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.StringUtil;
-import com.shcp.pojo.TbUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

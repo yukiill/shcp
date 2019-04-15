@@ -13,8 +13,6 @@ public class TbDevice {
 
     private String dstname;
 
-    private Integer dsttype;
-
     private Date dsdatetime;
 
     private String dsipaddr;
@@ -61,14 +59,6 @@ public class TbDevice {
 
     public void setDstname(String dstname) {
         this.dstname = dstname == null ? null : dstname.trim();
-    }
-
-    public Integer getDsttype() {
-        return dsttype;
-    }
-
-    public void setDsttype(Integer dsttype) {
-        this.dsttype = dsttype;
     }
 
     public Date getDsdatetime() {

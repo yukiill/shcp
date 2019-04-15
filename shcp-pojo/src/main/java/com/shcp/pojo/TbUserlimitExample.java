@@ -3,14 +3,14 @@ package com.shcp.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReTdevicetypeandctrlExample {
+public class TbUserlimitExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ReTdevicetypeandctrlExample() {
+    public TbUserlimitExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,63 +104,133 @@ public class ReTdevicetypeandctrlExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andDecidIsNull() {
-            addCriterion("DECID is null");
+        public Criteria andLidIsNull() {
+            addCriterion("LID is null");
             return (Criteria) this;
         }
 
-        public Criteria andDecidIsNotNull() {
-            addCriterion("DECID is not null");
+        public Criteria andLidIsNotNull() {
+            addCriterion("LID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDecidEqualTo(Long value) {
-            addCriterion("DECID =", value, "decid");
+        public Criteria andLidEqualTo(Short value) {
+            addCriterion("LID =", value, "lid");
             return (Criteria) this;
         }
 
-        public Criteria andDecidNotEqualTo(Long value) {
-            addCriterion("DECID <>", value, "decid");
+        public Criteria andLidNotEqualTo(Short value) {
+            addCriterion("LID <>", value, "lid");
             return (Criteria) this;
         }
 
-        public Criteria andDecidGreaterThan(Long value) {
-            addCriterion("DECID >", value, "decid");
+        public Criteria andLidGreaterThan(Short value) {
+            addCriterion("LID >", value, "lid");
             return (Criteria) this;
         }
 
-        public Criteria andDecidGreaterThanOrEqualTo(Long value) {
-            addCriterion("DECID >=", value, "decid");
+        public Criteria andLidGreaterThanOrEqualTo(Short value) {
+            addCriterion("LID >=", value, "lid");
             return (Criteria) this;
         }
 
-        public Criteria andDecidLessThan(Long value) {
-            addCriterion("DECID <", value, "decid");
+        public Criteria andLidLessThan(Short value) {
+            addCriterion("LID <", value, "lid");
             return (Criteria) this;
         }
 
-        public Criteria andDecidLessThanOrEqualTo(Long value) {
-            addCriterion("DECID <=", value, "decid");
+        public Criteria andLidLessThanOrEqualTo(Short value) {
+            addCriterion("LID <=", value, "lid");
             return (Criteria) this;
         }
 
-        public Criteria andDecidIn(List<Long> values) {
-            addCriterion("DECID in", values, "decid");
+        public Criteria andLidIn(List<Short> values) {
+            addCriterion("LID in", values, "lid");
             return (Criteria) this;
         }
 
-        public Criteria andDecidNotIn(List<Long> values) {
-            addCriterion("DECID not in", values, "decid");
+        public Criteria andLidNotIn(List<Short> values) {
+            addCriterion("LID not in", values, "lid");
             return (Criteria) this;
         }
 
-        public Criteria andDecidBetween(Long value1, Long value2) {
-            addCriterion("DECID between", value1, value2, "decid");
+        public Criteria andLidBetween(Short value1, Short value2) {
+            addCriterion("LID between", value1, value2, "lid");
             return (Criteria) this;
         }
 
-        public Criteria andDecidNotBetween(Long value1, Long value2) {
-            addCriterion("DECID not between", value1, value2, "decid");
+        public Criteria andLidNotBetween(Short value1, Short value2) {
+            addCriterion("LID not between", value1, value2, "lid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameIsNull() {
+            addCriterion("LNAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameIsNotNull() {
+            addCriterion("LNAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameEqualTo(String value) {
+            addCriterion("LNAME =", value, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameNotEqualTo(String value) {
+            addCriterion("LNAME <>", value, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameGreaterThan(String value) {
+            addCriterion("LNAME >", value, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameGreaterThanOrEqualTo(String value) {
+            addCriterion("LNAME >=", value, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameLessThan(String value) {
+            addCriterion("LNAME <", value, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameLessThanOrEqualTo(String value) {
+            addCriterion("LNAME <=", value, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameLike(String value) {
+            addCriterion("LNAME like", value, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameNotLike(String value) {
+            addCriterion("LNAME not like", value, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameIn(List<String> values) {
+            addCriterion("LNAME in", values, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameNotIn(List<String> values) {
+            addCriterion("LNAME not in", values, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameBetween(String value1, String value2) {
+            addCriterion("LNAME between", value1, value2, "lname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLnameNotBetween(String value1, String value2) {
+            addCriterion("LNAME not between", value1, value2, "lname");
             return (Criteria) this;
         }
     }

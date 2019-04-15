@@ -6,7 +6,6 @@ import com.shcp.client.utils.RegisterCachePool;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.common.utils.StringUtil;
-import com.shcp.pojo.TbUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

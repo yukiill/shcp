@@ -3,6 +3,8 @@ package com.shcp.pojo;
 public class TbDevicelimit {
     private Long dslid;
 
+    private Long tid;
+
     private String dslname;
 
     private String dslkey;
@@ -13,6 +15,14 @@ public class TbDevicelimit {
 
     public void setDslid(Long dslid) {
         this.dslid = dslid;
+    }
+
+    public Long getTid() {
+        return tid;
+    }
+
+    public void setTid(Long tid) {
+        this.tid = tid;
     }
 
     public String getDslname() {

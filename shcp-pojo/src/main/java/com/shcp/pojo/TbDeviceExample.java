@@ -415,66 +415,6 @@ public class TbDeviceExample {
             return (Criteria) this;
         }
 
-        public Criteria andDsttypeIsNull() {
-            addCriterion("DSTTYPE is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeIsNotNull() {
-            addCriterion("DSTTYPE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeEqualTo(Integer value) {
-            addCriterion("DSTTYPE =", value, "dsttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeNotEqualTo(Integer value) {
-            addCriterion("DSTTYPE <>", value, "dsttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeGreaterThan(Integer value) {
-            addCriterion("DSTTYPE >", value, "dsttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("DSTTYPE >=", value, "dsttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeLessThan(Integer value) {
-            addCriterion("DSTTYPE <", value, "dsttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeLessThanOrEqualTo(Integer value) {
-            addCriterion("DSTTYPE <=", value, "dsttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeIn(List<Integer> values) {
-            addCriterion("DSTTYPE in", values, "dsttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeNotIn(List<Integer> values) {
-            addCriterion("DSTTYPE not in", values, "dsttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeBetween(Integer value1, Integer value2) {
-            addCriterion("DSTTYPE between", value1, value2, "dsttype");
-            return (Criteria) this;
-        }
-
-        public Criteria andDsttypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("DSTTYPE not between", value1, value2, "dsttype");
-            return (Criteria) this;
-        }
-
         public Criteria andDsdatetimeIsNull() {
             addCriterion("DSDATETIME is null");
             return (Criteria) this;

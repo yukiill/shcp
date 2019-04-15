@@ -7,6 +7,8 @@ public class TbUser {
 
     private Long did;
 
+    private Short lid;
+
     private String username;
 
     private String password;
@@ -20,10 +22,6 @@ public class TbUser {
     private String uhimg;
 
     private Date ubirth;
-
-    private Byte utype;
-
-    private Short ulimit;
 
     public Long getUid() {
         return uid;
@@ -39,6 +37,14 @@ public class TbUser {
 
     public void setDid(Long did) {
         this.did = did;
+    }
+
+    public Short getLid() {
+        return lid;
+    }
+
+    public void setLid(Short lid) {
+        this.lid = lid;
     }
 
     public String getUsername() {
@@ -95,21 +101,5 @@ public class TbUser {
 
     public void setUbirth(Date ubirth) {
         this.ubirth = ubirth;
-    }
-
-    public Byte getUtype() {
-        return utype;
-    }
-
-    public void setUtype(Byte utype) {
-        this.utype = utype;
-    }
-
-    public Short getUlimit() {
-        return ulimit;
-    }
-
-    public void setUlimit(Short ulimit) {
-        this.ulimit = ulimit;
     }
 }

@@ -565,52 +565,52 @@ public class DeveloperinfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andDcaidEqualTo(Integer value) {
+        public Criteria andDcaidEqualTo(Long value) {
             addCriterion("DCAID =", value, "dcaid");
             return (Criteria) this;
         }
 
-        public Criteria andDcaidNotEqualTo(Integer value) {
+        public Criteria andDcaidNotEqualTo(Long value) {
             addCriterion("DCAID <>", value, "dcaid");
             return (Criteria) this;
         }
 
-        public Criteria andDcaidGreaterThan(Integer value) {
+        public Criteria andDcaidGreaterThan(Long value) {
             addCriterion("DCAID >", value, "dcaid");
             return (Criteria) this;
         }
 
-        public Criteria andDcaidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andDcaidGreaterThanOrEqualTo(Long value) {
             addCriterion("DCAID >=", value, "dcaid");
             return (Criteria) this;
         }
 
-        public Criteria andDcaidLessThan(Integer value) {
+        public Criteria andDcaidLessThan(Long value) {
             addCriterion("DCAID <", value, "dcaid");
             return (Criteria) this;
         }
 
-        public Criteria andDcaidLessThanOrEqualTo(Integer value) {
+        public Criteria andDcaidLessThanOrEqualTo(Long value) {
             addCriterion("DCAID <=", value, "dcaid");
             return (Criteria) this;
         }
 
-        public Criteria andDcaidIn(List<Integer> values) {
+        public Criteria andDcaidIn(List<Long> values) {
             addCriterion("DCAID in", values, "dcaid");
             return (Criteria) this;
         }
 
-        public Criteria andDcaidNotIn(List<Integer> values) {
+        public Criteria andDcaidNotIn(List<Long> values) {
             addCriterion("DCAID not in", values, "dcaid");
             return (Criteria) this;
         }
 
-        public Criteria andDcaidBetween(Integer value1, Integer value2) {
+        public Criteria andDcaidBetween(Long value1, Long value2) {
             addCriterion("DCAID between", value1, value2, "dcaid");
             return (Criteria) this;
         }
 
-        public Criteria andDcaidNotBetween(Integer value1, Integer value2) {
+        public Criteria andDcaidNotBetween(Long value1, Long value2) {
             addCriterion("DCAID not between", value1, value2, "dcaid");
             return (Criteria) this;
         }

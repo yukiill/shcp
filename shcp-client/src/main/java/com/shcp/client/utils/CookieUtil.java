@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class CookieUtil {
 
-    private final static String COOKIE_NAME = "token";
+    private final static String COOKIE_NAME = "dev_token";
     private final static String COOKIE_PATH = "/";
 
     public static void addCookie(HttpServletRequest request, HttpServletResponse response){

@@ -4,15 +4,7 @@ import com.shcp.client.service.UserService;
 import com.shcp.client.utils.FileUtil;
 import com.shcp.client.utils.IdGenerator;
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.dao.mapper.TbReplyMapper;
-import com.shcp.dao.mapper.TbUserMapper;
-import com.shcp.dao.mapper.TbUserfeedbackMapper;
-import com.shcp.pojo.TbReply;
-import com.shcp.pojo.TbUser;
-import com.shcp.pojo.TbUserExample;
-import com.shcp.pojo.TbUserfeedback;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 

@@ -1,7 +1,5 @@
 package com.shcp.client.utils;
 
-import com.shcp.pojo.TbUser;
-
 /**
  * @author Yuki
  * @date 2019/3/27 20:13

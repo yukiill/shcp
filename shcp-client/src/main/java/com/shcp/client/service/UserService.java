@@ -1,7 +1,6 @@
 package com.shcp.client.service;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.pojo.TbUser;
 
 /**
  * @author Yuki

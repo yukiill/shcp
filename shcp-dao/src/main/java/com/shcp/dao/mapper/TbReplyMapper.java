@@ -33,6 +33,4 @@ public interface TbReplyMapper {
     int updateByPrimaryKeyWithBLOBs(TbReply record);
 
     int updateByPrimaryKey(TbReply record);
-
-    List<TbReply> getAllRepliesWithBLOBs(@Param("UID") Long UID, @Param("FID") Long FID);
 }

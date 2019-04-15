@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shcp.dao.mapper.TbUserlimitMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbUserlimit" >
+    <id column="LID" property="lid" jdbcType="SMALLINT" />
+    <result column="LNAME" property="lname" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LID, LNAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbUserlimitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_userlimit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_userlimit
+    where LID = #{lid,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from tb_userlimit
+    where LID = #{lid,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbUserlimitExample" >
+    delete from tb_userlimit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.TbUserlimit" >
+    insert into tb_userlimit (LID, LNAME)
+    values (#{lid,jdbcType=SMALLINT}, #{lname,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TbUserlimit" >
+    insert into tb_userlimit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        LID,
+      </if>
+      <if test="lname != null" >
+        LNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        #{lid,jdbcType=SMALLINT},
+      </if>
+      <if test="lname != null" >
+        #{lname,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.TbUserlimitExample" resultType="java.lang.Integer" >
+    select count(*) from tb_userlimit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_userlimit
+    <set >
+      <if test="record.lid != null" >
+        LID = #{record.lid,jdbcType=SMALLINT},
+      </if>
+      <if test="record.lname != null" >
+        LNAME = #{record.lname,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_userlimit
+    set LID = #{record.lid,jdbcType=SMALLINT},
+      LNAME = #{record.lname,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbUserlimit" >
+    update tb_userlimit
+    <set >
+      <if test="lname != null" >
+        LNAME = #{lname,jdbcType=CHAR},
+      </if>
+    </set>
+    where LID = #{lid,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbUserlimit" >
+    update tb_userlimit
+    set LNAME = #{lname,jdbcType=CHAR}
+    where LID = #{lid,jdbcType=SMALLINT}
+  </update>
+</mapper>

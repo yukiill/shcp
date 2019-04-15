@@ -17,7 +17,7 @@ public class Developerinfo {
 
     private Byte dcstatus;
 
-    private Integer dcaid;
+    private Long dcaid;
 
     public Long getDcid() {
         return dcid;
@@ -75,11 +75,11 @@ public class Developerinfo {
         this.dcstatus = dcstatus;
     }
 
-    public Integer getDcaid() {
+    public Long getDcaid() {
         return dcaid;
     }
 
-    public void setDcaid(Integer dcaid) {
+    public void setDcaid(Long dcaid) {
         this.dcaid = dcaid;
     }
 }

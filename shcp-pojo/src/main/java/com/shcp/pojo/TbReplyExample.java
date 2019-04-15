@@ -295,52 +295,52 @@ public class TbReplyExample {
             return (Criteria) this;
         }
 
-        public Criteria andRridEqualTo(Integer value) {
+        public Criteria andRridEqualTo(Long value) {
             addCriterion("RRID =", value, "rrid");
             return (Criteria) this;
         }
 
-        public Criteria andRridNotEqualTo(Integer value) {
+        public Criteria andRridNotEqualTo(Long value) {
             addCriterion("RRID <>", value, "rrid");
             return (Criteria) this;
         }
 
-        public Criteria andRridGreaterThan(Integer value) {
+        public Criteria andRridGreaterThan(Long value) {
             addCriterion("RRID >", value, "rrid");
             return (Criteria) this;
         }
 
-        public Criteria andRridGreaterThanOrEqualTo(Integer value) {
+        public Criteria andRridGreaterThanOrEqualTo(Long value) {
             addCriterion("RRID >=", value, "rrid");
             return (Criteria) this;
         }
 
-        public Criteria andRridLessThan(Integer value) {
+        public Criteria andRridLessThan(Long value) {
             addCriterion("RRID <", value, "rrid");
             return (Criteria) this;
         }
 
-        public Criteria andRridLessThanOrEqualTo(Integer value) {
+        public Criteria andRridLessThanOrEqualTo(Long value) {
             addCriterion("RRID <=", value, "rrid");
             return (Criteria) this;
         }
 
-        public Criteria andRridIn(List<Integer> values) {
+        public Criteria andRridIn(List<Long> values) {
             addCriterion("RRID in", values, "rrid");
             return (Criteria) this;
         }
 
-        public Criteria andRridNotIn(List<Integer> values) {
+        public Criteria andRridNotIn(List<Long> values) {
             addCriterion("RRID not in", values, "rrid");
             return (Criteria) this;
         }
 
-        public Criteria andRridBetween(Integer value1, Integer value2) {
+        public Criteria andRridBetween(Long value1, Long value2) {
             addCriterion("RRID between", value1, value2, "rrid");
             return (Criteria) this;
         }
 
-        public Criteria andRridNotBetween(Integer value1, Integer value2) {
+        public Criteria andRridNotBetween(Long value1, Long value2) {
             addCriterion("RRID not between", value1, value2, "rrid");
             return (Criteria) this;
         }

@@ -3,6 +3,8 @@ package com.shcp.pojo;
 public class TbDectrl {
     private Long decid;
 
+    private Long tid;
+
     private String decname;
 
     private String deckey;
@@ -15,6 +17,14 @@ public class TbDectrl {
 
     public void setDecid(Long decid) {
         this.decid = decid;
+    }
+
+    public Long getTid() {
+        return tid;
+    }
+
+    public void setTid(Long tid) {
+        this.tid = tid;
     }
 
     public String getDecname() {

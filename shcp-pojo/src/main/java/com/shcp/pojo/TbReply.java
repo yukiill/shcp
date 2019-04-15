@@ -9,7 +9,7 @@ public class TbReply {
 
     private Date rdatetime;
 
-    private Integer rrid;
+    private Long rrid;
 
     private String rcontent;
 
@@ -37,11 +37,11 @@ public class TbReply {
         this.rdatetime = rdatetime;
     }
 
-    public Integer getRrid() {
+    public Long getRrid() {
         return rrid;
     }
 
-    public void setRrid(Integer rrid) {
+    public void setRrid(Long rrid) {
         this.rrid = rrid;
     }
 
