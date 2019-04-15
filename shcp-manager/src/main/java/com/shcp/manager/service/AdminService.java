@@ -1,5 +1,7 @@
 package com.shcp.manager.service;
 
+import com.shcp.pojo.Admin;
+
 /**
  * @author Yuki
  * @date 2019/4/6 16:17

@@ -287,4 +287,10 @@
       UBIRTH = #{ubirth,jdbcType=DATE}
     where UID = #{uid,jdbcType=BIGINT}
   </update>
+  <select id="selectByUsername" parameterType="string" resultType="string">
+    select username from tb_user where username = #{username}
+  </select>
+  <select id="selectByEmail" parameterType="string" resultType="string">
+    select UEMAIL from tb_user where UEMAIL = #{email}
+  </select>
 </mapper>

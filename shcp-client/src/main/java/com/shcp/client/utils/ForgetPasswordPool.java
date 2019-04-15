@@ -1,6 +1,7 @@
 package com.shcp.client.utils;
 
 import com.shcp.client.pojo.CacheUser;
+import com.shcp.pojo.TbUser;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;

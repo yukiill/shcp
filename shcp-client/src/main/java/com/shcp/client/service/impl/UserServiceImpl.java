@@ -4,6 +4,13 @@ import com.shcp.client.service.UserService;
 import com.shcp.client.utils.FileUtil;
 import com.shcp.client.utils.IdGenerator;
 import com.shcp.common.pojo.ShcpResult;
+import com.shcp.dao.mapper.TbReplyMapper;
+import com.shcp.dao.mapper.TbUserMapper;
+import com.shcp.dao.mapper.TbUserfeedbackMapper;
+import com.shcp.pojo.TbReply;
+import com.shcp.pojo.TbUser;
+import com.shcp.pojo.TbUserExample;
+import com.shcp.pojo.TbUserfeedback;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -54,8 +61,7 @@ public class UserServiceImpl implements UserService{
         tbUser.setDid((long) 0);
         tbUser.setUhimg(FileUtil.DEFAULT_IMAGE_URL);
         tbUser.setUbirth(null);
-        tbUser.setUlimit((short) 11);
-        tbUser.setUtype((byte) 0);
+        tbUser.setLid((short) 0);
         tbUser.setUid(IdGenerator.generateUserId());
         log.info("register user:{} platform:{} success ", userName, TerID);
         return tbUser;
@@ -79,7 +85,7 @@ public class UserServiceImpl implements UserService{
             isChanged = true;
             tbUser.setUintroduce(introduction);
         }
-        Date newBirth = null;
+        Date newBirth;
         try {
             newBirth = dateFormat.parse(birthday);
         } catch (ParseException e) {

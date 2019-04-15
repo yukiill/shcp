@@ -1,8 +1,11 @@
 package com.shcp.developer.service.impl;
 
-import com.shcp.client.pojo.CacheUser;
-import com.shcp.client.service.EmailService;
 import com.shcp.common.pojo.ShcpResult;
+import com.shcp.dao.mapper.TbUserMapper;
+import com.shcp.developer.pojo.CacheUser;
+import com.shcp.developer.service.EmailService;
+import com.shcp.developer.utils.ForgetPasswordPool;
+import com.shcp.developer.utils.RegisterCachePool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -21,7 +24,7 @@ import java.util.Properties;
  */
 @Slf4j
 @Service("emailService")
-public class EmailServiceImpl implements EmailService{
+public class EmailServiceImpl implements EmailService {
 
     @Resource
     private JavaMailSender javaMailSender;
@@ -40,7 +43,7 @@ public class EmailServiceImpl implements EmailService{
             log.info("verify forgetPass email expired");
             return ShcpResult.build(655, "超过验证时限，请重新发送验证邮件");
         }
-        tbUserMapper.updateByPrimaryKeySelective(cacheUser.getTbUser());
+//        tbUserMapper.updateByPrimaryKeySelective(cacheUser.getTbUser());
         return ShcpResult.ok();
     }
 
@@ -56,14 +59,14 @@ public class EmailServiceImpl implements EmailService{
             log.info("userId:{} verify email expired", userId);
             return ShcpResult.build(655, "超过验证时限，请重新发送验证邮件");
         }
-        TbUser tbUser = cacheUser.getTbUser();
-        if(Objects.equals(tbUser.getUid(), userId)) {
-            tbUserMapper.insertSelective(tbUser);
-            FileUtil.mkdirForUser(tbUser.getUsername());
-            log.info("userId:{} time:{} check successful verification", userId, time);
-            registerCachePool.remove(time);
-            return ShcpResult.ok();
-        }
+//        TbUser tbUser = cacheUser.getTbUser();
+//        if(Objects.equals(tbUser.getUid(), userId)) {
+//            tbUserMapper.insertSelective(tbUser);
+//            FileUtil.mkdirForUser(tbUser.getUsername());
+//            log.info("userId:{} time:{} check successful verification", userId, time);
+//            registerCachePool.remove(time);
+//            return ShcpResult.ok();
+//        }
         return ShcpResult.build(714, "验证失败");
     }
 
@@ -74,10 +77,10 @@ public class EmailServiceImpl implements EmailService{
         if(cacheUser.isAllowToSend()){
             cacheUser.setExpiredTimeAndDecrCount();
             log.info("send check email to userID:{}, email:{}", userId, email);
-            if(sendEmail(TextTemplate.getCheckEmailTemplate(userId, time), TextTemplate.getCheckEmailSubject(), email, type)){
-                log.info("send check email to userId:{} successed", userId);
-                return ShcpResult.ok();
-            }
+//            if(sendEmail(TextTemplate.getCheckEmailTemplate(userId, time), TextTemplate.getCheckEmailSubject(), email, type)){
+//                log.info("send check email to userId:{} successed", userId);
+//                return ShcpResult.ok();
+//            }
             return ShcpResult.build(711, "邮件发送失败");
         }
         log.info("this userId:{} excess to send check email", userId);
@@ -90,25 +93,25 @@ public class EmailServiceImpl implements EmailService{
         CacheUser cacheUser = forgetPasswordPool.get(time);
         if(Objects.isNull(cacheUser)){
             log.info("send forgetPass email to email:{}", email);
-            TbUserExample tbUserExample = new TbUserExample();
-            tbUserExample.createCriteria()
-                    .andUemailEqualTo(email);
-            TbUser tbUser = tbUserMapper.selectByExample(tbUserExample).get(0);
-            if(Objects.isNull(tbUser)){
-                log.info("email:{} haven't opposite user", email);
-                return ShcpResult.build(715, "邮箱未绑定");
-            }
-            tbUser.setPassword(password);
-            cacheUser = forgetPasswordPool.add(tbUser, time);
+//            TbUserExample tbUserExample = new TbUserExample();
+//            tbUserExample.createCriteria()
+//                    .andUemailEqualTo(email);
+//            TbUser tbUser = tbUserMapper.selectByExample(tbUserExample).get(0);
+//            if(Objects.isNull(tbUser)){
+//                log.info("email:{} haven't opposite user", email);
+//                return ShcpResult.build(715, "邮箱未绑定");
+//            }
+//            tbUser.setPassword(password);
+//            cacheUser = forgetPasswordPool.add(tbUser, time);
         }
         if(cacheUser.isAllowToSend()){
-            if(sendEmail(TextTemplate.getForgetPassEmailTemplate(time), TextTemplate.getCheckEmailSubject(), email, type)){
-                log.info("send check forgetPass email to email:{} successed", email);
-                cacheUser.setExpiredTimeAndDecrCount();
-                return ShcpResult.ok();
-            } else {
-                return ShcpResult.build(657, "邮件发送失败");
-            }
+//            if(sendEmail(TextTemplate.getForgetPassEmailTemplate(time), TextTemplate.getCheckEmailSubject(), email, type)){
+//                log.info("send check forgetPass email to email:{} successed", email);
+//                cacheUser.setExpiredTimeAndDecrCount();
+//                return ShcpResult.ok();
+//            } else {
+//                return ShcpResult.build(657, "邮件发送失败");
+//            }
 
         }
         log.info("excess to send forgetPass email");

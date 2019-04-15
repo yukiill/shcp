@@ -248,4 +248,16 @@
       RRID = #{rrid,jdbcType=BIGINT}
     where RID = #{rid,jdbcType=BIGINT}
   </update>
+  <select id="getAllRepliesWithBLOBs" parameterType="long" resultMap="ResultMapWithBLOBs">
+    select
+    re.RID, re.FID, re.RDATETIME, re.
+    FROM
+    <if test="FID != null">
+      tb_reply where FID = #{FID}
+    </if>
+    <if test="FID == null">
+      (select fb.FID from tb_userfeedback fb where UID = #{UID})
+      fb INNER JOIN tb_reply re ON re.FID = fb.FID
+    </if>
+  </select>
 </mapper>

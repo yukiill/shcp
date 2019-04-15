@@ -1,5 +1,7 @@
 package com.shcp.manager.service;
 
+import com.shcp.pojo.TbDeveloper;
+
 import java.util.List;
 
 /**

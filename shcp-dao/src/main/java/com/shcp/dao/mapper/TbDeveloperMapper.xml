@@ -272,4 +272,7 @@
       SUBMITDATETIME = #{submitdatetime,jdbcType=TIMESTAMP}
     where DID = #{did,jdbcType=BIGINT}
   </update>
+  <select id="selectByEmail" parameterType="string" resultType="string">
+    select DEMAIL from tb_developer where DEMAIL = #{email}
+  </select>
 </mapper>

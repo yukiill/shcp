@@ -1,8 +1,11 @@
 package com.shcp.developer.service.impl;
 
 import com.shcp.common.pojo.ShcpResult;
+import com.shcp.dao.mapper.TbUserfeedbackMapper;
 import com.shcp.developer.service.FeedbackService;
 import com.shcp.developer.utils.IdGenerator;
+import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.TbUserfeedback;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

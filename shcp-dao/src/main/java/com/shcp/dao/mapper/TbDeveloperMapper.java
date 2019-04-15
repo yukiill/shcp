@@ -27,4 +27,6 @@ public interface TbDeveloperMapper {
     int updateByPrimaryKeySelective(TbDeveloper record);
 
     int updateByPrimaryKey(TbDeveloper record);
+
+    String selectByEmail(@Param("email") String email);
 }
