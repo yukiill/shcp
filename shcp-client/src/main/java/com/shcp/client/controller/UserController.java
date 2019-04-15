@@ -83,7 +83,7 @@ public class UserController {
         return CorsUtil.format(userService.getUserInfo(tbUser.getUid()));
     }
 
-    @PostMapping(value = "/changePwd")
+    @RequestMapping(value = "/changePwd")
     @ResponseBody
     public Object changePwd(String nPwd, String rPwd, String email, Object bw){
         TbUser tbUser = (TbUser) session.getAttribute("user");

@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shcp.dao.mapper.DeveloperinfoMapper">
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.Developerinfo">
-    <id column="DCID" jdbcType="BIGINT" property="dcid" />
-    <result column="DID" jdbcType="BIGINT" property="did" />
-    <result column="DCNAME" jdbcType="VARCHAR" property="dcname" />
-    <result column="DCADDR" jdbcType="VARCHAR" property="dcaddr" />
-    <result column="DCNUMBER" jdbcType="VARCHAR" property="dcnumber" />
-    <result column="DCDATETIME" jdbcType="TIMESTAMP" property="dcdatetime" />
-    <result column="DCSTATUS" jdbcType="TINYINT" property="dcstatus" />
-    <result column="DCAID" jdbcType="INTEGER" property="dcaid" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shcp.dao.mapper.DeveloperinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.Developerinfo" >
+    <id column="DCID" property="dcid" jdbcType="BIGINT" />
+    <result column="DID" property="did" jdbcType="BIGINT" />
+    <result column="DCNAME" property="dcname" jdbcType="VARCHAR" />
+    <result column="DCADDR" property="dcaddr" jdbcType="VARCHAR" />
+    <result column="DCNUMBER" property="dcnumber" jdbcType="VARCHAR" />
+    <result column="DCDATETIME" property="dcdatetime" jdbcType="TIMESTAMP" />
+    <result column="DCSTATUS" property="dcstatus" jdbcType="TINYINT" />
+    <result column="DCAID" property="dcaid" jdbcType="BIGINT" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -40,25 +40,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -69,141 +69,141 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     DCID, DID, DCNAME, DCADDR, DCNUMBER, DCDATETIME, DCSTATUS, DCAID
   </sql>
-  <select id="selectByExample" parameterType="com.shcp.pojo.DeveloperinfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeveloperinfoExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from developerinfo
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from developerinfo
     where DCID = #{dcid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from developerinfo
     where DCID = #{dcid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeveloperinfoExample">
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeveloperinfoExample" >
     delete from developerinfo
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.Developerinfo">
+  <insert id="insert" parameterType="com.shcp.pojo.Developerinfo" >
     insert into developerinfo (DCID, DID, DCNAME, 
       DCADDR, DCNUMBER, DCDATETIME, 
       DCSTATUS, DCAID)
     values (#{dcid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{dcname,jdbcType=VARCHAR}, 
       #{dcaddr,jdbcType=VARCHAR}, #{dcnumber,jdbcType=VARCHAR}, #{dcdatetime,jdbcType=TIMESTAMP}, 
-      #{dcstatus,jdbcType=TINYINT}, #{dcaid,jdbcType=INTEGER})
+      #{dcstatus,jdbcType=TINYINT}, #{dcaid,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.Developerinfo">
+  <insert id="insertSelective" parameterType="com.shcp.pojo.Developerinfo" >
     insert into developerinfo
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="dcid != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dcid != null" >
         DCID,
       </if>
-      <if test="did != null">
+      <if test="did != null" >
         DID,
       </if>
-      <if test="dcname != null">
+      <if test="dcname != null" >
         DCNAME,
       </if>
-      <if test="dcaddr != null">
+      <if test="dcaddr != null" >
         DCADDR,
       </if>
-      <if test="dcnumber != null">
+      <if test="dcnumber != null" >
         DCNUMBER,
       </if>
-      <if test="dcdatetime != null">
+      <if test="dcdatetime != null" >
         DCDATETIME,
       </if>
-      <if test="dcstatus != null">
+      <if test="dcstatus != null" >
         DCSTATUS,
       </if>
-      <if test="dcaid != null">
+      <if test="dcaid != null" >
         DCAID,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="dcid != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dcid != null" >
         #{dcid,jdbcType=BIGINT},
       </if>
-      <if test="did != null">
+      <if test="did != null" >
         #{did,jdbcType=BIGINT},
       </if>
-      <if test="dcname != null">
+      <if test="dcname != null" >
         #{dcname,jdbcType=VARCHAR},
       </if>
-      <if test="dcaddr != null">
+      <if test="dcaddr != null" >
         #{dcaddr,jdbcType=VARCHAR},
       </if>
-      <if test="dcnumber != null">
+      <if test="dcnumber != null" >
         #{dcnumber,jdbcType=VARCHAR},
       </if>
-      <if test="dcdatetime != null">
+      <if test="dcdatetime != null" >
         #{dcdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="dcstatus != null">
+      <if test="dcstatus != null" >
         #{dcstatus,jdbcType=TINYINT},
       </if>
-      <if test="dcaid != null">
-        #{dcaid,jdbcType=INTEGER},
+      <if test="dcaid != null" >
+        #{dcaid,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.DeveloperinfoExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.shcp.pojo.DeveloperinfoExample" resultType="java.lang.Integer" >
     select count(*) from developerinfo
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update developerinfo
-    <set>
-      <if test="record.dcid != null">
+    <set >
+      <if test="record.dcid != null" >
         DCID = #{record.dcid,jdbcType=BIGINT},
       </if>
-      <if test="record.did != null">
+      <if test="record.did != null" >
         DID = #{record.did,jdbcType=BIGINT},
       </if>
-      <if test="record.dcname != null">
+      <if test="record.dcname != null" >
         DCNAME = #{record.dcname,jdbcType=VARCHAR},
       </if>
-      <if test="record.dcaddr != null">
+      <if test="record.dcaddr != null" >
         DCADDR = #{record.dcaddr,jdbcType=VARCHAR},
       </if>
-      <if test="record.dcnumber != null">
+      <if test="record.dcnumber != null" >
         DCNUMBER = #{record.dcnumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.dcdatetime != null">
+      <if test="record.dcdatetime != null" >
         DCDATETIME = #{record.dcdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.dcstatus != null">
+      <if test="record.dcstatus != null" >
         DCSTATUS = #{record.dcstatus,jdbcType=TINYINT},
       </if>
-      <if test="record.dcaid != null">
-        DCAID = #{record.dcaid,jdbcType=INTEGER},
+      <if test="record.dcaid != null" >
+        DCAID = #{record.dcaid,jdbcType=BIGINT},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update developerinfo
     set DCID = #{record.dcid,jdbcType=BIGINT},
       DID = #{record.did,jdbcType=BIGINT},
@@ -212,39 +212,39 @@
       DCNUMBER = #{record.dcnumber,jdbcType=VARCHAR},
       DCDATETIME = #{record.dcdatetime,jdbcType=TIMESTAMP},
       DCSTATUS = #{record.dcstatus,jdbcType=TINYINT},
-      DCAID = #{record.dcaid,jdbcType=INTEGER}
-    <if test="_parameter != null">
+      DCAID = #{record.dcaid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.Developerinfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.Developerinfo" >
     update developerinfo
-    <set>
-      <if test="did != null">
+    <set >
+      <if test="did != null" >
         DID = #{did,jdbcType=BIGINT},
       </if>
-      <if test="dcname != null">
+      <if test="dcname != null" >
         DCNAME = #{dcname,jdbcType=VARCHAR},
       </if>
-      <if test="dcaddr != null">
+      <if test="dcaddr != null" >
         DCADDR = #{dcaddr,jdbcType=VARCHAR},
       </if>
-      <if test="dcnumber != null">
+      <if test="dcnumber != null" >
         DCNUMBER = #{dcnumber,jdbcType=VARCHAR},
       </if>
-      <if test="dcdatetime != null">
+      <if test="dcdatetime != null" >
         DCDATETIME = #{dcdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="dcstatus != null">
+      <if test="dcstatus != null" >
         DCSTATUS = #{dcstatus,jdbcType=TINYINT},
       </if>
-      <if test="dcaid != null">
-        DCAID = #{dcaid,jdbcType=INTEGER},
+      <if test="dcaid != null" >
+        DCAID = #{dcaid,jdbcType=BIGINT},
       </if>
     </set>
     where DCID = #{dcid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.Developerinfo">
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.Developerinfo" >
     update developerinfo
     set DID = #{did,jdbcType=BIGINT},
       DCNAME = #{dcname,jdbcType=VARCHAR},
@@ -252,8 +252,7 @@
       DCNUMBER = #{dcnumber,jdbcType=VARCHAR},
       DCDATETIME = #{dcdatetime,jdbcType=TIMESTAMP},
       DCSTATUS = #{dcstatus,jdbcType=TINYINT},
-      DCAID = #{dcaid,jdbcType=INTEGER}
+      DCAID = #{dcaid,jdbcType=BIGINT}
     where DCID = #{dcid,jdbcType=BIGINT}
   </update>
-
 </mapper>

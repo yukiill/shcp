@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shcp.dao.mapper.TbDeviceexamineMapper">
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDeviceexamine">
-    <id column="DSEXID" jdbcType="BIGINT" property="dsexid" />
-    <result column="DID" jdbcType="BIGINT" property="did" />
-    <result column="DSEXNAME1" jdbcType="VARCHAR" property="dsexname1" />
-    <result column="DSEXDATETIME" jdbcType="TIMESTAMP" property="dsexdatetime" />
-    <result column="DSEXSTATUS" jdbcType="BIT" property="dsexstatus" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shcp.dao.mapper.TbDeviceexamineMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDeviceexamine" >
+    <id column="DSEXID" property="dsexid" jdbcType="BIGINT" />
+    <result column="DID" property="did" jdbcType="BIGINT" />
+    <result column="DSEXNAME1" property="dsexname1" jdbcType="VARCHAR" />
+    <result column="DSEXDATETIME" property="dsexdatetime" jdbcType="TIMESTAMP" />
+    <result column="DSEXSTATUS" property="dsexstatus" jdbcType="BIT" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -37,25 +37,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -66,141 +66,141 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     DSEXID, DID, DSEXNAME1, DSEXDATETIME, DSEXSTATUS
   </sql>
-  <select id="selectByExample" parameterType="com.shcp.pojo.TbDeviceexamineExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbDeviceexamineExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from tb_deviceexamine
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from tb_deviceexamine
     where DSEXID = #{dsexid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tb_deviceexamine
     where DSEXID = #{dsexid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDeviceexamineExample">
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDeviceexamineExample" >
     delete from tb_deviceexamine
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbDeviceexamine">
+  <insert id="insert" parameterType="com.shcp.pojo.TbDeviceexamine" >
     insert into tb_deviceexamine (DSEXID, DID, DSEXNAME1, 
       DSEXDATETIME, DSEXSTATUS)
     values (#{dsexid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{dsexname1,jdbcType=VARCHAR}, 
       #{dsexdatetime,jdbcType=TIMESTAMP}, #{dsexstatus,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDeviceexamine">
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDeviceexamine" >
     insert into tb_deviceexamine
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="dsexid != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dsexid != null" >
         DSEXID,
       </if>
-      <if test="did != null">
+      <if test="did != null" >
         DID,
       </if>
-      <if test="dsexname1 != null">
+      <if test="dsexname1 != null" >
         DSEXNAME1,
       </if>
-      <if test="dsexdatetime != null">
+      <if test="dsexdatetime != null" >
         DSEXDATETIME,
       </if>
-      <if test="dsexstatus != null">
+      <if test="dsexstatus != null" >
         DSEXSTATUS,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="dsexid != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dsexid != null" >
         #{dsexid,jdbcType=BIGINT},
       </if>
-      <if test="did != null">
+      <if test="did != null" >
         #{did,jdbcType=BIGINT},
       </if>
-      <if test="dsexname1 != null">
+      <if test="dsexname1 != null" >
         #{dsexname1,jdbcType=VARCHAR},
       </if>
-      <if test="dsexdatetime != null">
+      <if test="dsexdatetime != null" >
         #{dsexdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="dsexstatus != null">
+      <if test="dsexstatus != null" >
         #{dsexstatus,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbDeviceexamineExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.shcp.pojo.TbDeviceexamineExample" resultType="java.lang.Integer" >
     select count(*) from tb_deviceexamine
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update tb_deviceexamine
-    <set>
-      <if test="record.dsexid != null">
+    <set >
+      <if test="record.dsexid != null" >
         DSEXID = #{record.dsexid,jdbcType=BIGINT},
       </if>
-      <if test="record.did != null">
+      <if test="record.did != null" >
         DID = #{record.did,jdbcType=BIGINT},
       </if>
-      <if test="record.dsexname1 != null">
+      <if test="record.dsexname1 != null" >
         DSEXNAME1 = #{record.dsexname1,jdbcType=VARCHAR},
       </if>
-      <if test="record.dsexdatetime != null">
+      <if test="record.dsexdatetime != null" >
         DSEXDATETIME = #{record.dsexdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.dsexstatus != null">
+      <if test="record.dsexstatus != null" >
         DSEXSTATUS = #{record.dsexstatus,jdbcType=BIT},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update tb_deviceexamine
     set DSEXID = #{record.dsexid,jdbcType=BIGINT},
       DID = #{record.did,jdbcType=BIGINT},
       DSEXNAME1 = #{record.dsexname1,jdbcType=VARCHAR},
       DSEXDATETIME = #{record.dsexdatetime,jdbcType=TIMESTAMP},
       DSEXSTATUS = #{record.dsexstatus,jdbcType=BIT}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDeviceexamine">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDeviceexamine" >
     update tb_deviceexamine
-    <set>
-      <if test="did != null">
+    <set >
+      <if test="did != null" >
         DID = #{did,jdbcType=BIGINT},
       </if>
-      <if test="dsexname1 != null">
+      <if test="dsexname1 != null" >
         DSEXNAME1 = #{dsexname1,jdbcType=VARCHAR},
       </if>
-      <if test="dsexdatetime != null">
+      <if test="dsexdatetime != null" >
         DSEXDATETIME = #{dsexdatetime,jdbcType=TIMESTAMP},
       </if>
-      <if test="dsexstatus != null">
+      <if test="dsexstatus != null" >
         DSEXSTATUS = #{dsexstatus,jdbcType=BIT},
       </if>
     </set>
     where DSEXID = #{dsexid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDeviceexamine">
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDeviceexamine" >
     update tb_deviceexamine
     set DID = #{did,jdbcType=BIGINT},
       DSEXNAME1 = #{dsexname1,jdbcType=VARCHAR},

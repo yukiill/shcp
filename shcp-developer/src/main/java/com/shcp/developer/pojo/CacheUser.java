@@ -1,5 +1,6 @@
 package com.shcp.developer.pojo;
 
+import com.shcp.pojo.TbDeveloper;
 import lombok.Data;
 
 import java.util.Date;

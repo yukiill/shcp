@@ -1,5 +1,6 @@
 package com.shcp.developer.service;
 
+import com.shcp.common.pojo.ShcpResult;
 import com.shcp.pojo.TbUser;
 
 /**
@@ -9,4 +10,6 @@ import com.shcp.pojo.TbUser;
 public interface UserService {
 
     TbUser searchUser(String keyWord, String type);
+
+//    ShcpResult modifiUserInfo();
 }

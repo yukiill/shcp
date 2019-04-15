@@ -1,37 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shcp.dao.mapper.TbDeveloperMapper">
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDeveloper">
-    <id column="DID" jdbcType="BIGINT" property="did" />
-    <result column="DCID" jdbcType="BIGINT" property="dcid" />
-    <result column="DEVNAME" jdbcType="VARCHAR" property="devname" />
-    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
-    <result column="DEMAIL" jdbcType="VARCHAR" property="demail" />
-    <result column="DSUB" jdbcType="INTEGER" property="dsub" />
-    <result column="DSTATUS" jdbcType="TINYINT" property="dstatus" />
-    <result column="DHIMG" jdbcType="VARCHAR" property="dhimg" />
-    <result column="DLIMIT" jdbcType="INTEGER" property="dlimit" />
-    <result column="SUBMITDATETIME" jdbcType="TIMESTAMP" property="submitdatetime" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shcp.dao.mapper.TbDeveloperMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDeveloper" >
+    <id column="DID" property="did" jdbcType="BIGINT" />
+    <result column="DCID" property="dcid" jdbcType="BIGINT" />
+    <result column="DEVNAME" property="devname" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="DEMAIL" property="demail" jdbcType="VARCHAR" />
+    <result column="DSTATUS" property="dstatus" jdbcType="TINYINT" />
+    <result column="DHIMG" property="dhimg" jdbcType="VARCHAR" />
+    <result column="DLIMIT" property="dlimit" jdbcType="INTEGER" />
+    <result column="SUBMITDATETIME" property="submitdatetime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -42,25 +41,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -71,221 +70,209 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    DID, DCID, DEVNAME, PASSWORD, DEMAIL, DSUB, DSTATUS, DHIMG, DLIMIT, SUBMITDATETIME
+  <sql id="Base_Column_List" >
+    DID, DCID, DEVNAME, PASSWORD, DEMAIL, DSTATUS, DHIMG, DLIMIT, SUBMITDATETIME
   </sql>
-  <select id="selectByExample" parameterType="com.shcp.pojo.TbDeveloperExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbDeveloperExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from tb_developer
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from tb_developer
     where DID = #{did,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tb_developer
     where DID = #{did,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDeveloperExample">
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDeveloperExample" >
     delete from tb_developer
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbDeveloper">
+  <insert id="insert" parameterType="com.shcp.pojo.TbDeveloper" >
     insert into tb_developer (DID, DCID, DEVNAME, 
-      PASSWORD, DEMAIL, DSUB, 
-      DSTATUS, DHIMG, DLIMIT, 
-      SUBMITDATETIME)
+      PASSWORD, DEMAIL, DSTATUS, 
+      DHIMG, DLIMIT, SUBMITDATETIME
+      )
     values (#{did,jdbcType=BIGINT}, #{dcid,jdbcType=BIGINT}, #{devname,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{demail,jdbcType=VARCHAR}, #{dsub,jdbcType=INTEGER}, 
-      #{dstatus,jdbcType=TINYINT}, #{dhimg,jdbcType=VARCHAR}, #{dlimit,jdbcType=INTEGER}, 
-      #{submitdatetime,jdbcType=TIMESTAMP})
+      #{password,jdbcType=VARCHAR}, #{demail,jdbcType=VARCHAR}, #{dstatus,jdbcType=TINYINT}, 
+      #{dhimg,jdbcType=VARCHAR}, #{dlimit,jdbcType=INTEGER}, #{submitdatetime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDeveloper">
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDeveloper" >
     insert into tb_developer
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="did != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="did != null" >
         DID,
       </if>
-      <if test="dcid != null">
+      <if test="dcid != null" >
         DCID,
       </if>
-      <if test="devname != null">
+      <if test="devname != null" >
         DEVNAME,
       </if>
-      <if test="password != null">
+      <if test="password != null" >
         PASSWORD,
       </if>
-      <if test="demail != null">
+      <if test="demail != null" >
         DEMAIL,
       </if>
-      <if test="dsub != null">
-        DSUB,
-      </if>
-      <if test="dstatus != null">
+      <if test="dstatus != null" >
         DSTATUS,
       </if>
-      <if test="dhimg != null">
+      <if test="dhimg != null" >
         DHIMG,
       </if>
-      <if test="dlimit != null">
+      <if test="dlimit != null" >
         DLIMIT,
       </if>
-      <if test="submitdatetime != null">
+      <if test="submitdatetime != null" >
         SUBMITDATETIME,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="did != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="did != null" >
         #{did,jdbcType=BIGINT},
       </if>
-      <if test="dcid != null">
+      <if test="dcid != null" >
         #{dcid,jdbcType=BIGINT},
       </if>
-      <if test="devname != null">
+      <if test="devname != null" >
         #{devname,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
+      <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="demail != null">
+      <if test="demail != null" >
         #{demail,jdbcType=VARCHAR},
       </if>
-      <if test="dsub != null">
-        #{dsub,jdbcType=INTEGER},
-      </if>
-      <if test="dstatus != null">
+      <if test="dstatus != null" >
         #{dstatus,jdbcType=TINYINT},
       </if>
-      <if test="dhimg != null">
+      <if test="dhimg != null" >
         #{dhimg,jdbcType=VARCHAR},
       </if>
-      <if test="dlimit != null">
+      <if test="dlimit != null" >
         #{dlimit,jdbcType=INTEGER},
       </if>
-      <if test="submitdatetime != null">
+      <if test="submitdatetime != null" >
         #{submitdatetime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbDeveloperExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.shcp.pojo.TbDeveloperExample" resultType="java.lang.Integer" >
     select count(*) from tb_developer
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update tb_developer
-    <set>
-      <if test="record.did != null">
+    <set >
+      <if test="record.did != null" >
         DID = #{record.did,jdbcType=BIGINT},
       </if>
-      <if test="record.dcid != null">
+      <if test="record.dcid != null" >
         DCID = #{record.dcid,jdbcType=BIGINT},
       </if>
-      <if test="record.devname != null">
+      <if test="record.devname != null" >
         DEVNAME = #{record.devname,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
+      <if test="record.password != null" >
         PASSWORD = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.demail != null">
+      <if test="record.demail != null" >
         DEMAIL = #{record.demail,jdbcType=VARCHAR},
       </if>
-      <if test="record.dsub != null">
-        DSUB = #{record.dsub,jdbcType=INTEGER},
-      </if>
-      <if test="record.dstatus != null">
+      <if test="record.dstatus != null" >
         DSTATUS = #{record.dstatus,jdbcType=TINYINT},
       </if>
-      <if test="record.dhimg != null">
+      <if test="record.dhimg != null" >
         DHIMG = #{record.dhimg,jdbcType=VARCHAR},
       </if>
-      <if test="record.dlimit != null">
+      <if test="record.dlimit != null" >
         DLIMIT = #{record.dlimit,jdbcType=INTEGER},
       </if>
-      <if test="record.submitdatetime != null">
+      <if test="record.submitdatetime != null" >
         SUBMITDATETIME = #{record.submitdatetime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update tb_developer
     set DID = #{record.did,jdbcType=BIGINT},
       DCID = #{record.dcid,jdbcType=BIGINT},
       DEVNAME = #{record.devname,jdbcType=VARCHAR},
       PASSWORD = #{record.password,jdbcType=VARCHAR},
       DEMAIL = #{record.demail,jdbcType=VARCHAR},
-      DSUB = #{record.dsub,jdbcType=INTEGER},
       DSTATUS = #{record.dstatus,jdbcType=TINYINT},
       DHIMG = #{record.dhimg,jdbcType=VARCHAR},
       DLIMIT = #{record.dlimit,jdbcType=INTEGER},
       SUBMITDATETIME = #{record.submitdatetime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDeveloper">
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDeveloper" >
     update tb_developer
-    <set>
-      <if test="dcid != null">
+    <set >
+      <if test="dcid != null" >
         DCID = #{dcid,jdbcType=BIGINT},
       </if>
-      <if test="devname != null">
+      <if test="devname != null" >
         DEVNAME = #{devname,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
+      <if test="password != null" >
         PASSWORD = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="demail != null">
+      <if test="demail != null" >
         DEMAIL = #{demail,jdbcType=VARCHAR},
       </if>
-      <if test="dsub != null">
-        DSUB = #{dsub,jdbcType=INTEGER},
-      </if>
-      <if test="dstatus != null">
+      <if test="dstatus != null" >
         DSTATUS = #{dstatus,jdbcType=TINYINT},
       </if>
-      <if test="dhimg != null">
+      <if test="dhimg != null" >
         DHIMG = #{dhimg,jdbcType=VARCHAR},
       </if>
-      <if test="dlimit != null">
+      <if test="dlimit != null" >
         DLIMIT = #{dlimit,jdbcType=INTEGER},
       </if>
-      <if test="submitdatetime != null">
+      <if test="submitdatetime != null" >
         SUBMITDATETIME = #{submitdatetime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where DID = #{did,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDeveloper">
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDeveloper" >
     update tb_developer
     set DCID = #{dcid,jdbcType=BIGINT},
       DEVNAME = #{devname,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
       DEMAIL = #{demail,jdbcType=VARCHAR},
-      DSUB = #{dsub,jdbcType=INTEGER},
       DSTATUS = #{dstatus,jdbcType=TINYINT},
       DHIMG = #{dhimg,jdbcType=VARCHAR},
       DLIMIT = #{dlimit,jdbcType=INTEGER},
       SUBMITDATETIME = #{submitdatetime,jdbcType=TIMESTAMP}
     where DID = #{did,jdbcType=BIGINT}
   </update>
-
+  <select id="selectByEmail" parameterType="string" resultType="string">
+    select DEMAIL from tb_developer where DEMAIL = #{email}
+  </select>
 </mapper>

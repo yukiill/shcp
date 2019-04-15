@@ -1,29 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shcp.dao.mapper.TbDevtestdevicetypeMapper">
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDevtestdevicetype">
-    <result column="TID" jdbcType="BIGINT" property="tid" />
-    <result column="TNAME" jdbcType="VARCHAR" property="tname" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shcp.dao.mapper.TbDevtestdevicetypeMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDevtestdevicetype" >
+    <result column="TID" property="tid" jdbcType="BIGINT" />
+    <result column="TNAME" property="tname" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -34,25 +34,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -63,77 +63,77 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     TID, TNAME
   </sql>
-  <select id="selectByExample" parameterType="com.shcp.pojo.TbDevtestdevicetypeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbDevtestdevicetypeExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from tb_devtestdevicetype
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDevtestdevicetypeExample">
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDevtestdevicetypeExample" >
     delete from tb_devtestdevicetype
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbDevtestdevicetype">
+  <insert id="insert" parameterType="com.shcp.pojo.TbDevtestdevicetype" >
     insert into tb_devtestdevicetype (TID, TNAME)
     values (#{tid,jdbcType=BIGINT}, #{tname,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDevtestdevicetype">
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDevtestdevicetype" >
     insert into tb_devtestdevicetype
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="tid != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
         TID,
       </if>
-      <if test="tname != null">
+      <if test="tname != null" >
         TNAME,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="tid != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
         #{tid,jdbcType=BIGINT},
       </if>
-      <if test="tname != null">
+      <if test="tname != null" >
         #{tname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbDevtestdevicetypeExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.shcp.pojo.TbDevtestdevicetypeExample" resultType="java.lang.Integer" >
     select count(*) from tb_devtestdevicetype
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update tb_devtestdevicetype
-    <set>
-      <if test="record.tid != null">
+    <set >
+      <if test="record.tid != null" >
         TID = #{record.tid,jdbcType=BIGINT},
       </if>
-      <if test="record.tname != null">
+      <if test="record.tname != null" >
         TNAME = #{record.tname,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update tb_devtestdevicetype
     set TID = #{record.tid,jdbcType=BIGINT},
       TNAME = #{record.tname,jdbcType=VARCHAR}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>

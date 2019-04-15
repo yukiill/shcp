@@ -7,6 +7,10 @@ import com.gracelie.shcp.cpcsconn.config.sendmessage.SendMessage;
 import com.shcp.client.service.DeviceService;
 import com.shcp.client.utils.MessageUtil;
 import com.shcp.common.pojo.ShcpResult;
+import com.shcp.dao.mapper.TbDeviceMapper;
+import com.shcp.pojo.TbDevice;
+import com.shcp.pojo.TbDeviceExample;
+import com.shcp.pojo.TbUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
