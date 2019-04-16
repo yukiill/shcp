@@ -7,35 +7,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff3d7b8b-28a0-44f5-b985-90b60caacef5" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/shcp_client.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/shcp_client.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/shcp-common/src/main/java/com/shcp/common/pojo/StatusCode.java" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/shcp-common/src/main/java/com/shcp/common/pojo/StatusCodeInterface.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/shcp_client_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/shcp_client_war_exploded.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/shcp_developer_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/shcp_developer_war_exploded.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/shcp_manager_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/shcp_manager_war_exploded.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__STAssociation_cpcsconn_1_0_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__STAssociation_cpcsconn_1_0_SNAPSHOT.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__aspectj_aspectjrt_1_5_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__aspectj_aspectjrt_1_5_3.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_belerweb_pinyin4j_2_5_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_belerweb_pinyin4j_2_5_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_8_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_8_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_8_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_8_2.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_8_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_8_2.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_0_9_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_0_9_4.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_miemiedev_mybatis_paginator_1_2_15.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_miemiedev_mybatis_paginator_1_2_15.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_4_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_4_1_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_20_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_20_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_zxing_core_3_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_zxing_core_3_2_1.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_mchange_c3p0_0_9_5_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_mchange_c3p0_0_9_5_2.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_mchange_mchange_commons_java_0_2_11.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_mchange_mchange_commons_java_0_2_11.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_6.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_2.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_mail_1_4_7.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_mail_1_4_7.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jstl_jstl_1_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jstl_jstl_1_2.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_6_0_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_6_0_3.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_4.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_4_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_4_2.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_3_1.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_3_1.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_13.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_13.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_2_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_2_3.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_2_1.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_16_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_16_2.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_12.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_12.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_12.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_3_15_RELEASE.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_3_15_RELEASE.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_3_15_RELEASE.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/shcp-client/src/main/java/com/shcp/client/pojo/CacheUser.java" afterPath="$PROJECT_DIR$/shcp-client/src/main/java/com/shcp/client/pojo/CacheUser.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-client/src/main/resources/properties/db.properties" afterPath="$PROJECT_DIR$/shcp-client/src/main/resources/properties/db.properties" />
-      <change beforePath="$PROJECT_DIR$/shcp-client/target/classes/properties/db.properties" afterPath="$PROJECT_DIR$/shcp-client/target/classes/properties/db.properties" />
-      <change beforePath="$PROJECT_DIR$/shcp-client/target/shcp-client-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/shcp-client/target/shcp-client-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
-      <change beforePath="$PROJECT_DIR$/shcp-client/target/shcp-client-1.0-SNAPSHOT/WEB-INF/classes/properties/db.properties" afterPath="$PROJECT_DIR$/shcp-client/target/shcp-client-1.0-SNAPSHOT/WEB-INF/classes/properties/db.properties" />
-      <change beforePath="$PROJECT_DIR$/shcp-client/target/shcp-client-1.0-SNAPSHOT/WEB-INF/classes/properties/mail.properties" afterPath="$PROJECT_DIR$/shcp-client/target/shcp-client-1.0-SNAPSHOT/WEB-INF/classes/properties/mail.properties" />
-      <change beforePath="$PROJECT_DIR$/shcp-dao/src/main/java/com/shcp/dao/mapper/AdminMapper.xml" afterPath="$PROJECT_DIR$/shcp-dao/src/main/java/com/shcp/dao/mapper/AdminMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/shcp-dao/src/main/java/com/shcp/dao/mapper/TbReplyMapper.java" afterPath="$PROJECT_DIR$/shcp-dao/src/main/java/com/shcp/dao/mapper/TbReplyMapper.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-dao/src/main/java/com/shcp/dao/mapper/TbReplyMapper.xml" afterPath="$PROJECT_DIR$/shcp-dao/src/main/java/com/shcp/dao/mapper/TbReplyMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/shcp-dao/target/classes/com/shcp/dao/mapper/AdminMapper.xml" afterPath="$PROJECT_DIR$/shcp-dao/target/classes/com/shcp/dao/mapper/AdminMapper.xml" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/controller/ExamineController.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/controller/ExamineController.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/controller/FeedbackController.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/controller/FeedbackController.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/pojo/CacheUser.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/pojo/CacheUser.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/DeveloperService.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/DeveloperService.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/DeviceExamineService.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/DeviceExamineService.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/DeviceService.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/DeviceService.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/ExamineService.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/ExamineService.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/FeedbackService.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/FeedbackService.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/impl/DeveloperServiceImpl.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/impl/DeveloperServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/impl/DeviceServiceImpl.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/impl/DeviceServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/impl/ExamineServiceImpl.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/impl/ExamineServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/impl/FeedbackServiceImpl.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/service/impl/FeedbackServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/utils/IdGenerator.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/utils/IdGenerator.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/utils/MessageUtil.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/utils/MessageUtil.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/utils/URLUtil.java" afterPath="$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/utils/URLUtil.java" />
-      <change beforePath="$PROJECT_DIR$/shcp-developer/src/main/resources/properties/mail.properties" afterPath="$PROJECT_DIR$/shcp-developer/src/main/resources/properties/mail.properties" />
-      <change beforePath="$PROJECT_DIR$/shcp-manager/src/main/java/com/shcp/manager/controller/AdminController.java" afterPath="$PROJECT_DIR$/shcp-manager/src/main/java/com/shcp/manager/controller/AdminController.java" />
+      <change beforePath="$PROJECT_DIR$/shcp-client/shcp-client.iml" afterPath="$PROJECT_DIR$/shcp-client/shcp-client.iml" />
+      <change beforePath="$PROJECT_DIR$/shcp-dao/shcp-dao.iml" afterPath="$PROJECT_DIR$/shcp-dao/shcp-dao.iml" />
+      <change beforePath="$PROJECT_DIR$/shcp-developer/shcp-developer.iml" afterPath="$PROJECT_DIR$/shcp-developer/shcp-developer.iml" />
+      <change beforePath="$PROJECT_DIR$/shcp-manager/shcp-manager.iml" afterPath="$PROJECT_DIR$/shcp-manager/shcp-manager.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -54,7 +84,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -184,22 +214,13 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="shcp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="shcp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-      </expand>
+      <expand />
       <select />
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
+    <option name="x" value="820" />
+    <option name="y" value="58" />
     <option name="width" value="976" />
     <option name="height" value="1038" />
   </component>
@@ -241,9 +262,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -255,57 +276,6 @@
               <item name="shcp" type="b2602c69:ProjectViewProjectNode" />
               <item name="shcp" type="462c0819:PsiDirectoryNode" />
               <item name="shcp-developer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shcp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shcp" type="462c0819:PsiDirectoryNode" />
-              <item name="shcp-developer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shcp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shcp" type="462c0819:PsiDirectoryNode" />
-              <item name="shcp-developer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shcp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shcp" type="462c0819:PsiDirectoryNode" />
-              <item name="shcp-developer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shcp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shcp" type="462c0819:PsiDirectoryNode" />
-              <item name="shcp-developer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shcp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shcp" type="462c0819:PsiDirectoryNode" />
-              <item name="shcp-developer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="shcp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shcp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shcp" type="462c0819:PsiDirectoryNode" />
-              <item name="shcp-developer" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="shcp" type="462c0819:PsiDirectoryNode" />
-              <item name="developer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="shcp" type="b2602c69:ProjectViewProjectNode" />
@@ -341,7 +311,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -364,15 +334,13 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Java\GithubRepository\shcp\shcp-client\src\main\webapp\WEB-INF\html" />
+      <recent name="D:\Java\GithubRepository\shcp\shcp-client\src\main\webapp\WEB-INF\jsp" />
+      <recent name="D:\Java\GithubRepository\shcp\shcp-manager\src\main\resources" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.shcp.common.utils" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Java\GithubRepository\shcp\shcp-dao\src\main\java\com\shcp\dao\mapper" />
-      <recent name="D:\Java\GithubRepository\shcp\shcp-pojo\src\main\java\com\shcp\pojo" />
-      <recent name="D:\Java\GithubRepository\shcp\shcp-developer\src\main\java\com\shcp\developer\utils" />
-      <recent name="D:\Java\GithubRepository\shcp\shcp-developer\src\main\resources" />
-      <recent name="D:\Java\GithubRepository\shcp\shcp-developer\src\main\webapp\WEB-INF" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.shcp.developer.pojo" />
@@ -381,10 +349,12 @@
       <recent name="com.shcp.developer.interceptor" />
       <recent name="com.shcp.developer.utils" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Java\GithubRepository\shcp\shcp-client\src\main\webapp\WEB-INF\html" />
-      <recent name="D:\Java\GithubRepository\shcp\shcp-client\src\main\webapp\WEB-INF\jsp" />
-      <recent name="D:\Java\GithubRepository\shcp\shcp-manager\src\main\resources" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\FileCode\JavaItem\shcp\shcp-common\src\main\java\com\shcp\common\pojo" />
+      <recent name="D:\Java\GithubRepository\shcp\shcp-dao\src\main\java\com\shcp\dao\mapper" />
+      <recent name="D:\Java\GithubRepository\shcp\shcp-pojo\src\main\java\com\shcp\pojo" />
+      <recent name="D:\Java\GithubRepository\shcp\shcp-developer\src\main\java\com\shcp\developer\utils" />
+      <recent name="D:\Java\GithubRepository\shcp\shcp-developer\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -823,6 +793,8 @@
       <workItem from="1555379412169" duration="7729000" />
       <workItem from="1555398790667" duration="1762000" />
       <workItem from="1555413422204" duration="7957000" />
+      <workItem from="1555386530954" duration="62000" />
+      <workItem from="1555422797606" duration="62000" />
     </task>
     <servers />
   </component>
@@ -832,7 +804,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194322000" />
+    <option name="totallyTimeSpent" value="174408000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -852,7 +824,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30954936" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29667383" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -892,31 +864,10 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/shcp-client/src/main/java/com/shcp/client/service/impl/DeviceServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/shcp-client/src/main/java/com/shcp/client/controller/DeviceController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-264">
-          <caret line="54" column="51" lean-forward="false" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shcp-developer/src/main/java/com/shcp/developer/controller/DeveloperController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="65" column="17" lean-forward="false" selection-start-line="65" selection-start-column="17" selection-end-line="65" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shcp-client/target/shcp-client-1.0-SNAPSHOT/WEB-INF/classes/com/shcp/client/controller/LoginController.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-890">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shcp-client/src/main/java/com/shcp/client/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="118" column="5" lean-forward="false" selection-start-line="101" selection-start-column="4" selection-end-line="118" selection-end-column="5" />
+        <state relative-caret-position="178">
+          <caret line="32" column="14" lean-forward="false" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -977,14 +928,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4485">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="180" column="16" lean-forward="false" selection-start-line="180" selection-start-column="13" selection-end-line="180" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1070,7 +1013,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
           <caret line="47" column="42" lean-forward="false" selection-start-line="47" selection-start-column="42" selection-end-line="47" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1099,7 +1041,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1114,10 +1055,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1012">
           <caret line="48" column="44" lean-forward="false" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="44" />
-          <folding>
-            <element signature="e#1100#1101#0" expanded="false" />
-            <element signature="e#1173#1174#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1125,7 +1062,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
           <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1133,7 +1069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
           <caret line="5" column="35" lean-forward="false" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1141,10 +1076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
           <caret line="30" column="45" lean-forward="true" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
-          <folding>
-            <element signature="e#1138#1139#0" expanded="false" />
-            <element signature="e#1211#1212#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1152,7 +1083,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="51" column="27" lean-forward="false" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1160,7 +1090,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="638">
           <caret line="69" column="31" lean-forward="false" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1168,7 +1097,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="15" column="60" lean-forward="false" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1176,7 +1104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="42" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1184,7 +1111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1192,7 +1118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="24" column="20" lean-forward="false" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1200,10 +1125,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="26" column="36" lean-forward="false" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
-          <folding>
-            <element signature="e#580#581#0" expanded="true" />
-            <element signature="e#624#625#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1211,18 +1132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="262" column="39" lean-forward="false" selection-start-line="262" selection-start-column="14" selection-end-line="262" selection-end-column="39" />
-          <folding>
-            <marker date="1555417325200" expanded="true" signature="4151:4303" ph="select , fro... " />
-            <marker date="1555417325200" expanded="true" signature="4387:4446" ph="delete from tb_reply... " />
-            <marker date="1555417325200" expanded="true" signature="4541:4561" ph="delete from tb_reply... " />
-            <marker date="1555417325200" expanded="true" signature="4733:4957" ph="insert into tb_reply... " />
-            <marker date="1555417325200" expanded="true" signature="6040:6069" ph="select count... tb_reply" />
-            <marker date="1555417325200" expanded="true" signature="6979:7242" ph="update tb_reply... " />
-            <marker date="1555417325200" expanded="true" signature="7415:7620" ph="update tb_reply... " />
-            <marker date="1555417325200" expanded="true" signature="7823:8267" ph="update tb_reply... " />
-            <marker date="1555417325200" expanded="true" signature="8367:8598" ph="update tb_reply... " />
-            <marker date="1555417325200" expanded="true" signature="8689:8869" ph="update tb_reply... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1230,7 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="569">
           <caret line="34" column="43" lean-forward="true" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1238,7 +1146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="707">
           <caret line="102" column="83" lean-forward="false" selection-start-line="102" selection-start-column="83" selection-end-line="102" selection-end-column="83" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1246,7 +1153,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="621">
           <caret line="64" column="104" lean-forward="false" selection-start-line="64" selection-start-column="104" selection-end-line="64" selection-end-column="104" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1254,7 +1160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="18" column="128" lean-forward="false" selection-start-line="18" selection-start-column="128" selection-end-line="18" selection-end-column="128" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1262,7 +1167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1270,7 +1174,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="385">
           <caret line="74" column="19" lean-forward="true" selection-start-line="74" selection-start-column="19" selection-end-line="74" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1278,7 +1181,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
           <caret line="84" column="135" lean-forward="true" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="135" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1286,7 +1188,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="13" column="61" lean-forward="false" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1294,7 +1195,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1302,6 +1202,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="454">
           <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shcp-common/src/main/java/com/shcp/common/pojo/StatusCodeInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shcp-common/src/main/java/com/shcp/common/pojo/StatusCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shcp-common/src/main/java/com/shcp/common/pojo/ShcpResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1590">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="180" column="16" lean-forward="false" selection-start-line="180" selection-start-column="13" selection-end-line="180" selection-end-column="16" />
           <folding />
         </state>
       </provider>
