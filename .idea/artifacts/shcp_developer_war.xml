@@ -1,6 +1,12 @@
 <component name="ArtifactManager">
   <artifact type="war" name="shcp-developer:war">
     <output-path>$PROJECT_DIR$/shcp-developer/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>shcp-developer</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="archive" name="shcp-developer-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="shcp-developer:war exploded" />
     </root>

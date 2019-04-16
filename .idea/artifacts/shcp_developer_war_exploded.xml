@@ -1,6 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="shcp-developer:war exploded">
     <output-path>$PROJECT_DIR$/shcp-developer/target/shcp-developer-1.0-SNAPSHOT</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>shcp-developer</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -10,7 +17,6 @@
           <element id="archive" name="shcp-common-1.0-SNAPSHOT.jar">
             <element id="module-output" name="shcp-common" />
           </element>
-          <element id="library" level="project" name="Maven: STAssociation:cpcsconn:1.0-SNAPSHOT" />
           <element id="archive" name="shcp-pojo-1.0-SNAPSHOT.jar">
             <element id="module-output" name="shcp-pojo" />
           </element>
@@ -49,6 +55,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.15.RELEASE" />
           <element id="library" level="project" name="Maven: aspectj:aspectjrt:1.5.3" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.13" />
+          <element id="library" level="project" name="Maven: STAssociation:cpcsconn:1.0-SNAPSHOT" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:20.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.2" />
