@@ -46,4 +46,42 @@ public class FeedbackController {
         return CorsUtil.format(feedbackService.submitDevFeedback(tbDeveloper, FbContent, FbTitle));
     }
 
+    @RequestMapping("/repies")
+    @ResponseBody
+    public Object showReplies(@RequestParam(required = false) Long FID, @RequestParam(defaultValue = "10", required = false) int rows,
+                              @RequestParam(defaultValue = "1", required = false) int page){
+        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        return CorsUtil.format(feedbackService.getAllRepies(tbDeveloper, FID, rows, page));
+    }
+
+
+    @RequestMapping("/replyfb")
+    @ResponseBody
+    public Object addReply(@RequestParam String FbId, @RequestParam String fbContent, @RequestParam(required = false) Object bw){
+        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        return CorsUtil.format(feedbackService.replyFeedback(tbDeveloper, FbId, fbContent));
+    }
+
+    @RequestMapping("/showfb")
+    @ResponseBody
+    public Object getFeedback(@RequestParam String FbId, @RequestParam(required = false) Object bw){
+        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        return CorsUtil.format(feedbackService.getFeedbackByFID(tbDeveloper, FbId));
+    }
+
+    @RequestMapping("/searchfb")
+    @ResponseBody
+    public Object searchFeedback(){
+        //TODO 需要修复
+        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        return CorsUtil.format("asd");
+    }
+
+    @RequestMapping("/browsefb")
+    @ResponseBody
+    public Object getAllReply(@RequestParam Long FID, @RequestParam(defaultValue = "10", required = false) int rows,
+                              @RequestParam(defaultValue = "1", required = false) int page, @RequestParam(required = false) Object bw){
+        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        return CorsUtil.format(feedbackService.getAllRepies(tbDeveloper, FID, rows, page));
+    }
 }

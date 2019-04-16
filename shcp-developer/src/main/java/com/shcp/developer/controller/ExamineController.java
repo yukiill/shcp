@@ -3,6 +3,7 @@ package com.shcp.developer.controller;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.developer.service.ExamineService;
+import com.shcp.pojo.TbDeveloper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 /**
  * @author Yuki
@@ -43,5 +45,23 @@ public class ExamineController {
             return CorsUtil.format(ShcpResult.build(719, "相关证件号不能为空"));
         }
         return examineService.submitExamine(tbDeveloper,dcName, dcAddr, crType, dcNumber);
+    }
+
+    @RequestMapping("/showDevExamineStatus")
+    @ResponseBody
+    public Object showExamineStatus(@RequestParam(required = false) Object bw){
+        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        return CorsUtil.format(examineService.showDevExamineStatus(tbDeveloper));
+    }
+
+    @RequestMapping("/modifyExamine")
+    @ResponseBody
+    public Object modifyExamineInfo(@RequestParam(defaultValue = "", required = false) String dcName, @RequestParam(defaultValue = "", required = false) String dcAddr,
+                                    @RequestParam(defaultValue = "", required = false) String dcNumber, @RequestParam(required = false) Object bw){
+        if(Objects.equals("", dcName) && Objects.equals("", dcAddr) && Objects.equals("", dcNumber)){
+            return CorsUtil.format(ShcpResult.build(721, "请输入有效的修改"));
+        }
+        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        return CorsUtil.format(examineService.modifiedExamineInfo(tbDeveloper, dcName, dcAddr, dcNumber));
     }
 }

@@ -17,14 +17,6 @@ public interface DeveloperService {
 
     Boolean devCancellation(Long DEId);
 
-    /**
-     * 提交审核信息
-     * @param dcName 组织名称
-     * @param dcAddr 开发者地址
-     * @return 相应结果
-     */
-    ShcpResult submitExamine(String dcName, String dcAddr);
-
     ShcpResult changePwd(TbDeveloper tbDeveloper);
 
     boolean emailIsPresent(String email);

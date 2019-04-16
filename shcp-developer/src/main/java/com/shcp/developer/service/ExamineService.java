@@ -10,4 +10,8 @@ import com.shcp.pojo.TbDeveloper;
 public interface ExamineService {
 
     ShcpResult submitExamine(TbDeveloper tbDeveloper, String dcName, String dcAddr, String crType, String dcNumber);
+
+    ShcpResult showDevExamineStatus(TbDeveloper tbDeveloper);
+
+    ShcpResult modifiedExamineInfo(TbDeveloper tbDeveloper, String dcName, String dcAddr, String dcNumber);
 }

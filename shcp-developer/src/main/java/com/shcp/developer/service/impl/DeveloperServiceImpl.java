@@ -68,11 +68,6 @@ public class DeveloperServiceImpl implements DeveloperService {
     }
 
     @Override
-    public ShcpResult submitExamine(String dcName, String dcAddr) {
-        return null;
-    }
-
-    @Override
     public ShcpResult changePwd(TbDeveloper tbDeveloper) {
         tbDeveloperMapper.updateByPrimaryKeySelective(tbDeveloper);
         log.info("devID:{} change pwd success", tbDeveloper.getDid());

@@ -22,7 +22,7 @@ public interface DeviceExamineService {
 
     /**
      * 查看设备的审核状态，默认是所有，否则根据测试设备编号来检索
-     * @param Tid 设备审核编号
+     * @param DSEXID 设备审核编号
      * @return 响应信息
      */
     ShcpResult showDeviceExamineStatus(String DSEXID);

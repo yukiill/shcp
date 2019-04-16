@@ -22,4 +22,8 @@ public class IdGenerator {
     public synchronized static long generateExamineId(){
         return System.nanoTime() * 5;
     }
+
+    public synchronized static long generateDeviceTypeId(){
+        return System.nanoTime() * 2;
+    }
 }

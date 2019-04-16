@@ -15,4 +15,6 @@ public interface DeviceService {
     ShcpResult addDevice(TbDeveloper tbDeveloper, String Dsid, String DSname, String DStype, boolean isTest);
 
     ShcpResult deleteDevice(String Dsid);
+
+    ShcpResult addDeviceType(String DSTypeName, String DSStatusType, String DSStatusValue, String DSCtrlType, String DSCtrlValue);
 }
