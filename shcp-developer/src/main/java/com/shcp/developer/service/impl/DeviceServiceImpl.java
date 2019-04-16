@@ -4,6 +4,7 @@ import com.shcp.common.pojo.ShcpResult;
 import com.shcp.dao.mapper.TbDeviceMapper;
 import com.shcp.dao.mapper.TbDevicetypeMapper;
 import com.shcp.developer.service.DeviceService;
+import com.shcp.developer.utils.IdGenerator;
 import com.shcp.pojo.TbDeveloper;
 import com.shcp.pojo.TbDevice;
 import com.shcp.pojo.TbDevicetype;
@@ -77,6 +78,15 @@ public class DeviceServiceImpl implements DeviceService{
         }
         tbDeviceMapper.deleteByPrimaryKey(Did);
         log.info("delete Did:{} success", Dsid);
+        return ShcpResult.ok();
+    }
+
+    @Override
+    public ShcpResult addDeviceType(String DSTypeName, String DSStatusType, String DSStatusValue, String DSCtrlType, String DSCtrlValue) {
+        //TODO 完全不知道写什么
+        TbDevicetype tbDevicetype = new TbDevicetype();
+        tbDevicetype.setTid(IdGenerator.generateDeviceTypeId());
+        tbDevicetype.setTname(DSTypeName);
         return ShcpResult.ok();
     }
 }

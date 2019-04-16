@@ -34,5 +34,7 @@ public interface TbReplyMapper {
 
     int updateByPrimaryKey(TbReply record);
 
-    List<TbReply> getAllRepliesWithBLOBs(@Param("UID") Long UID, @Param("FID") Long FID);
+    List<TbReply> getRepliesWithBLOBsForUser(@Param("UID") Long UID, @Param("FID") Long FID);
+
+    List<TbReply> getRepliesWithBLOBsForDev(@Param("DID") Long DID, @Param("FID") Long FID);
 }

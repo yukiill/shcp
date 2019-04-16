@@ -3,6 +3,7 @@ package com.shcp.manager.controller;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.manager.service.AdminService;
+import com.shcp.pojo.Admin;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ public class AdminController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public String login(@RequestParam String userName, @RequestParam String password,
+    public Object login(@RequestParam String userName, @RequestParam String password,
                         @RequestParam(required = false) String pageID, @RequestParam(required = false) String TerID,
                         Object bw, Model model, HttpServletRequest request){
         if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)){

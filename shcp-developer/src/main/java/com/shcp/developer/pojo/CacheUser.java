@@ -46,6 +46,6 @@ public class CacheUser {
     }
 
     public boolean isExpired(){
-        return this.getLatestExpiredTime() < new Date().getTime();
+        return this.getLatestExpiredTime() > new Date().getTime();
     }
 }
