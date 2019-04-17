@@ -12,9 +12,13 @@ public interface DeviceService {
 
     TbDevice searchDevice(String Dsid);
 
-    ShcpResult addDevice(TbDeveloper tbDeveloper, String Dsid, String DSname, String DStype, boolean isTest);
+    ShcpResult addDevice(TbDeveloper tbDeveloper, String Dsid, String DSname, String DStype, String DSmac, boolean isTest);
 
     ShcpResult deleteDevice(String Dsid);
 
-    ShcpResult addDeviceType(String DSTypeName, String DSStatusType, String DSStatusValue, String DSCtrlType, String DSCtrlValue);
+    ShcpResult addDeviceType(String DSTypeName);
+
+    ShcpResult addDeviceStatus(Long tid, String desname, String destype, String defaultValue, String minValue, String maxValue);
+
+    ShcpResult addDevCtrl(Long DSTypeID, String DsCtrlName, String DsCtrlKey, String DsCtrlValue, String DsCtrlValTy);
 }

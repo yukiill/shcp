@@ -26,4 +26,12 @@ public class IdGenerator {
     public synchronized static long generateDeviceTypeId(){
         return System.nanoTime() * 2;
     }
+
+    public synchronized static long generateDeviceCtrlId(){
+        return System.nanoTime() * 4;
+    }
+
+    public synchronized static long generateDeviceStatusId(){
+        return System.nanoTime() * 3;
+    }
 }

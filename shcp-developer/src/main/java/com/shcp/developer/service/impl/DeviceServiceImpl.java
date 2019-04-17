@@ -1,14 +1,13 @@
 package com.shcp.developer.service.impl;
 
 import com.shcp.common.pojo.ShcpResult;
+import com.shcp.dao.mapper.TbDectrlMapper;
 import com.shcp.dao.mapper.TbDeviceMapper;
+import com.shcp.dao.mapper.TbDevicestatusMapper;
 import com.shcp.dao.mapper.TbDevicetypeMapper;
 import com.shcp.developer.service.DeviceService;
 import com.shcp.developer.utils.IdGenerator;
-import com.shcp.pojo.TbDeveloper;
-import com.shcp.pojo.TbDevice;
-import com.shcp.pojo.TbDevicetype;
-import com.shcp.pojo.TbDevicetypeExample;
+import com.shcp.pojo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,11 @@ public class DeviceServiceImpl implements DeviceService{
     @Resource
     private TbDeviceMapper tbDeviceMapper;
     @Resource
+    private TbDectrlMapper tbDectrlMapper;
+    @Resource
     private TbDevicetypeMapper tbDevicetypeMapper;
+    @Resource
+    private TbDevicestatusMapper tbDevicestatusMapper;
 
     @Override
     public TbDevice searchDevice(String Dsid) {
@@ -42,7 +45,7 @@ public class DeviceServiceImpl implements DeviceService{
     }
 
     @Override
-    public ShcpResult addDevice(TbDeveloper tbDeveloper, String Dsid, String DSname, String DStype, boolean isTest) {
+    public ShcpResult addDevice(TbDeveloper tbDeveloper, String Dsid, String DSname, String DStype, String DSmax, boolean isTest) {
         Long Did;
         try {
             Did = Long.parseLong(Dsid);
@@ -56,14 +59,14 @@ public class DeviceServiceImpl implements DeviceService{
         if(Objects.isNull(tbDevicetype)){
             return ShcpResult.build(500, "没有相应的设备类型");
         }
+        //TODO 加入测试设备的新增
         TbDevice tbDevice = new TbDevice();
         tbDevice.setDid(tbDeveloper.getDid());
         tbDevice.setUid((long)0);
         tbDevice.setTid(tbDevicetype.getTid());
         tbDevice.setDstid(Did);
-//        tbDevice.setDsipaddr();
-//        tbDevice.setDsmac();
-//        tbDevice.setDsipaddr();
+        tbDevice.setDsmac(DSmax);
+        tbDeviceMapper.insertSelective(tbDevice);
         return ShcpResult.ok();
     }
 
@@ -82,11 +85,39 @@ public class DeviceServiceImpl implements DeviceService{
     }
 
     @Override
-    public ShcpResult addDeviceType(String DSTypeName, String DSStatusType, String DSStatusValue, String DSCtrlType, String DSCtrlValue) {
-        //TODO 完全不知道写什么
+    public ShcpResult addDeviceType(String DSTypeName) {
         TbDevicetype tbDevicetype = new TbDevicetype();
         tbDevicetype.setTid(IdGenerator.generateDeviceTypeId());
         tbDevicetype.setTname(DSTypeName);
+        tbDevicetypeMapper.insert(tbDevicetype);
+        return ShcpResult.ok();
+    }
+
+    @Override
+    public ShcpResult addDeviceStatus(Long tid, String desname, String destype, String defaultValue, String minValue, String maxValue) {
+        TbDevicestatus tbDevicestatus = new TbDevicestatus();
+        tbDevicestatus.setDesid(IdGenerator.generateDeviceStatusId());
+        tbDevicestatus.setTid(tid);
+        tbDevicestatus.setDesname(desname);
+        tbDevicestatus.setDestype(destype);
+        tbDevicestatus.setDesdefaultvalue(defaultValue);
+        tbDevicestatus.setDesminvalue(minValue);
+        tbDevicestatus.setDesmaxvalue(maxValue);
+        tbDevicestatusMapper.insertSelective(tbDevicestatus);
+        log.info("insert new deviceStatus:{} success", tbDevicestatus);
+        return ShcpResult.ok();
+    }
+
+    @Override
+    public ShcpResult addDevCtrl(Long DSTypeID, String DsCtrlName, String DsCtrlKey, String DsCtrlValue, String DsCtrlValTy) {
+        TbDectrl tbDectrl = new TbDectrl();
+        tbDectrl.setDecid(IdGenerator.generateDeviceCtrlId());
+        tbDectrl.setTid(DSTypeID);
+        tbDectrl.setDecname(DsCtrlName);
+        tbDectrl.setDeckey(DsCtrlKey);
+        tbDectrl.setDecvaluetype(DsCtrlValTy);
+        tbDectrlMapper.insertSelective(tbDectrl);
+        log.info("insert new deviceCtrl:{} success", tbDectrl);
         return ShcpResult.ok();
     }
 }
