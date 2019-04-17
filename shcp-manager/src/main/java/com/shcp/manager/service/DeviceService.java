@@ -1,8 +1,11 @@
 package com.shcp.manager.service;
 
+import com.shcp.pojo.TbDevice;
+
 /**
- * @author Yuki
- * @date 2019/4/6 16:17
+ * @author CYZ
+ * @date 2019/4/16 20:05
  */
 public interface DeviceService {
+    TbDevice searchDevice(String Dstid);
 }

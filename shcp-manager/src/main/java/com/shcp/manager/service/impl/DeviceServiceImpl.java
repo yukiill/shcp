@@ -1,22 +1,36 @@
 package com.shcp.manager.service.impl;
 
+import com.shcp.dao.mapper.TbDeviceMapper;
 import com.shcp.manager.service.DevelopService;
+import com.shcp.manager.service.DeviceService;
 import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.TbDevice;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author Yuki
- * @date 2019/4/6 16:57
+ * @author CYZ
+ * @date 2019/4/16 20:06
  */
-public class DeviceServiceImpl implements DevelopService{
+@Slf4j
+@Service
+public class DeviceServiceImpl implements DeviceService {
 
     @Resource
-    private DevelopService developService;
+    private TbDeviceMapper tbDeviceMapper;
 
     @Override
-    public List<TbDeveloper> findDevelops(String wd, String type) {
-        return null;
-    }
-}
+    public TbDevice searchDevice(String Dstid) {
+        Long _dstid;
+        try {
+            _dstid = Long.parseLong(Dstid);
+        } catch (NumberFormatException e) {
+            log.info("input Dstid is invaild data Dsid:{}", Dstid);
+            return null;
+        }
+        log.info("search _dstid:{} device success", Dstid);
+        return tbDeviceMapper.selectByPrimaryKey(_dstid);
+    }}
