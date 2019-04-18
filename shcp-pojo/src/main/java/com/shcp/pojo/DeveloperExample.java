@@ -685,6 +685,66 @@ public class DeveloperExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsAgreeIsNull() {
+            addCriterion("IS_AGREE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeIsNotNull() {
+            addCriterion("IS_AGREE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeEqualTo(Byte value) {
+            addCriterion("IS_AGREE =", value, "isAgree");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeNotEqualTo(Byte value) {
+            addCriterion("IS_AGREE <>", value, "isAgree");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeGreaterThan(Byte value) {
+            addCriterion("IS_AGREE >", value, "isAgree");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeGreaterThanOrEqualTo(Byte value) {
+            addCriterion("IS_AGREE >=", value, "isAgree");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeLessThan(Byte value) {
+            addCriterion("IS_AGREE <", value, "isAgree");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeLessThanOrEqualTo(Byte value) {
+            addCriterion("IS_AGREE <=", value, "isAgree");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeIn(List<Byte> values) {
+            addCriterion("IS_AGREE in", values, "isAgree");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeNotIn(List<Byte> values) {
+            addCriterion("IS_AGREE not in", values, "isAgree");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeBetween(Byte value1, Byte value2) {
+            addCriterion("IS_AGREE between", value1, value2, "isAgree");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAgreeNotBetween(Byte value1, Byte value2) {
+            addCriterion("IS_AGREE not between", value1, value2, "isAgree");
+            return (Criteria) this;
+        }
+
         public Criteria andBirthIsNull() {
             addCriterion("BIRTH is null");
             return (Criteria) this;

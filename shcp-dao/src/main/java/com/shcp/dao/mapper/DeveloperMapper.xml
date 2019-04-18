@@ -11,6 +11,7 @@
     <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" />
     <result column="IS_PASS" property="isPass" jdbcType="TINYINT" />
+    <result column="IS_AGREE" property="isAgree" jdbcType="TINYINT" />
     <result column="BIRTH" property="birth" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    DID, DFID, USERNAME, PASSWORD, IMG, EMAIL, GMT_CREATE, GMT_MODIFY, IS_PASS, BIRTH
+    DID, DFID, USERNAME, PASSWORD, IMG, EMAIL, GMT_CREATE, GMT_MODIFY, IS_PASS, IS_AGREE, 
+    BIRTH
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeveloperExample" >
     select
@@ -107,12 +109,12 @@
   <insert id="insert" parameterType="com.shcp.pojo.Developer" >
     insert into developer (DID, DFID, USERNAME, 
       PASSWORD, IMG, EMAIL, GMT_CREATE, 
-      GMT_MODIFY, IS_PASS, BIRTH
-      )
+      GMT_MODIFY, IS_PASS, IS_AGREE, 
+      BIRTH)
     values (#{did,jdbcType=BIGINT}, #{dfid,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{img,jdbcType=CHAR}, #{email,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModify,jdbcType=TIMESTAMP}, #{isPass,jdbcType=TINYINT}, #{birth,jdbcType=TIMESTAMP}
-      )
+      #{gmtModify,jdbcType=TIMESTAMP}, #{isPass,jdbcType=TINYINT}, #{isAgree,jdbcType=TINYINT}, 
+      #{birth,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.shcp.pojo.Developer" >
     insert into developer
@@ -143,6 +145,9 @@
       </if>
       <if test="isPass != null" >
         IS_PASS,
+      </if>
+      <if test="isAgree != null" >
+        IS_AGREE,
       </if>
       <if test="birth != null" >
         BIRTH,
@@ -175,6 +180,9 @@
       </if>
       <if test="isPass != null" >
         #{isPass,jdbcType=TINYINT},
+      </if>
+      <if test="isAgree != null" >
+        #{isAgree,jdbcType=TINYINT},
       </if>
       <if test="birth != null" >
         #{birth,jdbcType=TIMESTAMP},
@@ -217,6 +225,9 @@
       <if test="record.isPass != null" >
         IS_PASS = #{record.isPass,jdbcType=TINYINT},
       </if>
+      <if test="record.isAgree != null" >
+        IS_AGREE = #{record.isAgree,jdbcType=TINYINT},
+      </if>
       <if test="record.birth != null" >
         BIRTH = #{record.birth,jdbcType=TIMESTAMP},
       </if>
@@ -236,6 +247,7 @@
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP},
       IS_PASS = #{record.isPass,jdbcType=TINYINT},
+      IS_AGREE = #{record.isAgree,jdbcType=TINYINT},
       BIRTH = #{record.birth,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -268,6 +280,9 @@
       <if test="isPass != null" >
         IS_PASS = #{isPass,jdbcType=TINYINT},
       </if>
+      <if test="isAgree != null" >
+        IS_AGREE = #{isAgree,jdbcType=TINYINT},
+      </if>
       <if test="birth != null" >
         BIRTH = #{birth,jdbcType=TIMESTAMP},
       </if>
@@ -284,10 +299,11 @@
       GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
       IS_PASS = #{isPass,jdbcType=TINYINT},
+      IS_AGREE = #{isAgree,jdbcType=TINYINT},
       BIRTH = #{birth,jdbcType=TIMESTAMP}
     where DID = #{did,jdbcType=BIGINT}
   </update>
   <select id="selectByEmail" parameterType="string" resultType="string">
-    select DEMAIL from tb_developer where DEMAIL = #{email}
+    select EMAIL from tb_developer where EMAIL = #{email}
   </select>
 </mapper>

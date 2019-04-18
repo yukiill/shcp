@@ -21,6 +21,8 @@ public class Developer {
 
     private Byte isPass;
 
+    private Byte isAgree;
+
     private Date birth;
 
     public Long getDid() {
@@ -93,6 +95,14 @@ public class Developer {
 
     public void setIsPass(Byte isPass) {
         this.isPass = isPass;
+    }
+
+    public Byte getIsAgree() {
+        return isAgree;
+    }
+
+    public void setIsAgree(Byte isAgree) {
+        this.isAgree = isAgree;
     }
 
     public Date getBirth() {
