@@ -3,8 +3,7 @@ package com.shcp.developer.controller;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.developer.service.DeviceService;
-import com.shcp.pojo.TbDevice;
-import com.sun.org.apache.regexp.internal.RE;
+import com.shcp.pojo.Device;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -32,7 +31,7 @@ public class DeviceController {
         if(StringUtils.isEmpty(Dsid)){
             return CorsUtil.format(ShcpResult.build(723, "输入的设备编号无效"));
         }
-        TbDevice tbDevice = deviceService.searchDevice(Dsid);
+        Device tbDevice = deviceService.searchDevice(Dsid);
         return ShcpResult.ok(tbDevice);
     }
 

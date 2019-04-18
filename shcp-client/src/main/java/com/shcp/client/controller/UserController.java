@@ -7,7 +7,7 @@ import com.shcp.common.utils.CorsUtil;
 import com.shcp.client.utils.FileUtil;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.StringUtil;
-import com.shcp.pojo.TbUser;
+import com.shcp.pojo.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +41,8 @@ public class UserController {
                              @RequestParam(required = false, defaultValue = "") String introduction,
                              @RequestParam(required = false, defaultValue = "") String sex,
                                  @RequestParam(required = false) Object bw){
-        TbUser tbUser = (TbUser) session.getAttribute("user");
-        if(userService.changeInfo(tbUser, email, birthday, introduction, sex)){
+        User user = (User) session.getAttribute("user");
+        if(userService.changeInfo(user, email, birthday, introduction, sex)){
             return CorsUtil.format(ShcpResult.ok());
         }
         return CorsUtil.format(ShcpResult.build(500, "服务器内部错误"));
@@ -51,15 +51,15 @@ public class UserController {
     @RequestMapping(value = "/changeimg")
     @ResponseBody
     public Object changeImg(@RequestParam(name = "file") MultipartFile multipartFile, Object bw){
-        TbUser tbUser = (TbUser) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         String result = null;
         try {
-            result = FileUtil.uploadHeadImage(tbUser.getUsername(), multipartFile);
+            result = FileUtil.uploadHeadImage(user.getUsername(), multipartFile);
         } catch (Exception e) {
             return CorsUtil.format(ShcpResult.build(500, "服务器内部错误"));
         }
-        tbUser.setUhimg(result);
-        if(userService.changeImg(tbUser)){
+        user.setImg(result);
+        if(userService.changeImg(user)){
             return ShcpResult.ok();
         } else {
             return CorsUtil.format(ShcpResult.build(660, "修改失败"));
@@ -79,14 +79,14 @@ public class UserController {
     @RequestMapping("/showing")
     @ResponseBody
     public Object getUserInfo(Object bw){
-        TbUser tbUser = (TbUser) session.getAttribute("user");
-        return CorsUtil.format(userService.getUserInfo(tbUser.getUid()));
+        User user = (User) session.getAttribute("user");
+        return CorsUtil.format(userService.getUserInfo(user.getUid()));
     }
 
     @RequestMapping(value = "/changePwd")
     @ResponseBody
     public Object changePwd(String nPwd, String rPwd, String email, Object bw){
-        TbUser tbUser = (TbUser) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         if(StringUtils.isEmpty(nPwd)){
             return CorsUtil.format(ShcpResult.build(706, "密码不能为空"));
         }
@@ -96,7 +96,7 @@ public class UserController {
         if(!StringUtil.isCorrect(email)){
             return CorsUtil.format(ShcpResult.build(708, "邮箱格式不正确"));
         }
-        return CorsUtil.format(userService.changePwd(tbUser, nPwd));
+        return CorsUtil.format(userService.changePwd(user, nPwd));
     }
 
     @RequestMapping(value = "/forgetPwd")

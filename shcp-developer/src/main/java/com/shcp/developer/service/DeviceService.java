@@ -1,8 +1,8 @@
 package com.shcp.developer.service;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.pojo.TbDeveloper;
-import com.shcp.pojo.TbDevice;
+import com.shcp.pojo.Developer;
+import com.shcp.pojo.Device;
 
 /**
  * @author Yuki
@@ -10,9 +10,9 @@ import com.shcp.pojo.TbDevice;
  */
 public interface DeviceService {
 
-    TbDevice searchDevice(String Dsid);
+    Device searchDevice(String Dsid);
 
-    ShcpResult addDevice(TbDeveloper tbDeveloper, String Dsid, String DSname, String DStype, String DSmac, boolean isTest);
+    ShcpResult addDevice(Developer tbDeveloper, String Dsid, String DSname, String DStype, String DSmac, boolean isTest);
 
     ShcpResult deleteDevice(String Dsid);
 

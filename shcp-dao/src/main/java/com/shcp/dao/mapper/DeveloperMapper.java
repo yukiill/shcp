@@ -1,4 +1,4 @@
-package com.ice.ssm.mapper;
+package com.shcp.dao.mapper;
 
 import com.shcp.pojo.Developer;
 import com.shcp.pojo.DeveloperExample;
@@ -27,4 +27,6 @@ public interface DeveloperMapper {
     int updateByPrimaryKeySelective(Developer record);
 
     int updateByPrimaryKey(Developer record);
+
+    String selectByEmail(@Param("email") String email);
 }

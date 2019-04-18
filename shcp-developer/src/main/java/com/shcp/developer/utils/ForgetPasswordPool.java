@@ -1,7 +1,7 @@
 package com.shcp.developer.utils;
 
 import com.shcp.developer.pojo.CacheUser;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -30,7 +30,7 @@ public class ForgetPasswordPool {
         return forgetPasswordPool;
     }
 
-    public synchronized CacheUser add(TbDeveloper tbDeveloper, Long time){
+    public synchronized CacheUser add(Developer tbDeveloper, Long time){
         if(tbDeveloper == null || time == null){
             throw new RuntimeException("the instance or time is null");
         }

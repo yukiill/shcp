@@ -34,4 +34,22 @@ public class IdGenerator {
     public synchronized static long generateDeviceStatusId(){
         return System.nanoTime() * 3;
     }
+
+    public synchronized static long generateTestDeviceId(){
+        return System.nanoTime() * 6;
+    }
+
+    public synchronized static long generateTestDeviceStatusId(){
+        return System.nanoTime() * 7;
+    }
+
+    public synchronized  static long generateTestDeviceLimitId(){
+        return System.nanoTime() * 8;
+    }
+
+    public synchronized  static long generateTestDeviceControlId(){
+        return System.nanoTime() * 9;
+    }
+
+
 }

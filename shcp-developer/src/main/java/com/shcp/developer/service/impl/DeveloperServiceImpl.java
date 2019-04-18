@@ -1,13 +1,13 @@
 package com.shcp.developer.service.impl;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.dao.mapper.TbDeveloperMapper;
-import com.shcp.dao.mapper.TbUserfeedbackMapper;
+import com.shcp.dao.mapper.DeveloperMapper;
+import com.shcp.dao.mapper.FeedbackMapper;
 import com.shcp.developer.service.DeveloperService;
 import com.shcp.developer.utils.FileUtil;
 import com.shcp.developer.utils.IdGenerator;
-import com.shcp.pojo.TbDeveloper;
-import com.shcp.pojo.TbDeveloperExample;
+import com.shcp.pojo.Developer;
+import com.shcp.pojo.DeveloperExample;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -23,59 +23,56 @@ import javax.annotation.Resource;
 public class DeveloperServiceImpl implements DeveloperService {
 
     @Resource
-    private TbDeveloperMapper tbDeveloperMapper;
+    private DeveloperMapper developerMapper;
     @Resource
-    private TbUserfeedbackMapper tbUserfeedbackMapper;
+    private FeedbackMapper feedbackMapper;
 
     @Override
-    public TbDeveloper devLogin(String username, String password, String TerID) {
-        TbDeveloperExample example = new TbDeveloperExample();
+    public Developer devLogin(String username, String password, String TerID) {
+        DeveloperExample example = new DeveloperExample();
         example.createCriteria()
-                .andDevnameEqualTo(username)
+                .andUsernameEqualTo(username)
                 .andPasswordEqualTo(password);
-        return tbDeveloperMapper.selectByExample(example).get(0);
+        return developerMapper.selectByExample(example).get(0);
     }
 
     @Override
-    public TbDeveloper devRegister(String username, String password, String email, String TerID) {
-        TbDeveloper tbDeveloper = new TbDeveloper();
-        tbDeveloper.setDemail(email);
-        tbDeveloper.setDevname(username);
+    public Developer devRegister(String username, String password, String email, String TerID) {
+        Developer tbDeveloper = new Developer();
+        tbDeveloper.setEmail(email);
+        tbDeveloper.setUsername(username);
         tbDeveloper.setPassword(password);
-        tbDeveloper.setDhimg(FileUtil.DEFAULT_IMAGE_URL);
+        tbDeveloper.setImg(FileUtil.DEFAULT_IMAGE_URL);
         tbDeveloper.setDid(IdGenerator.generateDeveloporId());
-//        tbDeveloper.setDcid();
-//        tbDeveloper.setDsub();
-        tbDeveloper.setDlimit(0);
-        tbDeveloper.setDstatus((byte) 0);
-        tbDeveloperMapper.insertSelective(tbDeveloper);
+        tbDeveloper.setIsPass((byte) 0);
+        developerMapper.insertSelective(tbDeveloper);
         log.info("insert developer:{} success", tbDeveloper);
         return tbDeveloper;
     }
 
     @Override
     public Boolean devNameIsPresent(String username) {
-        TbDeveloperExample example = new TbDeveloperExample();
+        DeveloperExample example = new DeveloperExample();
         example.createCriteria()
-                .andDevnameEqualTo(username);
-        return tbDeveloperMapper.selectByExample(example).size() > 0;
+                .andUsernameEqualTo(username);
+        return developerMapper.selectByExample(example).size() > 0;
     }
 
     @Override
     public Boolean devCancellation(Long DEId) {
         log.info("delete devID:{} success", DEId);
-        return tbDeveloperMapper.deleteByPrimaryKey(DEId) == 1;
+        return developerMapper.deleteByPrimaryKey(DEId) == 1;
     }
 
     @Override
-    public ShcpResult changePwd(TbDeveloper tbDeveloper) {
-        tbDeveloperMapper.updateByPrimaryKeySelective(tbDeveloper);
+    public ShcpResult changePwd(Developer tbDeveloper) {
+        developerMapper.updateByPrimaryKeySelective(tbDeveloper);
         log.info("devID:{} change pwd success", tbDeveloper.getDid());
         return ShcpResult.ok();
     }
 
     @Override
     public boolean emailIsPresent(String email) {
-        return !StringUtils.isEmpty(tbDeveloperMapper.selectByEmail(email));
+        return !StringUtils.isEmpty(developerMapper.selectByEmail(email));
     }
 }

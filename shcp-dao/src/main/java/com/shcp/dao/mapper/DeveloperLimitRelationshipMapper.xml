@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ice.ssm.mapper.DeveloperLimitRelationshipMapper" >
+<mapper namespace="com.shcp.dao.mapper.DeveloperLimitRelationshipMapper" >
   <resultMap id="BaseResultMap" type="com.shcp.pojo.DeveloperLimitRelationship" >
     <id column="DLID" property="dlid" jdbcType="SMALLINT" />
     <id column="DID" property="did" jdbcType="BIGINT" />

@@ -1,4 +1,4 @@
-package com.ice.ssm.mapper;
+package com.shcp.dao.mapper;
 
 import com.shcp.pojo.User;
 import com.shcp.pojo.UserExample;
@@ -27,4 +27,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    String selectByEmail(@Param("email") String email);
+
+    String selectByUsername(@Param("username") String username);
 }

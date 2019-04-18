@@ -1,10 +1,10 @@
 package com.shcp.developer.service.impl;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.dao.mapper.TbDectrlMapper;
-import com.shcp.dao.mapper.TbDeviceMapper;
-import com.shcp.dao.mapper.TbDevicestatusMapper;
-import com.shcp.dao.mapper.TbDevicetypeMapper;
+import com.shcp.dao.mapper.DeviceControlMapper;
+import com.shcp.dao.mapper.DeviceMapper;
+import com.shcp.dao.mapper.DeviceStatusMapper;
+import com.shcp.dao.mapper.DeviceTypeMapper;
 import com.shcp.developer.service.DeviceService;
 import com.shcp.developer.utils.IdGenerator;
 import com.shcp.pojo.*;
@@ -23,16 +23,16 @@ import java.util.Objects;
 public class DeviceServiceImpl implements DeviceService{
 
     @Resource
-    private TbDeviceMapper tbDeviceMapper;
+    private DeviceMapper deviceMapper;
     @Resource
-    private TbDectrlMapper tbDectrlMapper;
+    private DeviceControlMapper deviceControlMapper;
     @Resource
-    private TbDevicetypeMapper tbDevicetypeMapper;
+    private DeviceTypeMapper deviceTypeMapper;
     @Resource
-    private TbDevicestatusMapper tbDevicestatusMapper;
+    private DeviceStatusMapper deviceStatusMapper;
 
     @Override
-    public TbDevice searchDevice(String Dsid) {
+    public Device searchDevice(String Dsid) {
         Long Did;
         try {
             Did = Long.parseLong(Dsid);
@@ -41,11 +41,11 @@ public class DeviceServiceImpl implements DeviceService{
             return null;
         }
         log.info("search Did:{} device success", Dsid);
-        return tbDeviceMapper.selectByPrimaryKey(Did);
+        return deviceMapper.selectByPrimaryKey(Did);
     }
 
     @Override
-    public ShcpResult addDevice(TbDeveloper tbDeveloper, String Dsid, String DSname, String DStype, String DSmax, boolean isTest) {
+    public ShcpResult addDevice(Developer tbDeveloper, String Dsid, String DSname, String DStype, String DSmax, boolean isTest) {
         Long Did;
         try {
             Did = Long.parseLong(Dsid);
@@ -53,20 +53,20 @@ public class DeviceServiceImpl implements DeviceService{
             log.info("input Dsid:{} is invalid", Dsid);
             return ShcpResult.build(725, "请输入有效的设备编号");
         }
-        TbDevicetypeExample tbDevicetypeExample = new TbDevicetypeExample();
-        tbDevicetypeExample.createCriteria().andTnameEqualTo(DStype);
-        TbDevicetype tbDevicetype = tbDevicetypeMapper.selectByExample(tbDevicetypeExample).get(0);
+        DeviceTypeExample tbDevicetypeExample = new DeviceTypeExample();
+        tbDevicetypeExample.createCriteria().andDsenameEqualTo(DStype);
+        DeviceType tbDevicetype = deviceTypeMapper.selectByExample(tbDevicetypeExample).get(0);
         if(Objects.isNull(tbDevicetype)){
             return ShcpResult.build(500, "没有相应的设备类型");
         }
         //TODO 加入测试设备的新增
-        TbDevice tbDevice = new TbDevice();
+        Device tbDevice = new Device();
         tbDevice.setDid(tbDeveloper.getDid());
         tbDevice.setUid((long)0);
-        tbDevice.setTid(tbDevicetype.getTid());
-        tbDevice.setDstid(Did);
-        tbDevice.setDsmac(DSmax);
-        tbDeviceMapper.insertSelective(tbDevice);
+        tbDevice.setDetid(tbDevicetype.getDetid());
+        tbDevice.setDid(Did);
+        tbDevice.setDemac(DSmax);
+        deviceMapper.insertSelective(tbDevice);
         return ShcpResult.ok();
     }
 
@@ -79,44 +79,44 @@ public class DeviceServiceImpl implements DeviceService{
             log.info("input Dsid is invaild data Dsid:{}", Dsid);
             return null;
         }
-        tbDeviceMapper.deleteByPrimaryKey(Did);
+        deviceMapper.deleteByPrimaryKey(Did);
         log.info("delete Did:{} success", Dsid);
         return ShcpResult.ok();
     }
 
     @Override
     public ShcpResult addDeviceType(String DSTypeName) {
-        TbDevicetype tbDevicetype = new TbDevicetype();
-        tbDevicetype.setTid(IdGenerator.generateDeviceTypeId());
-        tbDevicetype.setTname(DSTypeName);
-        tbDevicetypeMapper.insert(tbDevicetype);
+        DeviceType tbDevicetype = new DeviceType();
+        tbDevicetype.setDetid(IdGenerator.generateDeviceTypeId());
+        tbDevicetype.setDsename(DSTypeName);
+        deviceTypeMapper.insert(tbDevicetype);
         return ShcpResult.ok();
     }
 
     @Override
     public ShcpResult addDeviceStatus(Long tid, String desname, String destype, String defaultValue, String minValue, String maxValue) {
-        TbDevicestatus tbDevicestatus = new TbDevicestatus();
+        DeviceStatus tbDevicestatus = new DeviceStatus();
         tbDevicestatus.setDesid(IdGenerator.generateDeviceStatusId());
-        tbDevicestatus.setTid(tid);
+        tbDevicestatus.setDetid(tid);
         tbDevicestatus.setDesname(desname);
         tbDevicestatus.setDestype(destype);
         tbDevicestatus.setDesdefaultvalue(defaultValue);
         tbDevicestatus.setDesminvalue(minValue);
         tbDevicestatus.setDesmaxvalue(maxValue);
-        tbDevicestatusMapper.insertSelective(tbDevicestatus);
+        deviceStatusMapper.insertSelective(tbDevicestatus);
         log.info("insert new deviceStatus:{} success", tbDevicestatus);
         return ShcpResult.ok();
     }
 
     @Override
     public ShcpResult addDevCtrl(Long DSTypeID, String DsCtrlName, String DsCtrlKey, String DsCtrlValue, String DsCtrlValTy) {
-        TbDectrl tbDectrl = new TbDectrl();
+        DeviceControl tbDectrl = new DeviceControl();
         tbDectrl.setDecid(IdGenerator.generateDeviceCtrlId());
-        tbDectrl.setTid(DSTypeID);
+        tbDectrl.setDetid(DSTypeID);
         tbDectrl.setDecname(DsCtrlName);
         tbDectrl.setDeckey(DsCtrlKey);
-        tbDectrl.setDecvaluetype(DsCtrlValTy);
-        tbDectrlMapper.insertSelective(tbDectrl);
+        tbDectrl.setDecvalue(DsCtrlValTy);
+        deviceControlMapper.insertSelective(tbDectrl);
         log.info("insert new deviceCtrl:{} success", tbDectrl);
         return ShcpResult.ok();
     }

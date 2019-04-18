@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ice.ssm.mapper.TestDeviceStatusMapper" >
+<mapper namespace="com.shcp.dao.mapper.TestDeviceStatusMapper" >
   <resultMap id="BaseResultMap" type="com.shcp.pojo.TestDeviceStatus" >
     <id column="TDESID" property="tdesid" jdbcType="BIGINT" />
     <result column="TDSID" property="tdsid" jdbcType="BIGINT" />

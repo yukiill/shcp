@@ -1,15 +1,12 @@
 package com.shcp.manager.service.impl;
 
-import com.shcp.dao.mapper.TbDeviceMapper;
-import com.shcp.manager.service.DevelopService;
+import com.shcp.dao.mapper.DeviceMapper;
 import com.shcp.manager.service.DeviceService;
-import com.shcp.pojo.TbDeveloper;
-import com.shcp.pojo.TbDevice;
+import com.shcp.pojo.Device;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author CYZ
@@ -20,10 +17,10 @@ import java.util.List;
 public class DeviceServiceImpl implements DeviceService {
 
     @Resource
-    private TbDeviceMapper tbDeviceMapper;
+    private DeviceMapper tbDeviceMapper;
 
     @Override
-    public TbDevice searchDevice(String Dstid) {
+    public Device searchDevice(String Dstid) {
         Long _dstid;
         try {
             _dstid = Long.parseLong(Dstid);

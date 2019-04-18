@@ -3,7 +3,7 @@ package com.shcp.client.controller;
 import com.shcp.client.service.DeviceService;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
-import com.shcp.pojo.TbUser;
+import com.shcp.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,15 +30,15 @@ public class DeviceController {
     @RequestMapping("/user/bindDid")
     @ResponseBody
     public Object bindDevice(@RequestParam(value = "Deid") Long dstID, Object bw){
-        TbUser tbUser = (TbUser) httpSession.getAttribute("user");
-        return CorsUtil.format(deviceService.bindDevice(dstID, tbUser));
+        User user = (User) httpSession.getAttribute("user");
+        return CorsUtil.format(deviceService.bindDevice(dstID, User));
     }
 
     @RequestMapping("/user/device/show")
     @ResponseBody
     public Object getDeviceList(){
-        TbUser tbUser = (TbUser) httpSession.getAttribute("user");
-        return CorsUtil.format(deviceService.getDeviceListByUserId(tbUser.getUid()));
+        User user = (User) httpSession.getAttribute("user");
+        return CorsUtil.format(deviceService.getDeviceListByUserId(user.getUid()));
     }
 
     @RequestMapping("/user/device/status")

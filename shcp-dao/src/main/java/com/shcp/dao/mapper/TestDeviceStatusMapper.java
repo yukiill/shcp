@@ -1,4 +1,4 @@
-package com.ice.ssm.mapper;
+package com.shcp.dao.mapper;
 
 import com.shcp.pojo.TestDeviceStatus;
 import com.shcp.pojo.TestDeviceStatusExample;

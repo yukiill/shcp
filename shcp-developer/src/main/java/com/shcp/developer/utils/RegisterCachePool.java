@@ -1,7 +1,7 @@
 package com.shcp.developer.utils;
 
 import com.shcp.developer.pojo.CacheUser;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,7 +38,7 @@ public class RegisterCachePool{
      * @param time 当前时间戳,纳秒级
      * @return 是否插入成功
      */
-    public synchronized CacheUser add(TbDeveloper tbDeveloper, Long time){
+    public synchronized CacheUser add(Developer tbDeveloper, Long time){
         if(tbDeveloper == null || time == null){
             throw new RuntimeException("the instance or time is null");
         }
@@ -46,7 +46,7 @@ public class RegisterCachePool{
         if(Objects.isNull(cacheUser)){
             cacheUser = registerCache.put(time, new CacheUser(tbDeveloper, new Date()));
         }
-        usernameCache.add(tbDeveloper.getDevname());
+        usernameCache.add(tbDeveloper.getUsername());
         log.info("put userId:{} into registerCache and usernameCache", tbDeveloper.getDid());
         return cacheUser;
     }
@@ -65,7 +65,7 @@ public class RegisterCachePool{
         }
         log.info("key:{} remove from registerCache", time);
         CacheUser cacheUser = registerCache.remove(time);
-        usernameCache.remove(cacheUser.getTbDeveloper().getDevname());
+        usernameCache.remove(cacheUser.getTbDeveloper().getUsername());
         return true;
     }
 

@@ -6,7 +6,7 @@ import com.shcp.common.utils.StringUtil;
 import com.shcp.developer.service.DeveloperService;
 import com.shcp.developer.service.EmailService;
 import com.shcp.developer.utils.CookieUtil;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -47,7 +47,7 @@ public class DeveloperController {
     @PostMapping(value = "/changePwd")
     @ResponseBody
     public ShcpResult changePwd(String nPwd, String rPwd, String email, Object bw, HttpServletRequest request){
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         if(StringUtils.isEmpty(nPwd)){
             return ShcpResult.build(706, "密码不能为空");
         }

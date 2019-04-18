@@ -25,8 +25,8 @@ public class AdminServiceImpl implements AdminService{
         Admin admin = new Admin();
         AdminExample adminExample = new AdminExample();
         adminExample.createCriteria()
-                .andUsernameEqualTo(userName)
-                .andPasswordEqualTo(password);
+                .andAnameEqualTo(userName)
+                .andApasswordEqualTo(password);
         log.info("username:{} password:{} platform:{} login success", userName, password, TerID);
         return adminMapper.selectByExample(adminExample).get(0);
     }

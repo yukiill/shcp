@@ -2,7 +2,6 @@ package com.shcp.developer.utils;
 
 import com.gracelie.shcp.cpcsconn.config.sendmessage.InlayMessage;
 import com.gracelie.shcp.cpcsconn.config.sendmessage.Message;
-import com.shcp.pojo.TbDevice;
 
 /**
  * @author Yuki

@@ -5,7 +5,7 @@ import com.shcp.common.utils.CorsUtil;
 import com.shcp.common.utils.StringUtil;
 import com.shcp.developer.service.DeveloperService;
 import com.shcp.developer.utils.RegisterCachePool;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +42,7 @@ public class LoginController {
         if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)){
             return CorsUtil.format(ShcpResult.build(650, "用户名或密码为空"));
         }
-        TbDeveloper tbDeveloper = developerService.devLogin(userName, password, TerID);
+        Developer tbDeveloper = developerService.devLogin(userName, password, TerID);
         if(Objects.isNull(tbDeveloper)){
             CorsUtil.format(ShcpResult.build(651, "用户名或密码错误"));
         }
@@ -79,7 +79,7 @@ public class LoginController {
         if(developerService.emailIsPresent(email)){
             return CorsUtil.format(ShcpResult.build(712, "邮箱已被绑定"));
         }
-        TbDeveloper tbDeveloper = developerService.devRegister(userName, password, email, TerID);
+        Developer tbDeveloper = developerService.devRegister(userName, password, email, TerID);
         long time = System.nanoTime();
         registerCachePool.add(tbDeveloper, time);
         return CorsUtil.format(ShcpResult.ok());

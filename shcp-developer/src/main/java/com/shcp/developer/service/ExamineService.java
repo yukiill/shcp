@@ -1,7 +1,7 @@
 package com.shcp.developer.service;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 
 /**
  * @author Yuki
@@ -9,9 +9,9 @@ import com.shcp.pojo.TbDeveloper;
  */
 public interface ExamineService {
 
-    ShcpResult submitExamine(TbDeveloper tbDeveloper, String dcName, String dcAddr, String crType, String dcNumber);
+    ShcpResult submitExamine(Developer tbDeveloper, String dcName, String dcAddr, String crType, String dcNumber);
 
-    ShcpResult showDevExamineStatus(TbDeveloper tbDeveloper);
+    ShcpResult showDevExamineStatus(Developer tbDeveloper);
 
-    ShcpResult modifiedExamineInfo(TbDeveloper tbDeveloper, String dcName, String dcAddr, String dcNumber);
+    ShcpResult modifiedExamineInfo(Developer tbDeveloper, String dcName, String dcAddr, String dcNumber);
 }

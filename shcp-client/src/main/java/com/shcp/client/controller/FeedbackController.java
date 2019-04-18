@@ -3,7 +3,7 @@ package com.shcp.client.controller;
 import com.shcp.client.service.UserService;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
-import com.shcp.pojo.TbUser;
+import com.shcp.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -31,7 +31,7 @@ public class FeedbackController {
     @RequestMapping(value = "/user/feedback")
     @ResponseBody
     public Object submitFeedback(String content, String title, Short type, Object bw){
-        TbUser tbUser = (TbUser) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         if(StringUtils.isEmpty(content)){
             return CorsUtil.format(ShcpResult.build(702, "反馈内容不能为空"));
         }
@@ -41,13 +41,13 @@ public class FeedbackController {
         if(Objects.isNull(type)){
             return CorsUtil.format(ShcpResult.build(704, "反馈类型不能为空"));
         }
-        return CorsUtil.format(userService.submitFeedback(tbUser, content, title, type));
+        return CorsUtil.format(userService.submitFeedback(user, content, title, type));
     }
 
     @RequestMapping(value = "/user/Replyfb")
     @ResponseBody
     public Object showReplyInfo(@RequestParam(required = false) String UfbID){
-        TbUser tbUser = (TbUser) session.getAttribute("user");
-        return CorsUtil.format(userService.getAllReplies(tbUser.getUid(), UfbID));
+        User user = (User) session.getAttribute("user");
+        return CorsUtil.format(userService.getAllReplies(user.getUid(), UfbID));
     }
 }

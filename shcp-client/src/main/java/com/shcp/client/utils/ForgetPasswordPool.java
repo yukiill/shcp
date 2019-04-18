@@ -1,7 +1,7 @@
 package com.shcp.client.utils;
 
 import com.shcp.client.pojo.CacheUser;
-import com.shcp.pojo.TbUser;
+import com.shcp.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -30,15 +30,15 @@ public class ForgetPasswordPool {
         return forgetPasswordPool;
     }
 
-    public synchronized CacheUser add(TbUser tbUser, Long time){
-        if(tbUser == null || time == null){
+    public synchronized CacheUser add(User user, Long time){
+        if(user == null || time == null){
             throw new RuntimeException("the instance or time is null");
         }
         CacheUser cacheUser = get(time);
         if(Objects.isNull(cacheUser)){
-            cacheUser = forgetCache.put(time, new CacheUser(tbUser, new Date()));
+            cacheUser = forgetCache.put(time, new CacheUser(user, new Date()));
         }
-        log.info("put userId:{} into forgetCache", tbUser.getUid());
+        log.info("put userId:{} into forgetCache", user.getUid());
         return cacheUser;
     }
 

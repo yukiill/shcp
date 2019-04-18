@@ -1,4 +1,4 @@
-package com.ice.ssm.mapper;
+package com.shcp.dao.mapper;
 
 import com.shcp.pojo.DeviceExamine;
 import com.shcp.pojo.DeviceExamineExample;

@@ -3,7 +3,7 @@ package com.shcp.developer.controller;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.developer.service.FeedbackService;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -33,7 +33,7 @@ public class FeedbackController {
     @ResponseBody
     public Object submitFeedback(@RequestParam String FbContent, @RequestParam String FbTitle, @RequestParam String FbType,
                                  @RequestParam(required = false) Object bw){
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         if(StringUtils.isEmpty(FbContent)){
             return CorsUtil.format(ShcpResult.build(702, "反馈内容不能为空"));
         }
@@ -50,7 +50,7 @@ public class FeedbackController {
     @ResponseBody
     public Object showReplies(@RequestParam(required = false) Long FID, @RequestParam(defaultValue = "10", required = false) int rows,
                               @RequestParam(defaultValue = "1", required = false) int page){
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         return CorsUtil.format(feedbackService.getAllRepies(tbDeveloper, FID, rows, page));
     }
 
@@ -58,14 +58,14 @@ public class FeedbackController {
     @RequestMapping("/replyfb")
     @ResponseBody
     public Object addReply(@RequestParam String FbId, @RequestParam String fbContent, @RequestParam(required = false) Object bw){
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         return CorsUtil.format(feedbackService.replyFeedback(tbDeveloper, FbId, fbContent));
     }
 
     @RequestMapping("/showfb")
     @ResponseBody
     public Object getFeedback(@RequestParam String FbId, @RequestParam(required = false) Object bw){
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         return CorsUtil.format(feedbackService.getFeedbackByFID(tbDeveloper, FbId));
     }
 
@@ -73,7 +73,7 @@ public class FeedbackController {
     @ResponseBody
     public Object searchFeedback(){
         //TODO 需要修复
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         return CorsUtil.format("asd");
     }
 
@@ -81,7 +81,7 @@ public class FeedbackController {
     @ResponseBody
     public Object getAllReply(@RequestParam Long FID, @RequestParam(defaultValue = "10", required = false) int rows,
                               @RequestParam(defaultValue = "1", required = false) int page, @RequestParam(required = false) Object bw){
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         return CorsUtil.format(feedbackService.getAllRepies(tbDeveloper, FID, rows, page));
     }
 }

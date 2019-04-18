@@ -7,10 +7,10 @@ import com.gracelie.shcp.cpcsconn.config.sendmessage.SendMessage;
 import com.shcp.client.service.DeviceService;
 import com.shcp.client.utils.MessageUtil;
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.dao.mapper.TbDeviceMapper;
-import com.shcp.pojo.TbDevice;
-import com.shcp.pojo.TbDeviceExample;
-import com.shcp.pojo.TbUser;
+import com.shcp.dao.mapper.DeviceMapper;
+import com.shcp.pojo.Device;
+import com.shcp.pojo.DeviceExample;
+import com.shcp.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ import java.util.Objects;
 public class DeviceServiceImpl implements DeviceService{
 
     @Resource
-    private TbDeviceMapper tbDeviceMapper;
+    private DeviceMapper deviceMapper;
 
     @Override
     public ShcpResult getDeviceListByUserId(Long userId) {
@@ -35,14 +35,14 @@ public class DeviceServiceImpl implements DeviceService{
             log.info("userid should not be null");
             return ShcpResult.build(7777, "用户状态异常");
         }
-        TbDeviceExample tbDeviceExample = new TbDeviceExample();
-        tbDeviceExample.createCriteria()
+        DeviceExample deviceExample = new DeviceExample();
+        deviceExample.createCriteria()
                 .andUidEqualTo(userId);
-        List<TbDevice> tbDevices =  tbDeviceMapper.selectByExample(tbDeviceExample);
+        List<Device> tbDevices =  deviceMapper.selectByExample(deviceExample);
         //TODO 获取Device基础信息后，将设备状态信息也包装进TbDevice中
-        tbDevices.stream().parallel().forEach(tbDevice -> {
-            Configuration configuration = Configuration.getInstance(tbDevice.getDsipaddr(), tbDevice.getDsport());
-            Message message = MessageUtil.getMessage(tbDevice, Message.NOMORL_PRIORITY, "", "", false);
+        tbDevices.stream().parallel().forEach(device -> {
+            Configuration configuration = Configuration.getInstance(device.getDeipaddr(), device.getDeport());
+            Message message = MessageUtil.getMessage(device, Message.NOMORL_PRIORITY, "", "", false);
             String coment = MessageUtils.messageToComent(message);
             SendMessage sendMessage = new SendMessage();
             sendMessage.send();
@@ -52,28 +52,27 @@ public class DeviceServiceImpl implements DeviceService{
     }
 
     @Override
-    public ShcpResult bindDevice(Long dstID, TbUser tbUser) {
-        TbDevice tbDevice = tbDeviceMapper.selectByPrimaryKey(dstID);
+    public ShcpResult bindDevice(Long dstID, User user) {
+        Device tbDevice = deviceMapper.selectByPrimaryKey(dstID);
         if(Objects.isNull(tbDevice)){
-            log.info("userId:{} bind dstID:{} failed, opposite device isn't exist", tbUser.getUid(), dstID);
+            log.info("userId:{} bind dstID:{} failed, opposite device isn't exist", user.getUid(), dstID);
             return ShcpResult.build(661, "绑定失败");
         }
-        tbDevice.setUid(tbUser.getUid());
-        tbDevice.setDid(tbUser.getDid());
-        tbDeviceMapper.updateByPrimaryKeySelective(tbDevice);
-        log.info("userId:{} bind dstID:{} successful", tbUser.getUid(), dstID);
+        tbDevice.setUid(user.getUid());
+        deviceMapper.updateByPrimaryKeySelective(tbDevice);
+        log.info("userId:{} bind dstID:{} successful", user.getUid(), dstID);
         return ShcpResult.ok();
     }
 
     @Override
     public ShcpResult getDeviceStatus(Long deviceID) {
-        TbDevice tbDevice = tbDeviceMapper.selectByPrimaryKey(deviceID);
-        if(Objects.isNull(tbDevice)){
+        Device device = deviceMapper.selectByPrimaryKey(deviceID);
+        if(Objects.isNull(device)){
             log.info("Failed to obtain device information deviceID:{}", deviceID);
         }
         //TODO 发送信息并接受回传
-        Configuration configuration = Configuration.getInstance(tbDevice.getDsipaddr(), tbDevice.getDsport());
-        Message message = MessageUtil.getMessage(tbDevice, Message.NOMORL_PRIORITY, "", "", false);
+        Configuration configuration = Configuration.getInstance(device.getDeipaddr(), device.getDeport());
+        Message message = MessageUtil.getMessage(device, Message.NOMORL_PRIORITY, "", "", false);
         String coment = MessageUtils.messageToComent(message);
         SendMessage sendMessage = new SendMessage();
         sendMessage.setMessage(message);

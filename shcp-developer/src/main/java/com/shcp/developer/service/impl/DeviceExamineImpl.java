@@ -1,12 +1,11 @@
 package com.shcp.developer.service.impl;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.dao.mapper.TbDeviceexamineMapper;
+import com.shcp.dao.mapper.DeviceExamineMapper;
 import com.shcp.developer.service.DeviceExamineService;
-import com.shcp.developer.service.DeviceService;
-import com.shcp.pojo.TbDeveloper;
-import com.shcp.pojo.TbDeviceexamine;
-import com.shcp.pojo.TbDeviceexamineExample;
+import com.shcp.pojo.Developer;
+import com.shcp.pojo.DeviceExamine;
+import com.shcp.pojo.DeviceExamineExample;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -24,12 +23,12 @@ import java.util.List;
 public class DeviceExamineImpl implements DeviceExamineService{
 
     @Resource
-    private TbDeviceexamineMapper tbDeviceexamineMapper;
+    private DeviceExamineMapper deviceExamineMapper;
 
     @Override
-    public ShcpResult addDeviceExamine(TbDeveloper tbDeveloper, String DSEName, String DESType, String DSETestID, MultipartFile DSEFile) {
-        TbDeviceexamine tbDeviceexamine = new TbDeviceexamine();
-        tbDeviceexamine.setDid(tbDeveloper.getDid());
+    public ShcpResult addDeviceExamine(Developer tbDeveloper, String DSEName, String DESType, String DSETestID, MultipartFile DSEFile) {
+        DeviceExamine deviceExamine = new DeviceExamine();
+//        tbDeviceexamine.setDid(tbDeveloper.getDid());
 //        tbDeviceexamine.set
         return null;
     }
@@ -37,7 +36,7 @@ public class DeviceExamineImpl implements DeviceExamineService{
     @Override
     public ShcpResult showDeviceExamineStatus(String DSEXID) {
         if(StringUtils.isEmpty(DSEXID)){
-            List<TbDeviceexamine> tbDeviceexamineList = tbDeviceexamineMapper.selectByExample(new TbDeviceexamineExample());
+            List<DeviceExamine> tbDeviceexamineList = deviceExamineMapper.selectByExample(new DeviceExamineExample());
             log.info("return all deviceExamineStatus");
             return ShcpResult.ok(tbDeviceexamineList);
         }
@@ -48,7 +47,7 @@ public class DeviceExamineImpl implements DeviceExamineService{
             log.info("input DSEXID:{} is invalid", DSEXID);
             return ShcpResult.build(725, "请输入有效的设备编号");
         }
-        TbDeviceexamine tbDeviceexamine = tbDeviceexamineMapper.selectByPrimaryKey(dsexid);
+        DeviceExamine tbDeviceexamine = deviceExamineMapper.selectByPrimaryKey(dsexid);
         log.info("query DSEXID:{} deviceExamineStatus", DSEXID);
         return ShcpResult.ok(tbDeviceexamine);
     }

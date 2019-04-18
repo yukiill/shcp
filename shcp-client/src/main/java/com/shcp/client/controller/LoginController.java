@@ -6,7 +6,7 @@ import com.shcp.client.utils.RegisterCachePool;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.common.utils.StringUtil;
-import com.shcp.pojo.TbUser;
+import com.shcp.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,11 +40,11 @@ public class LoginController {
         if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)){
             return CorsUtil.format(ShcpResult.build(650, "用户名或密码为空"));
         }
-        TbUser tbUser = userService.login(userName, password, TerID);
-        if(Objects.isNull(tbUser)){
+        User user = userService.login(userName, password, TerID);
+        if(Objects.isNull(user)){
             return CorsUtil.format(ShcpResult.build(651, "用户名或密码错误"));
         }
-        request.getSession().setAttribute("user", tbUser);
+        request.getSession().setAttribute("user", user);
         return CorsUtil.format(ShcpResult.ok());
     }
 
@@ -78,9 +78,9 @@ public class LoginController {
         if(userService.emailIsPresent(email)){
            return CorsUtil.format(ShcpResult.build(712, "邮箱已被绑定"));
         }
-        TbUser tbUser = userService.register(userName, password, email, TerID);
+        User user = userService.register(userName, password, email, TerID);
         long time = System.nanoTime();
-        registerCachePool.add(tbUser, time);
-        return emailService.sendCheckEmail(tbUser.getUid(), time, tbUser.getUemail(), false);
+        registerCachePool.add(user, time);
+        return emailService.sendCheckEmail(user.getUid(), time, user.getEmail(), false);
     }
 }

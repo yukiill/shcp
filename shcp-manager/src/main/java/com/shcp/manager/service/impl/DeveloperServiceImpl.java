@@ -1,8 +1,8 @@
 package com.shcp.manager.service.impl;
 
-import com.shcp.dao.mapper.TbDeveloperMapper;
+import com.shcp.dao.mapper.DeveloperMapper;
 import com.shcp.manager.service.DeveloperService;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +17,10 @@ import javax.annotation.Resource;
 public class DeveloperServiceImpl implements DeveloperService {
 
     @Resource
-    private TbDeveloperMapper tbDeveloperMapper;
+    private DeveloperMapper tbDeveloperMapper;
 
     @Override
-    public TbDeveloper searchDeveloper(String Did) {
+    public Developer searchDeveloper(String Did) {
         Long _did;
         try {
             _did = Long.parseLong(Did);

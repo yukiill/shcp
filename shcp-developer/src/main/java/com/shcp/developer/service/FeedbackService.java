@@ -1,7 +1,7 @@
 package com.shcp.developer.service;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 
 /**
  * @author Yuki
@@ -9,15 +9,15 @@ import com.shcp.pojo.TbDeveloper;
  */
 public interface FeedbackService {
 
-    ShcpResult submitDevFeedback(TbDeveloper tbDeveloper, String content, String title);
+    ShcpResult submitDevFeedback(Developer tbDeveloper, String content, String title);
 
-    ShcpResult getAllRepies(TbDeveloper tbDeveloper, Long FID, int rows, int page);
+    ShcpResult getAllRepies(Developer tbDeveloper, Long FID, int rows, int page);
 
-    ShcpResult getAllFeedback(TbDeveloper tbDeveloper, int rows, int page);
+    ShcpResult getAllFeedback(Developer tbDeveloper, int rows, int page);
 
-    ShcpResult getFeedbackByFID(TbDeveloper tbDeveloper, String FbId);
+    ShcpResult getFeedbackByFID(Developer tbDeveloper, String FbId);
 
-    ShcpResult getFeedbackByWd(TbDeveloper tbDeveloper,String wd, int rows, int page);
+    ShcpResult getFeedbackByWd(Developer tbDeveloper,String wd, int rows, int page);
 
-    ShcpResult replyFeedback(TbDeveloper tbDeveloper, String FbId, String fbContent);
+    ShcpResult replyFeedback(Developer tbDeveloper, String FbId, String fbContent);
 }

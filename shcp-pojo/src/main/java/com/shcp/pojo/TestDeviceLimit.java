@@ -9,6 +9,8 @@ public class TestDeviceLimit {
 
     private String tdelvalue;
 
+    private String tdelname;
+
     public Long getTdelid() {
         return tdelid;
     }
@@ -39,5 +41,13 @@ public class TestDeviceLimit {
 
     public void setTdelvalue(String tdelvalue) {
         this.tdelvalue = tdelvalue == null ? null : tdelvalue.trim();
+    }
+
+    public String getTdelname() {
+        return tdelname;
+    }
+
+    public void setTdelname(String tdelname) {
+        this.tdelname = tdelname == null ? null : tdelname.trim();
     }
 }

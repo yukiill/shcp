@@ -1,6 +1,6 @@
 package com.shcp.client.pojo;
 
-import com.shcp.pojo.TbUser;
+import com.shcp.pojo.User;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,14 +12,14 @@ import java.util.Date;
 @Data
 public class CacheUser {
 
-    private TbUser tbUser;
+    private User user;
     private int sendCount;
     private long latestExpiredTime;
     private long nextTimeAllowToSend;
     private long interval;
 
-    public CacheUser(TbUser tbUser, Date date){
-        this.tbUser = tbUser;
+    public CacheUser(User user, Date date){
+        this.user = user;
         this.sendCount = 5;
         this.latestExpiredTime = -1;
         this.interval = 600000;

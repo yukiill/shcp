@@ -1,7 +1,7 @@
 package com.shcp.developer.service;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -18,7 +18,7 @@ public interface DeviceExamineService {
      * @param DSEFile 设备审核的文件
      * @return 响应信息
      */
-    ShcpResult addDeviceExamine(TbDeveloper tbDeveloper, String DSEName, String DESType, String DSETestID, MultipartFile DSEFile);
+    ShcpResult addDeviceExamine(Developer tbDeveloper, String DSEName, String DESType, String DSETestID, MultipartFile DSEFile);
 
     /**
      * 查看设备的审核状态，默认是所有，否则根据测试设备编号来检索

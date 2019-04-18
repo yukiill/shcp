@@ -1,7 +1,7 @@
 package com.shcp.developer.service;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 
 /**
  * @author Yuki
@@ -9,15 +9,15 @@ import com.shcp.pojo.TbDeveloper;
  */
 public interface DeveloperService {
 
-    TbDeveloper devLogin(String username, String password, String TerID);
+    Developer devLogin(String username, String password, String TerID);
 
-    TbDeveloper devRegister(String username, String password, String email, String TerID);
+    Developer devRegister(String username, String password, String email, String TerID);
 
     Boolean devNameIsPresent(String username);
 
     Boolean devCancellation(Long DEId);
 
-    ShcpResult changePwd(TbDeveloper tbDeveloper);
+    ShcpResult changePwd(Developer tbDeveloper);
 
     boolean emailIsPresent(String email);
 

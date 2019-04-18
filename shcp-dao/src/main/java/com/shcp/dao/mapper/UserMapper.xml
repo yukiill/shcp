@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ice.ssm.mapper.UserMapper" >
+<mapper namespace="com.shcp.dao.mapper.UserMapper" >
   <resultMap id="BaseResultMap" type="com.shcp.pojo.User" >
     <id column="UID" property="uid" jdbcType="BIGINT" />
     <result column="DID" property="did" jdbcType="BIGINT" />
@@ -9,6 +9,7 @@
     <result column="EMAIL" property="email" jdbcType="CHAR" />
     <result column="BIRTH" property="birth" jdbcType="TIMESTAMP" />
     <result column="IMG" property="img" jdbcType="CHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
     <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    UID, DID, USERNAME, PASSWORD, EMAIL, BIRTH, IMG, GMT_CREATE, GMT_MODIFY
+    UID, DID, USERNAME, PASSWORD, EMAIL, BIRTH, IMG, introduce, GMT_CREATE, GMT_MODIFY
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.UserExample" >
     select
@@ -106,12 +107,12 @@
   <insert id="insert" parameterType="com.shcp.pojo.User" >
     insert into user (UID, DID, USERNAME, 
       PASSWORD, EMAIL, BIRTH, 
-      IMG, GMT_CREATE, GMT_MODIFY
-      )
+      IMG, introduce, GMT_CREATE, 
+      GMT_MODIFY)
     values (#{uid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{email,jdbcType=CHAR}, #{birth,jdbcType=TIMESTAMP}, 
-      #{img,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
-      )
+      #{img,jdbcType=CHAR}, #{introduce,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.shcp.pojo.User" >
     insert into user
@@ -136,6 +137,9 @@
       </if>
       <if test="img != null" >
         IMG,
+      </if>
+      <if test="introduce != null" >
+        introduce,
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE,
@@ -165,6 +169,9 @@
       </if>
       <if test="img != null" >
         #{img,jdbcType=CHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -204,6 +211,9 @@
       <if test="record.img != null" >
         IMG = #{record.img,jdbcType=CHAR},
       </if>
+      <if test="record.introduce != null" >
+        introduce = #{record.introduce,jdbcType=VARCHAR},
+      </if>
       <if test="record.gmtCreate != null" >
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
@@ -224,6 +234,7 @@
       EMAIL = #{record.email,jdbcType=CHAR},
       BIRTH = #{record.birth,jdbcType=TIMESTAMP},
       IMG = #{record.img,jdbcType=CHAR},
+      introduce = #{record.introduce,jdbcType=VARCHAR},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -251,6 +262,9 @@
       <if test="img != null" >
         IMG = #{img,jdbcType=CHAR},
       </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
       <if test="gmtCreate != null" >
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
@@ -268,8 +282,15 @@
       EMAIL = #{email,jdbcType=CHAR},
       BIRTH = #{birth,jdbcType=TIMESTAMP},
       IMG = #{img,jdbcType=CHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
       GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP}
     where UID = #{uid,jdbcType=BIGINT}
   </update>
+  <select id="selectByEmail" parameterType="String" resultType="String">
+    select EMAIL from user where EMAIL = #{email}
+  </select>
+  <select id="selectByUsername" parameterType="String" resultType="String">
+    select USERNAME from user where USERNAME = #{username}
+  </select>
 </mapper>

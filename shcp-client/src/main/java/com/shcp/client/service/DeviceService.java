@@ -1,7 +1,7 @@
 package com.shcp.client.service;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.pojo.TbUser;
+import com.shcp.pojo.User;
 
 /**
  * @author Yuki
@@ -11,7 +11,7 @@ public interface DeviceService {
 
     ShcpResult getDeviceListByUserId(Long userId);
 
-    ShcpResult bindDevice(Long dstID, TbUser tbUser);
+    ShcpResult bindDevice(Long dstID, User user);
 
     ShcpResult getDeviceStatus(Long deviceID);
 }

@@ -363,6 +363,76 @@ public class TestDeviceLimitExample {
             addCriterion("TDELVALUE not between", value1, value2, "tdelvalue");
             return (Criteria) this;
         }
+
+        public Criteria andTdelnameIsNull() {
+            addCriterion("TDELNAME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameIsNotNull() {
+            addCriterion("TDELNAME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameEqualTo(String value) {
+            addCriterion("TDELNAME =", value, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameNotEqualTo(String value) {
+            addCriterion("TDELNAME <>", value, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameGreaterThan(String value) {
+            addCriterion("TDELNAME >", value, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameGreaterThanOrEqualTo(String value) {
+            addCriterion("TDELNAME >=", value, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameLessThan(String value) {
+            addCriterion("TDELNAME <", value, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameLessThanOrEqualTo(String value) {
+            addCriterion("TDELNAME <=", value, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameLike(String value) {
+            addCriterion("TDELNAME like", value, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameNotLike(String value) {
+            addCriterion("TDELNAME not like", value, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameIn(List<String> values) {
+            addCriterion("TDELNAME in", values, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameNotIn(List<String> values) {
+            addCriterion("TDELNAME not in", values, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameBetween(String value1, String value2) {
+            addCriterion("TDELNAME between", value1, value2, "tdelname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTdelnameNotBetween(String value1, String value2) {
+            addCriterion("TDELNAME not between", value1, value2, "tdelname");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

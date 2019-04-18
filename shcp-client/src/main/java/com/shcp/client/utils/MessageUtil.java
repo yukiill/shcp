@@ -2,7 +2,7 @@ package com.shcp.client.utils;
 
 import com.gracelie.shcp.cpcsconn.config.sendmessage.InlayMessage;
 import com.gracelie.shcp.cpcsconn.config.sendmessage.Message;
-import com.shcp.pojo.TbDevice;
+import com.shcp.pojo.Device;
 
 /**
  * @author Yuki
@@ -10,9 +10,9 @@ import com.shcp.pojo.TbDevice;
  */
 public class MessageUtil {
 
-    public static Message getMessage(TbDevice tbDevice, int priority, String ctrKey, String ctrValue, boolean encryption){
+    public static Message getMessage(Device device, int priority, String ctrKey, String ctrValue, boolean encryption){
         InlayMessage inlayMessage = new InlayMessage();
-        inlayMessage.setDevicsId(tbDevice.getDid());
+        inlayMessage.setDevicsId(device.getDeid());
         inlayMessage.setPriority(priority);
         inlayMessage.setEncryption(false);
         inlayMessage.setCtrKey(ctrKey);

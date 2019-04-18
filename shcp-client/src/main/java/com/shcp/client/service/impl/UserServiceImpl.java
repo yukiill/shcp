@@ -4,13 +4,10 @@ import com.shcp.client.service.UserService;
 import com.shcp.client.utils.FileUtil;
 import com.shcp.client.utils.IdGenerator;
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.dao.mapper.TbReplyMapper;
-import com.shcp.dao.mapper.TbUserMapper;
-import com.shcp.dao.mapper.TbUserfeedbackMapper;
-import com.shcp.pojo.TbReply;
-import com.shcp.pojo.TbUser;
-import com.shcp.pojo.TbUserExample;
-import com.shcp.pojo.TbUserfeedback;
+import com.shcp.dao.mapper.FeedbackMapper;
+import com.shcp.dao.mapper.ReplyMapper;
+import com.shcp.dao.mapper.UserMapper;
+import com.shcp.pojo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -32,19 +29,19 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService{
 
     @Resource
-    private TbUserMapper tbUserMapper;
+    private UserMapper userMapper;
     @Resource
-    private TbUserfeedbackMapper tbUserfeedbackMapper;
+    private FeedbackMapper feedbackMapper;
     @Resource
-    private TbReplyMapper tbReplyMapper;
+    private ReplyMapper replyMapper;
 
     @Override
-    public TbUser login(String userName, String password, String TerID) {
-        TbUserExample example = new TbUserExample();
+    public User login(String userName, String password, String TerID) {
+        UserExample example = new UserExample();
         example.createCriteria()
                 .andUsernameEqualTo(userName)
                 .andPasswordEqualTo(password);
-        List<TbUser> tbUserList = tbUserMapper.selectByExample(example);
+        List<User> tbUserList = userMapper.selectByExample(example);
         if(tbUserList.size() > 0 ){
             log.info("username:{} platform:{} login success", userName, TerID);
             return tbUserList.get(0);
@@ -53,80 +50,80 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public TbUser register(String userName, String password, String email, String TerID) {
-        TbUser tbUser = new TbUser();
-        tbUser.setUsername(userName);
-        tbUser.setPassword(password);
-        tbUser.setUemail(email);
-        tbUser.setDid((long) 0);
-        tbUser.setUhimg(FileUtil.DEFAULT_IMAGE_URL);
-        tbUser.setUbirth(null);
-        tbUser.setLid((short) 0);
-        tbUser.setUid(IdGenerator.generateUserId());
+    public User register(String userName, String password, String email, String TerID) {
+        User user = new User();
+        user.setUsername(userName);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setDid((long) 0);
+        user.setImg(FileUtil.DEFAULT_IMAGE_URL);
+        user.setBirth(null);
+        user.setUid(IdGenerator.generateUserId());
         log.info("register user:{} platform:{} success ", userName, TerID);
-        return tbUser;
+        return user;
     }
 
     @Override
     public Boolean usernameIsPresent(String username) {
-        String result = tbUserMapper.selectByUsername(username);
+        String result = userMapper.selectByUsername(username);
         return !StringUtils.isEmpty(result);
     }
 
     @Override
-    public Boolean changeInfo(TbUser tbUser, String email, String birthday, String introduction, String sex) {
+    public Boolean changeInfo(User user, String email, String birthday, String introduction, String sex) {
         boolean isChanged = false;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        if(!StringUtils.isEmpty(email) && !Objects.equals(email, tbUser.getUemail())){
+        if(!StringUtils.isEmpty(email) && !Objects.equals(email, user.getEmail())){
             isChanged = true;
-            tbUser.setUemail(email);
+            user.setEmail(email);
         }
-        if(!StringUtils.isEmpty(introduction) && !Objects.equals(introduction, tbUser.getUintroduce())){
+        if(!StringUtils.isEmpty(introduction) && !Objects.equals(introduction, user.getIntroduce())){
             isChanged = true;
-            tbUser.setUintroduce(introduction);
+            user.setIntroduce(introduction);
         }
         Date newBirth;
         try {
             newBirth = dateFormat.parse(birthday);
         } catch (ParseException e) {
-            newBirth = tbUser.getUbirth();
+            newBirth = user.getBirth();
             log.info("format date has occurred error message:{}", e.getMessage());
         }
-        if(!StringUtils.isEmpty(birthday) && Objects.equals(tbUser.getUbirth().toString(), birthday)){
+        if(!StringUtils.isEmpty(birthday) && Objects.equals(user.getBirth().toString(), birthday)){
             isChanged = true;
-            tbUser.setUbirth(newBirth);
+            user.setBirth(newBirth);
         }
         if(isChanged){
-            tbUserMapper.updateByPrimaryKeySelective(tbUser);
-            log.info("userId:{} change userinfo success", tbUser.getUid());
+            userMapper.updateByPrimaryKeySelective(user);
+            log.info("userId:{} change userinfo success", user.getUid());
         }
         return true;
     }
 
     @Override
-    public Boolean changeImg(TbUser tbUser) {
-        log.info("userId:{} upload headImage success, filepath:{}", tbUser.getUid(), tbUser.getUhimg());
-        return tbUserMapper.updateByPrimaryKeySelective(tbUser) == 1;
+    public Boolean changeImg(User user) {
+        log.info("userId:{} upload headImage success, filepath:{}", user.getUid(), user.getImg());
+        return userMapper.updateByPrimaryKeySelective(user) == 1;
     }
 
     @Override
     public Boolean cancellation(Long userId) {
         log.info("userId:{} cancel account success", userId);
-        return tbUserMapper.deleteByPrimaryKey(userId) == 1;
+        return userMapper.deleteByPrimaryKey(userId) == 1;
     }
 
     @Override
-    public ShcpResult submitFeedback(TbUser tbUser, String content, String title, Short type) {
-        TbUserfeedback tbUserfeedback = new TbUserfeedback();
-        tbUserfeedback.setFcontent(content);
-        tbUserfeedback.setDid(tbUser.getDid());
-        tbUserfeedback.setFid(IdGenerator.generateFeedbackId());
-        tbUserfeedback.setFutype(type);
-        tbUserfeedback.setUid(tbUser.getUid());
-        tbUserfeedback.setFreply((byte) 0);
-        tbUserfeedback.setFcheck((byte) 0);
-        tbUserfeedbackMapper.insertSelective(tbUserfeedback);
-        log.info("userId:{} submit feedback success", tbUser.getUid());
+    public ShcpResult submitFeedback(User user, String content, String title, Short type) {
+        //TODO 应该新加一个开发者ID参数
+        Feedback feedback = new Feedback();
+        feedback.setFcontent(content);
+        feedback.setFromUserId(user.getUid());
+        feedback.setFromUserType((byte) 1);
+        feedback.setFid(IdGenerator.generateFeedbackId());
+        feedback.setFtitle(title);
+        feedback.setIsCheck((byte) 0);
+        feedback.setIsReply((byte) 0);
+        feedbackMapper.insertSelective(feedback);
+        log.info("userId:{} submit feedback success", user.getUid());
         return ShcpResult.ok();
     }
 
@@ -135,26 +132,26 @@ public class UserServiceImpl implements UserService{
         if(Objects.isNull(userId)){
             return ShcpResult.build(705, "用户状态异常");
         }
-        TbUser tbUser = tbUserMapper.selectByPrimaryKey(userId);
+        User user = userMapper.selectByPrimaryKey(userId);
         log.info("userId:{} obtain userinfo", userId);
-        return ShcpResult.ok(tbUser);
+        return ShcpResult.ok(user);
     }
 
     @Override
-    public ShcpResult changePwd(TbUser tbUser, String nPwd) {
-        tbUser.setPassword(nPwd);
-        tbUserMapper.updateByPrimaryKeySelective(tbUser);
-        log.info("userId:{} change pwd success", tbUser.getUid());
+    public ShcpResult changePwd(User user, String nPwd) {
+        user.setPassword(nPwd);
+        userMapper.updateByPrimaryKeySelective(user);
+        log.info("userId:{} change pwd success", user.getUid());
         return ShcpResult.ok();
     }
 
     @Override
     public ShcpResult forgetPwd(String newPass, String email) {
-        TbUserExample example = new TbUserExample();
+        UserExample example = new UserExample();
         example.createCriteria()
-                .andUemailEqualTo(email);
-        TbUser tbUser = tbUserMapper.selectByExample(example).get(0);
-        if(Objects.isNull(tbUser))
+                .andEmailEqualTo(email);
+        User user = userMapper.selectByExample(example).get(0);
+        if(Objects.isNull(user))
         {
             log.info("email:{} haven't opposite user", email);
             return ShcpResult.build(659, "用户未注册");
@@ -168,13 +165,18 @@ public class UserServiceImpl implements UserService{
         if(!StringUtils.isEmpty(UfbID)){
             FID = Long.parseLong(UfbID);
         }
-        List<TbReply> tbReplies = tbReplyMapper.getAllRepliesWithBLOBs(UID, FID);
+//        List<Reply> tbReplies = replyMapper.getAllRepliesWithBLOBs(UID, FID);
+        //TODO 应该拆分成分页和单独查询。
+        ReplyExample replyExample = new ReplyExample();
+        replyExample.createCriteria()
+                .andToUserIdEqualTo(UID);
+        List<Reply> tbReplies = replyMapper.selectByExample(replyExample);
         log.info("UID:{} query replyID:{} success", UID, UfbID);
         return ShcpResult.ok(tbReplies);
     }
 
     @Override
     public Boolean emailIsPresent(String email) {
-        return !StringUtils.isEmpty(tbUserMapper.selectByEmail(email));
+        return !StringUtils.isEmpty(userMapper.selectByEmail(email));
     }
 }

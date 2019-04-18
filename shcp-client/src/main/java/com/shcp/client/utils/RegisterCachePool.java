@@ -1,7 +1,7 @@
 package com.shcp.client.utils;
 
 import com.shcp.client.pojo.CacheUser;
-import com.shcp.pojo.TbUser;
+import com.shcp.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -34,20 +34,20 @@ public class RegisterCachePool{
 
     /**
      * 往注册缓存池中放入一个待验证的用户实体
-     * @param tbUser 用户实体
+     * @param user 用户实体
      * @param time 当前时间戳,纳秒级
      * @return 是否插入成功
      */
-    public synchronized CacheUser add(TbUser tbUser, Long time){
-        if(tbUser == null || time == null){
+    public synchronized CacheUser add(User user, Long time){
+        if(user == null || time == null){
             throw new RuntimeException("the instance or time is null");
         }
         CacheUser cacheUser = get(time);
         if(Objects.isNull(cacheUser)){
-            cacheUser = registerCache.put(time, new CacheUser(tbUser, new Date()));
+            cacheUser = registerCache.put(time, new CacheUser(user, new Date()));
         }
-        usernameCache.add(tbUser.getUsername());
-        log.info("put userId:{} into registerCache and usernameCache", tbUser.getUid());
+        usernameCache.add(user.getUsername());
+        log.info("put userId:{} into registerCache and usernameCache", user.getUid());
         return cacheUser;
     }
 
@@ -65,7 +65,7 @@ public class RegisterCachePool{
         }
         log.info("key:{} remove from registerCache", time);
         CacheUser cacheUser = registerCache.remove(time);
-        usernameCache.remove(cacheUser.getTbUser().getUsername());
+        usernameCache.remove(cacheUser.getUser().getUsername());
         return true;
     }
 

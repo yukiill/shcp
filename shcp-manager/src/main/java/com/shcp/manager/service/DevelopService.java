@@ -1,6 +1,6 @@
 package com.shcp.manager.service;
 
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface DevelopService {
 
-    List<TbDeveloper> findDevelops(String wd, String type);
+    List<Developer> findDevelops(String wd, String type);
 
 
 }

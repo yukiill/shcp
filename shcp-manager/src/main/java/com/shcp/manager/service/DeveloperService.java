@@ -1,11 +1,11 @@
 package com.shcp.manager.service;
 
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 
 /**
  * @author CYZ
  * @date 2019/4/16 20:39
  */
 public interface DeveloperService {
-    TbDeveloper searchDeveloper(String DVID);
+    Developer searchDeveloper(String DVID);
 }

@@ -17,6 +17,8 @@ public class User {
 
     private String img;
 
+    private String introduce;
+
     private Date gmtCreate;
 
     private Date gmtModify;
@@ -75,6 +77,14 @@ public class User {
 
     public void setImg(String img) {
         this.img = img == null ? null : img.trim();
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce == null ? null : introduce.trim();
     }
 
     public Date getGmtCreate() {

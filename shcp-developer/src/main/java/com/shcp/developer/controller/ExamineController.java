@@ -3,7 +3,7 @@ package com.shcp.developer.controller;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.developer.service.ExamineService;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class ExamineController {
     @RequestMapping("/examine")
     @ResponseBody
     public Object submitExamine(@RequestParam String dcName, @RequestParam String dcAddr,@RequestParam String crType, @RequestParam String dcNumber){
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         if(StringUtils.isEmpty(dcName)){
             return CorsUtil.format(ShcpResult.build(716, "组织名不能为空"));
         }
@@ -50,7 +50,7 @@ public class ExamineController {
     @RequestMapping("/showDevExamineStatus")
     @ResponseBody
     public Object showExamineStatus(@RequestParam(required = false) Object bw){
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         return CorsUtil.format(examineService.showDevExamineStatus(tbDeveloper));
     }
 
@@ -61,7 +61,7 @@ public class ExamineController {
         if(Objects.equals("", dcName) && Objects.equals("", dcAddr) && Objects.equals("", dcNumber)){
             return CorsUtil.format(ShcpResult.build(721, "请输入有效的修改"));
         }
-        TbDeveloper tbDeveloper = (TbDeveloper) session.getAttribute("duser");
+        Developer tbDeveloper = (Developer) session.getAttribute("duser");
         return CorsUtil.format(examineService.modifiedExamineInfo(tbDeveloper, dcName, dcAddr, dcNumber));
     }
 }

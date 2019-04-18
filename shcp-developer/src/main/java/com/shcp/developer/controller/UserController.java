@@ -2,25 +2,16 @@ package com.shcp.developer.controller;
 
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
-import com.shcp.common.utils.StringUtil;
-import com.shcp.developer.service.DeveloperService;
-import com.shcp.developer.service.EmailService;
 import com.shcp.developer.service.UserService;
-import com.shcp.developer.utils.CookieUtil;
-import com.shcp.pojo.TbUser;
+import com.shcp.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.Objects;
 
 /**
  * @author Yuki
@@ -43,7 +34,7 @@ public class UserController {
         if(StringUtils.isEmpty(type)){
             return CorsUtil.format(ShcpResult.build(721, "请指定搜索类型"));
         }
-        TbUser tbUser = userService.searchUser(searchWd, type);
+        User tbUser = userService.searchUser(searchWd, type);
         return ShcpResult.ok(tbUser);
     }
 

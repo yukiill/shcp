@@ -1,12 +1,12 @@
 package com.shcp.developer.service.impl;
 
 import com.shcp.common.pojo.ShcpResult;
-import com.shcp.dao.mapper.DeveloperinfoMapper;
+import com.shcp.dao.mapper.DeveloperInfoMapper;
 import com.shcp.developer.pojo.ExamineStatus;
 import com.shcp.developer.service.ExamineService;
 import com.shcp.developer.utils.IdGenerator;
-import com.shcp.pojo.Developerinfo;
-import com.shcp.pojo.TbDeveloper;
+import com.shcp.pojo.Developer;
+import com.shcp.pojo.DeveloperInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -23,36 +23,37 @@ import java.util.Objects;
 public class ExamineServiceImpl implements ExamineService{
 
     @Resource
-    private DeveloperinfoMapper developerinfoMapper;
+    private DeveloperInfoMapper developerinfoMapper;
 
     @Override
-    public ShcpResult submitExamine(TbDeveloper tbDeveloper, String dcName, String dcAddr, String crType, String dcNumber) {
-        Developerinfo developerinfo = new Developerinfo();
+    public ShcpResult submitExamine(Developer tbDeveloper, String dcName, String dcAddr, String crType, String dcNumber) {
+        //TODO 添加正反面照片等功能
+        DeveloperInfo developerinfo = new DeveloperInfo();
         developerinfo.setDcaddr(dcAddr);
         developerinfo.setDcname(dcName);
         developerinfo.setDid(tbDeveloper.getDid());
         developerinfo.setDcstatus(ExamineStatus.AUDITING);
         developerinfo.setDcnumber(dcNumber);
-        developerinfo.setDcid(IdGenerator.generateExamineId());
-        developerinfo.setDcaid((long) 0);
+//        developerinfo.setDe(IdGenerator.generateExamineId());
+//        developerinfo.setDcaid((long) 0);
         developerinfoMapper.insertSelective(developerinfo);
         log.info("developerinfo:{} insert success", developerinfo);
         return ShcpResult.ok();
     }
 
     @Override
-    public ShcpResult showDevExamineStatus(TbDeveloper tbDeveloper) {
-        Developerinfo developerinfo = developerinfoMapper.selectByPrimaryKey(tbDeveloper.getDcid());
+    public ShcpResult showDevExamineStatus(Developer tbDeveloper) {
+        DeveloperInfo developerinfo = developerinfoMapper.selectByPrimaryKey(tbDeveloper.getDfid());
         if(Objects.isNull(developerinfo)){
             return ShcpResult.build(720, "没有相关的开发者审核信息");
         }
-        log.info("developerId:{} query opposite examine examineId:{} info success", tbDeveloper.getDid(), developerinfo.getDcid());
+        log.info("developerId:{} query opposite examine examineId:{} info success", tbDeveloper.getDid(), developerinfo.getDfid());
         return ShcpResult.ok(developerinfo);
     }
 
     @Override
-    public ShcpResult modifiedExamineInfo(TbDeveloper tbDeveloper, String dcName, String dcAddr, String dcNumber) {
-        Developerinfo developerinfo = developerinfoMapper.selectByPrimaryKey(tbDeveloper.getDcid());
+    public ShcpResult modifiedExamineInfo(Developer tbDeveloper, String dcName, String dcAddr, String dcNumber) {
+        DeveloperInfo developerinfo = developerinfoMapper.selectByPrimaryKey(tbDeveloper.getDfid());
         if(Objects.isNull(developerinfo)){
             return ShcpResult.build(720, "没有相关的开发者审核信息");
         }
@@ -66,7 +67,7 @@ public class ExamineServiceImpl implements ExamineService{
             developerinfo.setDcnumber(dcNumber);
         }
         developerinfoMapper.updateByPrimaryKeySelective(developerinfo);
-        log.info("developerId:{} modified examineInfo examineId:{} success", tbDeveloper.getDid(), developerinfo.getDcid());
+        log.info("developerId:{} modified examineInfo examineId:{} success", tbDeveloper.getDid(), developerinfo.getDfid());
         return ShcpResult.ok();
     }
 }

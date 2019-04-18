@@ -1,9 +1,9 @@
 package com.shcp.developer.service.impl;
 
-import com.shcp.dao.mapper.TbUserMapper;
+import com.shcp.dao.mapper.UserMapper;
 import com.shcp.developer.service.UserService;
-import com.shcp.pojo.TbUser;
-import com.shcp.pojo.TbUserExample;
+import com.shcp.pojo.User;
+import com.shcp.pojo.UserExample;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +19,19 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService{
 
     @Resource
-    private TbUserMapper tbUserMapper;
+    private UserMapper userMapper;
 
     @Override
-    public TbUser searchUser(String keyWord, String type) {
-        TbUserExample tbUserExample = new TbUserExample();
-        TbUser tbUser = null;
+    public User searchUser(String keyWord, String type) {
+        UserExample tbUserExample = new UserExample();
+        User tbUser = null;
         //暂定t为使用用户名查询
         if(Objects.equals("t", type)){
             tbUserExample.createCriteria().andUsernameEqualTo(keyWord);
-            tbUser = tbUserMapper.selectByExample(tbUserExample).get(0);
+            tbUser = userMapper.selectByExample(tbUserExample).get(0);
         } else if(Objects.equals("q", type)){   //q为用户编号
             tbUserExample.createCriteria().andUidEqualTo(Long.parseLong(keyWord));
-            tbUser = tbUserMapper.selectByExample(tbUserExample).get(0);
+            tbUser = userMapper.selectByExample(tbUserExample).get(0);
         }
         log.info("adopt keyword:{} type:{} search user");
         return tbUser;
