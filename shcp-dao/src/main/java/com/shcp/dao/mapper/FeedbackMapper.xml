@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ice.ssm.mapper.FeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.Feedback" >
+    <id column="FID" property="fid" jdbcType="BIGINT" />
+    <result column="FTITLE" property="ftitle" jdbcType="VARCHAR" />
+    <result column="FCONTENT" property="fcontent" jdbcType="VARCHAR" />
+    <result column="IS_CHECK" property="isCheck" jdbcType="TINYINT" />
+    <result column="IS_REPLY" property="isReply" jdbcType="TINYINT" />
+    <result column="FROM_USER_ID" property="fromUserId" jdbcType="BIGINT" />
+    <result column="FROM_USER_TYPE" property="fromUserType" jdbcType="TINYINT" />
+    <result column="TO_USER_ID" property="toUserId" jdbcType="BIGINT" />
+    <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FID, FTITLE, FCONTENT, IS_CHECK, IS_REPLY, FROM_USER_ID, FROM_USER_TYPE, TO_USER_ID, 
+    GMT_CREATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.FeedbackExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from feedback
+    where FID = #{fid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from feedback
+    where FID = #{fid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.FeedbackExample" >
+    delete from feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.Feedback" >
+    insert into feedback (FID, FTITLE, FCONTENT, 
+      IS_CHECK, IS_REPLY, FROM_USER_ID, 
+      FROM_USER_TYPE, TO_USER_ID, GMT_CREATE
+      )
+    values (#{fid,jdbcType=BIGINT}, #{ftitle,jdbcType=VARCHAR}, #{fcontent,jdbcType=VARCHAR}, 
+      #{isCheck,jdbcType=TINYINT}, #{isReply,jdbcType=TINYINT}, #{fromUserId,jdbcType=BIGINT}, 
+      #{fromUserType,jdbcType=TINYINT}, #{toUserId,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.Feedback" >
+    insert into feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FID,
+      </if>
+      <if test="ftitle != null" >
+        FTITLE,
+      </if>
+      <if test="fcontent != null" >
+        FCONTENT,
+      </if>
+      <if test="isCheck != null" >
+        IS_CHECK,
+      </if>
+      <if test="isReply != null" >
+        IS_REPLY,
+      </if>
+      <if test="fromUserId != null" >
+        FROM_USER_ID,
+      </if>
+      <if test="fromUserType != null" >
+        FROM_USER_TYPE,
+      </if>
+      <if test="toUserId != null" >
+        TO_USER_ID,
+      </if>
+      <if test="gmtCreate != null" >
+        GMT_CREATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="ftitle != null" >
+        #{ftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fcontent != null" >
+        #{fcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null" >
+        #{isCheck,jdbcType=TINYINT},
+      </if>
+      <if test="isReply != null" >
+        #{isReply,jdbcType=TINYINT},
+      </if>
+      <if test="fromUserId != null" >
+        #{fromUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fromUserType != null" >
+        #{fromUserType,jdbcType=TINYINT},
+      </if>
+      <if test="toUserId != null" >
+        #{toUserId,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.FeedbackExample" resultType="java.lang.Integer" >
+    select count(*) from feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update feedback
+    <set >
+      <if test="record.fid != null" >
+        FID = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.ftitle != null" >
+        FTITLE = #{record.ftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcontent != null" >
+        FCONTENT = #{record.fcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCheck != null" >
+        IS_CHECK = #{record.isCheck,jdbcType=TINYINT},
+      </if>
+      <if test="record.isReply != null" >
+        IS_REPLY = #{record.isReply,jdbcType=TINYINT},
+      </if>
+      <if test="record.fromUserId != null" >
+        FROM_USER_ID = #{record.fromUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fromUserType != null" >
+        FROM_USER_TYPE = #{record.fromUserType,jdbcType=TINYINT},
+      </if>
+      <if test="record.toUserId != null" >
+        TO_USER_ID = #{record.toUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update feedback
+    set FID = #{record.fid,jdbcType=BIGINT},
+      FTITLE = #{record.ftitle,jdbcType=VARCHAR},
+      FCONTENT = #{record.fcontent,jdbcType=VARCHAR},
+      IS_CHECK = #{record.isCheck,jdbcType=TINYINT},
+      IS_REPLY = #{record.isReply,jdbcType=TINYINT},
+      FROM_USER_ID = #{record.fromUserId,jdbcType=BIGINT},
+      FROM_USER_TYPE = #{record.fromUserType,jdbcType=TINYINT},
+      TO_USER_ID = #{record.toUserId,jdbcType=BIGINT},
+      GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.Feedback" >
+    update feedback
+    <set >
+      <if test="ftitle != null" >
+        FTITLE = #{ftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fcontent != null" >
+        FCONTENT = #{fcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null" >
+        IS_CHECK = #{isCheck,jdbcType=TINYINT},
+      </if>
+      <if test="isReply != null" >
+        IS_REPLY = #{isReply,jdbcType=TINYINT},
+      </if>
+      <if test="fromUserId != null" >
+        FROM_USER_ID = #{fromUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fromUserType != null" >
+        FROM_USER_TYPE = #{fromUserType,jdbcType=TINYINT},
+      </if>
+      <if test="toUserId != null" >
+        TO_USER_ID = #{toUserId,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null" >
+        GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FID = #{fid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.Feedback" >
+    update feedback
+    set FTITLE = #{ftitle,jdbcType=VARCHAR},
+      FCONTENT = #{fcontent,jdbcType=VARCHAR},
+      IS_CHECK = #{isCheck,jdbcType=TINYINT},
+      IS_REPLY = #{isReply,jdbcType=TINYINT},
+      FROM_USER_ID = #{fromUserId,jdbcType=BIGINT},
+      FROM_USER_TYPE = #{fromUserType,jdbcType=TINYINT},
+      TO_USER_ID = #{toUserId,jdbcType=BIGINT},
+      GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP}
+    where FID = #{fid,jdbcType=BIGINT}
+  </update>
+</mapper>

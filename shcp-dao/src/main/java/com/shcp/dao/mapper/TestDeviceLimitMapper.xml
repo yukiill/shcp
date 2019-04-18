@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ice.ssm.mapper.TestDeviceLimitMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TestDeviceLimit" >
+    <id column="TDELID" property="tdelid" jdbcType="BIGINT" />
+    <result column="TDSID" property="tdsid" jdbcType="BIGINT" />
+    <result column="TDELKEY" property="tdelkey" jdbcType="VARCHAR" />
+    <result column="TDELVALUE" property="tdelvalue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TDELID, TDSID, TDELKEY, TDELVALUE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TestDeviceLimitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_device_limit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from test_device_limit
+    where TDELID = #{tdelid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from test_device_limit
+    where TDELID = #{tdelid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TestDeviceLimitExample" >
+    delete from test_device_limit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.TestDeviceLimit" >
+    insert into test_device_limit (TDELID, TDSID, TDELKEY, 
+      TDELVALUE)
+    values (#{tdelid,jdbcType=BIGINT}, #{tdsid,jdbcType=BIGINT}, #{tdelkey,jdbcType=VARCHAR}, 
+      #{tdelvalue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TestDeviceLimit" >
+    insert into test_device_limit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tdelid != null" >
+        TDELID,
+      </if>
+      <if test="tdsid != null" >
+        TDSID,
+      </if>
+      <if test="tdelkey != null" >
+        TDELKEY,
+      </if>
+      <if test="tdelvalue != null" >
+        TDELVALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tdelid != null" >
+        #{tdelid,jdbcType=BIGINT},
+      </if>
+      <if test="tdsid != null" >
+        #{tdsid,jdbcType=BIGINT},
+      </if>
+      <if test="tdelkey != null" >
+        #{tdelkey,jdbcType=VARCHAR},
+      </if>
+      <if test="tdelvalue != null" >
+        #{tdelvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.TestDeviceLimitExample" resultType="java.lang.Integer" >
+    select count(*) from test_device_limit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update test_device_limit
+    <set >
+      <if test="record.tdelid != null" >
+        TDELID = #{record.tdelid,jdbcType=BIGINT},
+      </if>
+      <if test="record.tdsid != null" >
+        TDSID = #{record.tdsid,jdbcType=BIGINT},
+      </if>
+      <if test="record.tdelkey != null" >
+        TDELKEY = #{record.tdelkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tdelvalue != null" >
+        TDELVALUE = #{record.tdelvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update test_device_limit
+    set TDELID = #{record.tdelid,jdbcType=BIGINT},
+      TDSID = #{record.tdsid,jdbcType=BIGINT},
+      TDELKEY = #{record.tdelkey,jdbcType=VARCHAR},
+      TDELVALUE = #{record.tdelvalue,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TestDeviceLimit" >
+    update test_device_limit
+    <set >
+      <if test="tdsid != null" >
+        TDSID = #{tdsid,jdbcType=BIGINT},
+      </if>
+      <if test="tdelkey != null" >
+        TDELKEY = #{tdelkey,jdbcType=VARCHAR},
+      </if>
+      <if test="tdelvalue != null" >
+        TDELVALUE = #{tdelvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TDELID = #{tdelid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TestDeviceLimit" >
+    update test_device_limit
+    set TDSID = #{tdsid,jdbcType=BIGINT},
+      TDELKEY = #{tdelkey,jdbcType=VARCHAR},
+      TDELVALUE = #{tdelvalue,jdbcType=VARCHAR}
+    where TDELID = #{tdelid,jdbcType=BIGINT}
+  </update>
+</mapper>

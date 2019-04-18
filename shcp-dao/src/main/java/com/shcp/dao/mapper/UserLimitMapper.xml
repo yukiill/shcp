@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ice.ssm.mapper.AdminMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.Admin" >
-    <id column="AID" property="aid" jdbcType="BIGINT" />
-    <result column="ANAME" property="aname" jdbcType="VARCHAR" />
-    <result column="APASSWORD" property="apassword" jdbcType="VARCHAR" />
-    <result column="AIMG" property="aimg" jdbcType="VARCHAR" />
+<mapper namespace="com.ice.ssm.mapper.UserLimitMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.UserLimit" >
+    <id column="ULID" property="ulid" jdbcType="SMALLINT" />
+    <result column="ULNAME" property="ulname" jdbcType="CHAR" />
     <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
-    <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    AID, ANAME, APASSWORD, AIMG, GMT_CREATE, GMT_MODIFY
+    ULID, ULNAME, GMT_CREATE
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.AdminExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.UserLimitExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from admin
+    from user_limit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,99 +81,70 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
     select 
     <include refid="Base_Column_List" />
-    from admin
-    where AID = #{aid,jdbcType=BIGINT}
+    from user_limit
+    where ULID = #{ulid,jdbcType=SMALLINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from admin
-    where AID = #{aid,jdbcType=BIGINT}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from user_limit
+    where ULID = #{ulid,jdbcType=SMALLINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.AdminExample" >
-    delete from admin
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.UserLimitExample" >
+    delete from user_limit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.Admin" >
-    insert into admin (AID, ANAME, APASSWORD, 
-      AIMG, GMT_CREATE, GMT_MODIFY
+  <insert id="insert" parameterType="com.shcp.pojo.UserLimit" >
+    insert into user_limit (ULID, ULNAME, GMT_CREATE
       )
-    values (#{aid,jdbcType=BIGINT}, #{aname,jdbcType=VARCHAR}, #{apassword,jdbcType=VARCHAR}, 
-      #{aimg,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
+    values (#{ulid,jdbcType=SMALLINT}, #{ulname,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.Admin" >
-    insert into admin
+  <insert id="insertSelective" parameterType="com.shcp.pojo.UserLimit" >
+    insert into user_limit
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="aid != null" >
-        AID,
+      <if test="ulid != null" >
+        ULID,
       </if>
-      <if test="aname != null" >
-        ANAME,
-      </if>
-      <if test="apassword != null" >
-        APASSWORD,
-      </if>
-      <if test="aimg != null" >
-        AIMG,
+      <if test="ulname != null" >
+        ULNAME,
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE,
       </if>
-      <if test="gmtModify != null" >
-        GMT_MODIFY,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="aid != null" >
-        #{aid,jdbcType=BIGINT},
+      <if test="ulid != null" >
+        #{ulid,jdbcType=SMALLINT},
       </if>
-      <if test="aname != null" >
-        #{aname,jdbcType=VARCHAR},
-      </if>
-      <if test="apassword != null" >
-        #{apassword,jdbcType=VARCHAR},
-      </if>
-      <if test="aimg != null" >
-        #{aimg,jdbcType=VARCHAR},
+      <if test="ulname != null" >
+        #{ulname,jdbcType=CHAR},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModify != null" >
-        #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.AdminExample" resultType="java.lang.Integer" >
-    select count(*) from admin
+  <select id="countByExample" parameterType="com.shcp.pojo.UserLimitExample" resultType="java.lang.Integer" >
+    select count(*) from user_limit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update admin
+    update user_limit
     <set >
-      <if test="record.aid != null" >
-        AID = #{record.aid,jdbcType=BIGINT},
+      <if test="record.ulid != null" >
+        ULID = #{record.ulid,jdbcType=SMALLINT},
       </if>
-      <if test="record.aname != null" >
-        ANAME = #{record.aname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.apassword != null" >
-        APASSWORD = #{record.apassword,jdbcType=VARCHAR},
-      </if>
-      <if test="record.aimg != null" >
-        AIMG = #{record.aimg,jdbcType=VARCHAR},
+      <if test="record.ulname != null" >
+        ULNAME = #{record.ulname,jdbcType=CHAR},
       </if>
       <if test="record.gmtCreate != null" >
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.gmtModify != null" >
-        GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -184,45 +152,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update admin
-    set AID = #{record.aid,jdbcType=BIGINT},
-      ANAME = #{record.aname,jdbcType=VARCHAR},
-      APASSWORD = #{record.apassword,jdbcType=VARCHAR},
-      AIMG = #{record.aimg,jdbcType=VARCHAR},
-      GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP}
+    update user_limit
+    set ULID = #{record.ulid,jdbcType=SMALLINT},
+      ULNAME = #{record.ulname,jdbcType=CHAR},
+      GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.Admin" >
-    update admin
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.UserLimit" >
+    update user_limit
     <set >
-      <if test="aname != null" >
-        ANAME = #{aname,jdbcType=VARCHAR},
-      </if>
-      <if test="apassword != null" >
-        APASSWORD = #{apassword,jdbcType=VARCHAR},
-      </if>
-      <if test="aimg != null" >
-        AIMG = #{aimg,jdbcType=VARCHAR},
+      <if test="ulname != null" >
+        ULNAME = #{ulname,jdbcType=CHAR},
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
-      <if test="gmtModify != null" >
-        GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
-      </if>
     </set>
-    where AID = #{aid,jdbcType=BIGINT}
+    where ULID = #{ulid,jdbcType=SMALLINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.Admin" >
-    update admin
-    set ANAME = #{aname,jdbcType=VARCHAR},
-      APASSWORD = #{apassword,jdbcType=VARCHAR},
-      AIMG = #{aimg,jdbcType=VARCHAR},
-      GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
-      GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP}
-    where AID = #{aid,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.UserLimit" >
+    update user_limit
+    set ULNAME = #{ulname,jdbcType=CHAR},
+      GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP}
+    where ULID = #{ulid,jdbcType=SMALLINT}
   </update>
 </mapper>

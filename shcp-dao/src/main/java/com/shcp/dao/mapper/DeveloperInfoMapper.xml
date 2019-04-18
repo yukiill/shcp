@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ice.ssm.mapper.DeveloperInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.DeveloperInfo" >
+    <id column="DFID" property="dfid" jdbcType="BIGINT" />
+    <result column="DID" property="did" jdbcType="BIGINT" />
+    <result column="AID" property="aid" jdbcType="BIGINT" />
+    <result column="DCNAME" property="dcname" jdbcType="VARCHAR" />
+    <result column="DCADDR" property="dcaddr" jdbcType="VARCHAR" />
+    <result column="CERTIFICATETYPE" property="certificatetype" jdbcType="VARCHAR" />
+    <result column="DCNUMBER" property="dcnumber" jdbcType="VARCHAR" />
+    <result column="DCSTATUS" property="dcstatus" jdbcType="TINYINT" />
+    <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="POSITIVEIMG" property="positiveimg" jdbcType="VARCHAR" />
+    <result column="NEGITIVEIMG" property="negitiveimg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DFID, DID, AID, DCNAME, DCADDR, CERTIFICATETYPE, DCNUMBER, DCSTATUS, GMT_CREATE, 
+    GMT_MODIFY, POSITIVEIMG, NEGITIVEIMG
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeveloperInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from developer_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from developer_info
+    where DFID = #{dfid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from developer_info
+    where DFID = #{dfid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeveloperInfoExample" >
+    delete from developer_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.DeveloperInfo" >
+    insert into developer_info (DFID, DID, AID, 
+      DCNAME, DCADDR, CERTIFICATETYPE, 
+      DCNUMBER, DCSTATUS, GMT_CREATE, 
+      GMT_MODIFY, POSITIVEIMG, NEGITIVEIMG
+      )
+    values (#{dfid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{aid,jdbcType=BIGINT}, 
+      #{dcname,jdbcType=VARCHAR}, #{dcaddr,jdbcType=VARCHAR}, #{certificatetype,jdbcType=VARCHAR}, 
+      #{dcnumber,jdbcType=VARCHAR}, #{dcstatus,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP}, #{positiveimg,jdbcType=VARCHAR}, #{negitiveimg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.DeveloperInfo" >
+    insert into developer_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dfid != null" >
+        DFID,
+      </if>
+      <if test="did != null" >
+        DID,
+      </if>
+      <if test="aid != null" >
+        AID,
+      </if>
+      <if test="dcname != null" >
+        DCNAME,
+      </if>
+      <if test="dcaddr != null" >
+        DCADDR,
+      </if>
+      <if test="certificatetype != null" >
+        CERTIFICATETYPE,
+      </if>
+      <if test="dcnumber != null" >
+        DCNUMBER,
+      </if>
+      <if test="dcstatus != null" >
+        DCSTATUS,
+      </if>
+      <if test="gmtCreate != null" >
+        GMT_CREATE,
+      </if>
+      <if test="gmtModify != null" >
+        GMT_MODIFY,
+      </if>
+      <if test="positiveimg != null" >
+        POSITIVEIMG,
+      </if>
+      <if test="negitiveimg != null" >
+        NEGITIVEIMG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dfid != null" >
+        #{dfid,jdbcType=BIGINT},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=BIGINT},
+      </if>
+      <if test="aid != null" >
+        #{aid,jdbcType=BIGINT},
+      </if>
+      <if test="dcname != null" >
+        #{dcname,jdbcType=VARCHAR},
+      </if>
+      <if test="dcaddr != null" >
+        #{dcaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="certificatetype != null" >
+        #{certificatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="dcnumber != null" >
+        #{dcnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dcstatus != null" >
+        #{dcstatus,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positiveimg != null" >
+        #{positiveimg,jdbcType=VARCHAR},
+      </if>
+      <if test="negitiveimg != null" >
+        #{negitiveimg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.DeveloperInfoExample" resultType="java.lang.Integer" >
+    select count(*) from developer_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update developer_info
+    <set >
+      <if test="record.dfid != null" >
+        DFID = #{record.dfid,jdbcType=BIGINT},
+      </if>
+      <if test="record.did != null" >
+        DID = #{record.did,jdbcType=BIGINT},
+      </if>
+      <if test="record.aid != null" >
+        AID = #{record.aid,jdbcType=BIGINT},
+      </if>
+      <if test="record.dcname != null" >
+        DCNAME = #{record.dcname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dcaddr != null" >
+        DCADDR = #{record.dcaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificatetype != null" >
+        CERTIFICATETYPE = #{record.certificatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dcnumber != null" >
+        DCNUMBER = #{record.dcnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dcstatus != null" >
+        DCSTATUS = #{record.dcstatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.gmtCreate != null" >
+        GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModify != null" >
+        GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.positiveimg != null" >
+        POSITIVEIMG = #{record.positiveimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.negitiveimg != null" >
+        NEGITIVEIMG = #{record.negitiveimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update developer_info
+    set DFID = #{record.dfid,jdbcType=BIGINT},
+      DID = #{record.did,jdbcType=BIGINT},
+      AID = #{record.aid,jdbcType=BIGINT},
+      DCNAME = #{record.dcname,jdbcType=VARCHAR},
+      DCADDR = #{record.dcaddr,jdbcType=VARCHAR},
+      CERTIFICATETYPE = #{record.certificatetype,jdbcType=VARCHAR},
+      DCNUMBER = #{record.dcnumber,jdbcType=VARCHAR},
+      DCSTATUS = #{record.dcstatus,jdbcType=TINYINT},
+      GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP},
+      POSITIVEIMG = #{record.positiveimg,jdbcType=VARCHAR},
+      NEGITIVEIMG = #{record.negitiveimg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.DeveloperInfo" >
+    update developer_info
+    <set >
+      <if test="did != null" >
+        DID = #{did,jdbcType=BIGINT},
+      </if>
+      <if test="aid != null" >
+        AID = #{aid,jdbcType=BIGINT},
+      </if>
+      <if test="dcname != null" >
+        DCNAME = #{dcname,jdbcType=VARCHAR},
+      </if>
+      <if test="dcaddr != null" >
+        DCADDR = #{dcaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="certificatetype != null" >
+        CERTIFICATETYPE = #{certificatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="dcnumber != null" >
+        DCNUMBER = #{dcnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dcstatus != null" >
+        DCSTATUS = #{dcstatus,jdbcType=TINYINT},
+      </if>
+      <if test="gmtCreate != null" >
+        GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positiveimg != null" >
+        POSITIVEIMG = #{positiveimg,jdbcType=VARCHAR},
+      </if>
+      <if test="negitiveimg != null" >
+        NEGITIVEIMG = #{negitiveimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DFID = #{dfid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.DeveloperInfo" >
+    update developer_info
+    set DID = #{did,jdbcType=BIGINT},
+      AID = #{aid,jdbcType=BIGINT},
+      DCNAME = #{dcname,jdbcType=VARCHAR},
+      DCADDR = #{dcaddr,jdbcType=VARCHAR},
+      CERTIFICATETYPE = #{certificatetype,jdbcType=VARCHAR},
+      DCNUMBER = #{dcnumber,jdbcType=VARCHAR},
+      DCSTATUS = #{dcstatus,jdbcType=TINYINT},
+      GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+      GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
+      POSITIVEIMG = #{positiveimg,jdbcType=VARCHAR},
+      NEGITIVEIMG = #{negitiveimg,jdbcType=VARCHAR}
+    where DFID = #{dfid,jdbcType=BIGINT}
+  </update>
+</mapper>

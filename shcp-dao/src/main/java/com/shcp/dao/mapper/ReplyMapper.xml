@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ice.ssm.mapper.AdminMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.Admin" >
-    <id column="AID" property="aid" jdbcType="BIGINT" />
-    <result column="ANAME" property="aname" jdbcType="VARCHAR" />
-    <result column="APASSWORD" property="apassword" jdbcType="VARCHAR" />
-    <result column="AIMG" property="aimg" jdbcType="VARCHAR" />
+<mapper namespace="com.ice.ssm.mapper.ReplyMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.Reply" >
+    <id column="RID" property="rid" jdbcType="BIGINT" />
+    <result column="DID" property="did" jdbcType="BIGINT" />
+    <result column="AID" property="aid" jdbcType="BIGINT" />
+    <result column="FID" property="fid" jdbcType="BIGINT" />
+    <result column="RTITLE" property="rtitle" jdbcType="VARCHAR" />
+    <result column="RCONTENT" property="rcontent" jdbcType="VARCHAR" />
     <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="TO_USER_ID" property="toUserId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,15 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    AID, ANAME, APASSWORD, AIMG, GMT_CREATE, GMT_MODIFY
+    RID, DID, AID, FID, RTITLE, RCONTENT, GMT_CREATE, GMT_MODIFY, TO_USER_ID
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.AdminExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.ReplyExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from admin
+    from reply
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,41 +90,47 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from admin
-    where AID = #{aid,jdbcType=BIGINT}
+    from reply
+    where RID = #{rid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from admin
-    where AID = #{aid,jdbcType=BIGINT}
+    delete from reply
+    where RID = #{rid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.AdminExample" >
-    delete from admin
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.ReplyExample" >
+    delete from reply
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.Admin" >
-    insert into admin (AID, ANAME, APASSWORD, 
-      AIMG, GMT_CREATE, GMT_MODIFY
-      )
-    values (#{aid,jdbcType=BIGINT}, #{aname,jdbcType=VARCHAR}, #{apassword,jdbcType=VARCHAR}, 
-      #{aimg,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="com.shcp.pojo.Reply" >
+    insert into reply (RID, DID, AID, FID, 
+      RTITLE, RCONTENT, GMT_CREATE, 
+      GMT_MODIFY, TO_USER_ID)
+    values (#{rid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{aid,jdbcType=BIGINT}, #{fid,jdbcType=BIGINT}, 
+      #{rtitle,jdbcType=VARCHAR}, #{rcontent,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP}, #{toUserId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.Admin" >
-    insert into admin
+  <insert id="insertSelective" parameterType="com.shcp.pojo.Reply" >
+    insert into reply
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        RID,
+      </if>
+      <if test="did != null" >
+        DID,
+      </if>
       <if test="aid != null" >
         AID,
       </if>
-      <if test="aname != null" >
-        ANAME,
+      <if test="fid != null" >
+        FID,
       </if>
-      <if test="apassword != null" >
-        APASSWORD,
+      <if test="rtitle != null" >
+        RTITLE,
       </if>
-      <if test="aimg != null" >
-        AIMG,
+      <if test="rcontent != null" >
+        RCONTENT,
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE,
@@ -129,19 +138,28 @@
       <if test="gmtModify != null" >
         GMT_MODIFY,
       </if>
+      <if test="toUserId != null" >
+        TO_USER_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rid != null" >
+        #{rid,jdbcType=BIGINT},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=BIGINT},
+      </if>
       <if test="aid != null" >
         #{aid,jdbcType=BIGINT},
       </if>
-      <if test="aname != null" >
-        #{aname,jdbcType=VARCHAR},
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
       </if>
-      <if test="apassword != null" >
-        #{apassword,jdbcType=VARCHAR},
+      <if test="rtitle != null" >
+        #{rtitle,jdbcType=VARCHAR},
       </if>
-      <if test="aimg != null" >
-        #{aimg,jdbcType=VARCHAR},
+      <if test="rcontent != null" >
+        #{rcontent,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -149,28 +167,37 @@
       <if test="gmtModify != null" >
         #{gmtModify,jdbcType=TIMESTAMP},
       </if>
+      <if test="toUserId != null" >
+        #{toUserId,jdbcType=BIGINT},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.AdminExample" resultType="java.lang.Integer" >
-    select count(*) from admin
+  <select id="countByExample" parameterType="com.shcp.pojo.ReplyExample" resultType="java.lang.Integer" >
+    select count(*) from reply
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update admin
+    update reply
     <set >
+      <if test="record.rid != null" >
+        RID = #{record.rid,jdbcType=BIGINT},
+      </if>
+      <if test="record.did != null" >
+        DID = #{record.did,jdbcType=BIGINT},
+      </if>
       <if test="record.aid != null" >
         AID = #{record.aid,jdbcType=BIGINT},
       </if>
-      <if test="record.aname != null" >
-        ANAME = #{record.aname,jdbcType=VARCHAR},
+      <if test="record.fid != null" >
+        FID = #{record.fid,jdbcType=BIGINT},
       </if>
-      <if test="record.apassword != null" >
-        APASSWORD = #{record.apassword,jdbcType=VARCHAR},
+      <if test="record.rtitle != null" >
+        RTITLE = #{record.rtitle,jdbcType=VARCHAR},
       </if>
-      <if test="record.aimg != null" >
-        AIMG = #{record.aimg,jdbcType=VARCHAR},
+      <if test="record.rcontent != null" >
+        RCONTENT = #{record.rcontent,jdbcType=VARCHAR},
       </if>
       <if test="record.gmtCreate != null" >
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -178,34 +205,46 @@
       <if test="record.gmtModify != null" >
         GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.toUserId != null" >
+        TO_USER_ID = #{record.toUserId,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update admin
-    set AID = #{record.aid,jdbcType=BIGINT},
-      ANAME = #{record.aname,jdbcType=VARCHAR},
-      APASSWORD = #{record.apassword,jdbcType=VARCHAR},
-      AIMG = #{record.aimg,jdbcType=VARCHAR},
+    update reply
+    set RID = #{record.rid,jdbcType=BIGINT},
+      DID = #{record.did,jdbcType=BIGINT},
+      AID = #{record.aid,jdbcType=BIGINT},
+      FID = #{record.fid,jdbcType=BIGINT},
+      RTITLE = #{record.rtitle,jdbcType=VARCHAR},
+      RCONTENT = #{record.rcontent,jdbcType=VARCHAR},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
-      GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP}
+      GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP},
+      TO_USER_ID = #{record.toUserId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.Admin" >
-    update admin
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.Reply" >
+    update reply
     <set >
-      <if test="aname != null" >
-        ANAME = #{aname,jdbcType=VARCHAR},
+      <if test="did != null" >
+        DID = #{did,jdbcType=BIGINT},
       </if>
-      <if test="apassword != null" >
-        APASSWORD = #{apassword,jdbcType=VARCHAR},
+      <if test="aid != null" >
+        AID = #{aid,jdbcType=BIGINT},
       </if>
-      <if test="aimg != null" >
-        AIMG = #{aimg,jdbcType=VARCHAR},
+      <if test="fid != null" >
+        FID = #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="rtitle != null" >
+        RTITLE = #{rtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="rcontent != null" >
+        RCONTENT = #{rcontent,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -213,16 +252,22 @@
       <if test="gmtModify != null" >
         GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
+      <if test="toUserId != null" >
+        TO_USER_ID = #{toUserId,jdbcType=BIGINT},
+      </if>
     </set>
-    where AID = #{aid,jdbcType=BIGINT}
+    where RID = #{rid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.Admin" >
-    update admin
-    set ANAME = #{aname,jdbcType=VARCHAR},
-      APASSWORD = #{apassword,jdbcType=VARCHAR},
-      AIMG = #{aimg,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.Reply" >
+    update reply
+    set DID = #{did,jdbcType=BIGINT},
+      AID = #{aid,jdbcType=BIGINT},
+      FID = #{fid,jdbcType=BIGINT},
+      RTITLE = #{rtitle,jdbcType=VARCHAR},
+      RCONTENT = #{rcontent,jdbcType=VARCHAR},
       GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
-      GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP}
-    where AID = #{aid,jdbcType=BIGINT}
+      GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
+      TO_USER_ID = #{toUserId,jdbcType=BIGINT}
+    where RID = #{rid,jdbcType=BIGINT}
   </update>
 </mapper>

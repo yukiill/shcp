@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ice.ssm.mapper.DeviceControlMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.DeviceControl" >
+    <id column="DECID" property="decid" jdbcType="BIGINT" />
+    <result column="DETID" property="detid" jdbcType="BIGINT" />
+    <result column="DECNAME" property="decname" jdbcType="VARCHAR" />
+    <result column="DECKEY" property="deckey" jdbcType="VARCHAR" />
+    <result column="DECVALUE" property="decvalue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DECID, DETID, DECNAME, DECKEY, DECVALUE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeviceControlExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device_control
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_control
+    where DECID = #{decid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from device_control
+    where DECID = #{decid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeviceControlExample" >
+    delete from device_control
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.DeviceControl" >
+    insert into device_control (DECID, DETID, DECNAME, 
+      DECKEY, DECVALUE)
+    values (#{decid,jdbcType=BIGINT}, #{detid,jdbcType=BIGINT}, #{decname,jdbcType=VARCHAR}, 
+      #{deckey,jdbcType=VARCHAR}, #{decvalue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.DeviceControl" >
+    insert into device_control
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="decid != null" >
+        DECID,
+      </if>
+      <if test="detid != null" >
+        DETID,
+      </if>
+      <if test="decname != null" >
+        DECNAME,
+      </if>
+      <if test="deckey != null" >
+        DECKEY,
+      </if>
+      <if test="decvalue != null" >
+        DECVALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="decid != null" >
+        #{decid,jdbcType=BIGINT},
+      </if>
+      <if test="detid != null" >
+        #{detid,jdbcType=BIGINT},
+      </if>
+      <if test="decname != null" >
+        #{decname,jdbcType=VARCHAR},
+      </if>
+      <if test="deckey != null" >
+        #{deckey,jdbcType=VARCHAR},
+      </if>
+      <if test="decvalue != null" >
+        #{decvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.DeviceControlExample" resultType="java.lang.Integer" >
+    select count(*) from device_control
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device_control
+    <set >
+      <if test="record.decid != null" >
+        DECID = #{record.decid,jdbcType=BIGINT},
+      </if>
+      <if test="record.detid != null" >
+        DETID = #{record.detid,jdbcType=BIGINT},
+      </if>
+      <if test="record.decname != null" >
+        DECNAME = #{record.decname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deckey != null" >
+        DECKEY = #{record.deckey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.decvalue != null" >
+        DECVALUE = #{record.decvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device_control
+    set DECID = #{record.decid,jdbcType=BIGINT},
+      DETID = #{record.detid,jdbcType=BIGINT},
+      DECNAME = #{record.decname,jdbcType=VARCHAR},
+      DECKEY = #{record.deckey,jdbcType=VARCHAR},
+      DECVALUE = #{record.decvalue,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.DeviceControl" >
+    update device_control
+    <set >
+      <if test="detid != null" >
+        DETID = #{detid,jdbcType=BIGINT},
+      </if>
+      <if test="decname != null" >
+        DECNAME = #{decname,jdbcType=VARCHAR},
+      </if>
+      <if test="deckey != null" >
+        DECKEY = #{deckey,jdbcType=VARCHAR},
+      </if>
+      <if test="decvalue != null" >
+        DECVALUE = #{decvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DECID = #{decid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.DeviceControl" >
+    update device_control
+    set DETID = #{detid,jdbcType=BIGINT},
+      DECNAME = #{decname,jdbcType=VARCHAR},
+      DECKEY = #{deckey,jdbcType=VARCHAR},
+      DECVALUE = #{decvalue,jdbcType=VARCHAR}
+    where DECID = #{decid,jdbcType=BIGINT}
+  </update>
+</mapper>

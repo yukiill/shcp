@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ice.ssm.mapper.TestDeviceTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TestDeviceType" >
+    <id column="TDSID" property="tdsid" jdbcType="BIGINT" />
+    <result column="TDSNAME" property="tdsname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TDSID, TDSNAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TestDeviceTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_device_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from test_device_type
+    where TDSID = #{tdsid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from test_device_type
+    where TDSID = #{tdsid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TestDeviceTypeExample" >
+    delete from test_device_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.TestDeviceType" >
+    insert into test_device_type (TDSID, TDSNAME)
+    values (#{tdsid,jdbcType=BIGINT}, #{tdsname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TestDeviceType" >
+    insert into test_device_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tdsid != null" >
+        TDSID,
+      </if>
+      <if test="tdsname != null" >
+        TDSNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tdsid != null" >
+        #{tdsid,jdbcType=BIGINT},
+      </if>
+      <if test="tdsname != null" >
+        #{tdsname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.TestDeviceTypeExample" resultType="java.lang.Integer" >
+    select count(*) from test_device_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update test_device_type
+    <set >
+      <if test="record.tdsid != null" >
+        TDSID = #{record.tdsid,jdbcType=BIGINT},
+      </if>
+      <if test="record.tdsname != null" >
+        TDSNAME = #{record.tdsname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update test_device_type
+    set TDSID = #{record.tdsid,jdbcType=BIGINT},
+      TDSNAME = #{record.tdsname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TestDeviceType" >
+    update test_device_type
+    <set >
+      <if test="tdsname != null" >
+        TDSNAME = #{tdsname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TDSID = #{tdsid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TestDeviceType" >
+    update test_device_type
+    set TDSNAME = #{tdsname,jdbcType=VARCHAR}
+    where TDSID = #{tdsid,jdbcType=BIGINT}
+  </update>
+</mapper>

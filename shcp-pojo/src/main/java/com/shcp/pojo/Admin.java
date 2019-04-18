@@ -1,53 +1,65 @@
 package com.shcp.pojo;
 
+import java.util.Date;
+
 public class Admin {
-    private Long id;
+    private Long aid;
 
-    private String username;
+    private String aname;
 
-    private String password;
+    private String apassword;
 
-    private String aemail;
+    private String aimg;
 
-    private String ahimg;
+    private Date gmtCreate;
 
-    public Long getId() {
-        return id;
+    private Date gmtModify;
+
+    public Long getAid() {
+        return aid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAid(Long aid) {
+        this.aid = aid;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAname() {
+        return aname;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setAname(String aname) {
+        this.aname = aname == null ? null : aname.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getApassword() {
+        return apassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setApassword(String apassword) {
+        this.apassword = apassword == null ? null : apassword.trim();
     }
 
-    public String getAemail() {
-        return aemail;
+    public String getAimg() {
+        return aimg;
     }
 
-    public void setAemail(String aemail) {
-        this.aemail = aemail == null ? null : aemail.trim();
+    public void setAimg(String aimg) {
+        this.aimg = aimg == null ? null : aimg.trim();
     }
 
-    public String getAhimg() {
-        return ahimg;
+    public Date getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setAhimg(String ahimg) {
-        this.ahimg = ahimg == null ? null : ahimg.trim();
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtModify() {
+        return gmtModify;
+    }
+
+    public void setGmtModify(Date gmtModify) {
+        this.gmtModify = gmtModify;
     }
 }

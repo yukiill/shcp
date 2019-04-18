@@ -1,4 +1,4 @@
-package com.shcp.dao.mapper;
+package com.ice.ssm.mapper;
 
 import com.shcp.pojo.Admin;
 import com.shcp.pojo.AdminExample;
@@ -10,7 +10,7 @@ public interface AdminMapper {
 
     int deleteByExample(AdminExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long aid);
 
     int insert(Admin record);
 
@@ -18,7 +18,7 @@ public interface AdminMapper {
 
     List<Admin> selectByExample(AdminExample example);
 
-    Admin selectByPrimaryKey(Long id);
+    Admin selectByPrimaryKey(Long aid);
 
     int updateByExampleSelective(@Param("record") Admin record, @Param("example") AdminExample example);
 

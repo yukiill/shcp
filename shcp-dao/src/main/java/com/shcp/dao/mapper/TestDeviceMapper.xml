@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ice.ssm.mapper.AdminMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.Admin" >
-    <id column="AID" property="aid" jdbcType="BIGINT" />
-    <result column="ANAME" property="aname" jdbcType="VARCHAR" />
-    <result column="APASSWORD" property="apassword" jdbcType="VARCHAR" />
-    <result column="AIMG" property="aimg" jdbcType="VARCHAR" />
+<mapper namespace="com.ice.ssm.mapper.TestDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TestDevice" >
+    <id column="TDEID" property="tdeid" jdbcType="BIGINT" />
+    <result column="DID" property="did" jdbcType="BIGINT" />
+    <result column="TDSID" property="tdsid" jdbcType="BIGINT" />
+    <result column="TDENAME" property="tdename" jdbcType="VARCHAR" />
+    <result column="TDEIPADDR" property="tdeipaddr" jdbcType="CHAR" />
+    <result column="TDEPORT" property="tdeport" jdbcType="INTEGER" />
+    <result column="DEMAC" property="demac" jdbcType="CHAR" />
     <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -68,15 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    AID, ANAME, APASSWORD, AIMG, GMT_CREATE, GMT_MODIFY
+    TDEID, DID, TDSID, TDENAME, TDEIPADDR, TDEPORT, DEMAC, GMT_CREATE, GMT_MODIFY
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.AdminExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TestDeviceExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from admin
+    from test_device
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,41 +90,52 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from admin
-    where AID = #{aid,jdbcType=BIGINT}
+    from test_device
+    where TDEID = #{tdeid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from admin
-    where AID = #{aid,jdbcType=BIGINT}
+    delete from test_device
+    where TDEID = #{tdeid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.AdminExample" >
-    delete from admin
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TestDeviceExample" >
+    delete from test_device
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.Admin" >
-    insert into admin (AID, ANAME, APASSWORD, 
-      AIMG, GMT_CREATE, GMT_MODIFY
+  <insert id="insert" parameterType="com.shcp.pojo.TestDevice" >
+    insert into test_device (TDEID, DID, TDSID, 
+      TDENAME, TDEIPADDR, TDEPORT, 
+      DEMAC, GMT_CREATE, GMT_MODIFY
       )
-    values (#{aid,jdbcType=BIGINT}, #{aname,jdbcType=VARCHAR}, #{apassword,jdbcType=VARCHAR}, 
-      #{aimg,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
+    values (#{tdeid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{tdsid,jdbcType=BIGINT}, 
+      #{tdename,jdbcType=VARCHAR}, #{tdeipaddr,jdbcType=CHAR}, #{tdeport,jdbcType=INTEGER}, 
+      #{demac,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.Admin" >
-    insert into admin
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TestDevice" >
+    insert into test_device
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="aid != null" >
-        AID,
+      <if test="tdeid != null" >
+        TDEID,
       </if>
-      <if test="aname != null" >
-        ANAME,
+      <if test="did != null" >
+        DID,
       </if>
-      <if test="apassword != null" >
-        APASSWORD,
+      <if test="tdsid != null" >
+        TDSID,
       </if>
-      <if test="aimg != null" >
-        AIMG,
+      <if test="tdename != null" >
+        TDENAME,
+      </if>
+      <if test="tdeipaddr != null" >
+        TDEIPADDR,
+      </if>
+      <if test="tdeport != null" >
+        TDEPORT,
+      </if>
+      <if test="demac != null" >
+        DEMAC,
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE,
@@ -131,17 +145,26 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="aid != null" >
-        #{aid,jdbcType=BIGINT},
+      <if test="tdeid != null" >
+        #{tdeid,jdbcType=BIGINT},
       </if>
-      <if test="aname != null" >
-        #{aname,jdbcType=VARCHAR},
+      <if test="did != null" >
+        #{did,jdbcType=BIGINT},
       </if>
-      <if test="apassword != null" >
-        #{apassword,jdbcType=VARCHAR},
+      <if test="tdsid != null" >
+        #{tdsid,jdbcType=BIGINT},
       </if>
-      <if test="aimg != null" >
-        #{aimg,jdbcType=VARCHAR},
+      <if test="tdename != null" >
+        #{tdename,jdbcType=VARCHAR},
+      </if>
+      <if test="tdeipaddr != null" >
+        #{tdeipaddr,jdbcType=CHAR},
+      </if>
+      <if test="tdeport != null" >
+        #{tdeport,jdbcType=INTEGER},
+      </if>
+      <if test="demac != null" >
+        #{demac,jdbcType=CHAR},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -151,26 +174,35 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.AdminExample" resultType="java.lang.Integer" >
-    select count(*) from admin
+  <select id="countByExample" parameterType="com.shcp.pojo.TestDeviceExample" resultType="java.lang.Integer" >
+    select count(*) from test_device
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update admin
+    update test_device
     <set >
-      <if test="record.aid != null" >
-        AID = #{record.aid,jdbcType=BIGINT},
+      <if test="record.tdeid != null" >
+        TDEID = #{record.tdeid,jdbcType=BIGINT},
       </if>
-      <if test="record.aname != null" >
-        ANAME = #{record.aname,jdbcType=VARCHAR},
+      <if test="record.did != null" >
+        DID = #{record.did,jdbcType=BIGINT},
       </if>
-      <if test="record.apassword != null" >
-        APASSWORD = #{record.apassword,jdbcType=VARCHAR},
+      <if test="record.tdsid != null" >
+        TDSID = #{record.tdsid,jdbcType=BIGINT},
       </if>
-      <if test="record.aimg != null" >
-        AIMG = #{record.aimg,jdbcType=VARCHAR},
+      <if test="record.tdename != null" >
+        TDENAME = #{record.tdename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tdeipaddr != null" >
+        TDEIPADDR = #{record.tdeipaddr,jdbcType=CHAR},
+      </if>
+      <if test="record.tdeport != null" >
+        TDEPORT = #{record.tdeport,jdbcType=INTEGER},
+      </if>
+      <if test="record.demac != null" >
+        DEMAC = #{record.demac,jdbcType=CHAR},
       </if>
       <if test="record.gmtCreate != null" >
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -184,28 +216,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update admin
-    set AID = #{record.aid,jdbcType=BIGINT},
-      ANAME = #{record.aname,jdbcType=VARCHAR},
-      APASSWORD = #{record.apassword,jdbcType=VARCHAR},
-      AIMG = #{record.aimg,jdbcType=VARCHAR},
+    update test_device
+    set TDEID = #{record.tdeid,jdbcType=BIGINT},
+      DID = #{record.did,jdbcType=BIGINT},
+      TDSID = #{record.tdsid,jdbcType=BIGINT},
+      TDENAME = #{record.tdename,jdbcType=VARCHAR},
+      TDEIPADDR = #{record.tdeipaddr,jdbcType=CHAR},
+      TDEPORT = #{record.tdeport,jdbcType=INTEGER},
+      DEMAC = #{record.demac,jdbcType=CHAR},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.Admin" >
-    update admin
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TestDevice" >
+    update test_device
     <set >
-      <if test="aname != null" >
-        ANAME = #{aname,jdbcType=VARCHAR},
+      <if test="did != null" >
+        DID = #{did,jdbcType=BIGINT},
       </if>
-      <if test="apassword != null" >
-        APASSWORD = #{apassword,jdbcType=VARCHAR},
+      <if test="tdsid != null" >
+        TDSID = #{tdsid,jdbcType=BIGINT},
       </if>
-      <if test="aimg != null" >
-        AIMG = #{aimg,jdbcType=VARCHAR},
+      <if test="tdename != null" >
+        TDENAME = #{tdename,jdbcType=VARCHAR},
+      </if>
+      <if test="tdeipaddr != null" >
+        TDEIPADDR = #{tdeipaddr,jdbcType=CHAR},
+      </if>
+      <if test="tdeport != null" >
+        TDEPORT = #{tdeport,jdbcType=INTEGER},
+      </if>
+      <if test="demac != null" >
+        DEMAC = #{demac,jdbcType=CHAR},
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -214,15 +258,18 @@
         GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where AID = #{aid,jdbcType=BIGINT}
+    where TDEID = #{tdeid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.Admin" >
-    update admin
-    set ANAME = #{aname,jdbcType=VARCHAR},
-      APASSWORD = #{apassword,jdbcType=VARCHAR},
-      AIMG = #{aimg,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TestDevice" >
+    update test_device
+    set DID = #{did,jdbcType=BIGINT},
+      TDSID = #{tdsid,jdbcType=BIGINT},
+      TDENAME = #{tdename,jdbcType=VARCHAR},
+      TDEIPADDR = #{tdeipaddr,jdbcType=CHAR},
+      TDEPORT = #{tdeport,jdbcType=INTEGER},
+      DEMAC = #{demac,jdbcType=CHAR},
       GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP}
-    where AID = #{aid,jdbcType=BIGINT}
+    where TDEID = #{tdeid,jdbcType=BIGINT}
   </update>
 </mapper>
