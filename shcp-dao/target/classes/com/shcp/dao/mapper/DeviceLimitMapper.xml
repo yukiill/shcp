@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shcp.dao.mapper.TbDevicetypeMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDevicetype" >
-    <id column="TID" property="tid" jdbcType="BIGINT" />
-    <result column="TNAME" property="tname" jdbcType="VARCHAR" />
+<mapper namespace="com.shcp.dao.mapper.DeviceLimitMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.DeviceLimit" >
+    <id column="DELID" property="delid" jdbcType="BIGINT" />
+    <result column="DETID" property="detid" jdbcType="BIGINT" />
+    <result column="DELKEY" property="delkey" jdbcType="VARCHAR" />
+    <result column="DELVALUE" property="delvalue" jdbcType="VARCHAR" />
+    <result column="DELNAME" property="delname" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    TID, TNAME
+    DELID, DETID, DELKEY, DELVALUE, DELNAME
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbDevicetypeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeviceLimitExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_devicetype
+    from device_limit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,56 +86,85 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tb_devicetype
-    where TID = #{tid,jdbcType=BIGINT}
+    from device_limit
+    where DELID = #{delid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tb_devicetype
-    where TID = #{tid,jdbcType=BIGINT}
+    delete from device_limit
+    where DELID = #{delid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDevicetypeExample" >
-    delete from tb_devicetype
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeviceLimitExample" >
+    delete from device_limit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbDevicetype" >
-    insert into tb_devicetype (TID, TNAME)
-    values (#{tid,jdbcType=BIGINT}, #{tname,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.shcp.pojo.DeviceLimit" >
+    insert into device_limit (DELID, DETID, DELKEY, 
+      DELVALUE, DELNAME)
+    values (#{delid,jdbcType=BIGINT}, #{detid,jdbcType=BIGINT}, #{delkey,jdbcType=VARCHAR}, 
+      #{delvalue,jdbcType=VARCHAR}, #{delname,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDevicetype" >
-    insert into tb_devicetype
+  <insert id="insertSelective" parameterType="com.shcp.pojo.DeviceLimit" >
+    insert into device_limit
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="tid != null" >
-        TID,
+      <if test="delid != null" >
+        DELID,
       </if>
-      <if test="tname != null" >
-        TNAME,
+      <if test="detid != null" >
+        DETID,
+      </if>
+      <if test="delkey != null" >
+        DELKEY,
+      </if>
+      <if test="delvalue != null" >
+        DELVALUE,
+      </if>
+      <if test="delname != null" >
+        DELNAME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="tid != null" >
-        #{tid,jdbcType=BIGINT},
+      <if test="delid != null" >
+        #{delid,jdbcType=BIGINT},
       </if>
-      <if test="tname != null" >
-        #{tname,jdbcType=VARCHAR},
+      <if test="detid != null" >
+        #{detid,jdbcType=BIGINT},
+      </if>
+      <if test="delkey != null" >
+        #{delkey,jdbcType=VARCHAR},
+      </if>
+      <if test="delvalue != null" >
+        #{delvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="delname != null" >
+        #{delname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbDevicetypeExample" resultType="java.lang.Integer" >
-    select count(*) from tb_devicetype
+  <select id="countByExample" parameterType="com.shcp.pojo.DeviceLimitExample" resultType="java.lang.Integer" >
+    select count(*) from device_limit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_devicetype
+    update device_limit
     <set >
-      <if test="record.tid != null" >
-        TID = #{record.tid,jdbcType=BIGINT},
+      <if test="record.delid != null" >
+        DELID = #{record.delid,jdbcType=BIGINT},
       </if>
-      <if test="record.tname != null" >
-        TNAME = #{record.tname,jdbcType=VARCHAR},
+      <if test="record.detid != null" >
+        DETID = #{record.detid,jdbcType=BIGINT},
+      </if>
+      <if test="record.delkey != null" >
+        DELKEY = #{record.delkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delvalue != null" >
+        DELVALUE = #{record.delvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delname != null" >
+        DELNAME = #{record.delname,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -140,25 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_devicetype
-    set TID = #{record.tid,jdbcType=BIGINT},
-      TNAME = #{record.tname,jdbcType=VARCHAR}
+    update device_limit
+    set DELID = #{record.delid,jdbcType=BIGINT},
+      DETID = #{record.detid,jdbcType=BIGINT},
+      DELKEY = #{record.delkey,jdbcType=VARCHAR},
+      DELVALUE = #{record.delvalue,jdbcType=VARCHAR},
+      DELNAME = #{record.delname,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDevicetype" >
-    update tb_devicetype
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.DeviceLimit" >
+    update device_limit
     <set >
-      <if test="tname != null" >
-        TNAME = #{tname,jdbcType=VARCHAR},
+      <if test="detid != null" >
+        DETID = #{detid,jdbcType=BIGINT},
+      </if>
+      <if test="delkey != null" >
+        DELKEY = #{delkey,jdbcType=VARCHAR},
+      </if>
+      <if test="delvalue != null" >
+        DELVALUE = #{delvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="delname != null" >
+        DELNAME = #{delname,jdbcType=VARCHAR},
       </if>
     </set>
-    where TID = #{tid,jdbcType=BIGINT}
+    where DELID = #{delid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDevicetype" >
-    update tb_devicetype
-    set TNAME = #{tname,jdbcType=VARCHAR}
-    where TID = #{tid,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.DeviceLimit" >
+    update device_limit
+    set DETID = #{detid,jdbcType=BIGINT},
+      DELKEY = #{delkey,jdbcType=VARCHAR},
+      DELVALUE = #{delvalue,jdbcType=VARCHAR},
+      DELNAME = #{delname,jdbcType=VARCHAR}
+    where DELID = #{delid,jdbcType=BIGINT}
   </update>
 </mapper>

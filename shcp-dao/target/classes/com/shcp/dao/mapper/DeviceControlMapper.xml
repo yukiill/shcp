@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shcp.dao.mapper.TbDectrlMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDectrl" >
+<mapper namespace="com.shcp.dao.mapper.DeviceControlMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.DeviceControl" >
     <id column="DECID" property="decid" jdbcType="BIGINT" />
-    <result column="TID" property="tid" jdbcType="BIGINT" />
+    <result column="DETID" property="detid" jdbcType="BIGINT" />
     <result column="DECNAME" property="decname" jdbcType="VARCHAR" />
     <result column="DECKEY" property="deckey" jdbcType="VARCHAR" />
-    <result column="DECVALUETYPE" property="decvaluetype" jdbcType="VARCHAR" />
+    <result column="DECVALUE" property="decvalue" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    DECID, TID, DECNAME, DECKEY, DECVALUETYPE
+    DECID, DETID, DECNAME, DECKEY, DECVALUE
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbDectrlExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeviceControlExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_dectrl
+    from device_control
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,33 +86,33 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tb_dectrl
+    from device_control
     where DECID = #{decid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tb_dectrl
+    delete from device_control
     where DECID = #{decid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDectrlExample" >
-    delete from tb_dectrl
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeviceControlExample" >
+    delete from device_control
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbDectrl" >
-    insert into tb_dectrl (DECID, TID, DECNAME, 
-      DECKEY, DECVALUETYPE)
-    values (#{decid,jdbcType=BIGINT}, #{tid,jdbcType=BIGINT}, #{decname,jdbcType=VARCHAR}, 
-      #{deckey,jdbcType=VARCHAR}, #{decvaluetype,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.shcp.pojo.DeviceControl" >
+    insert into device_control (DECID, DETID, DECNAME, 
+      DECKEY, DECVALUE)
+    values (#{decid,jdbcType=BIGINT}, #{detid,jdbcType=BIGINT}, #{decname,jdbcType=VARCHAR}, 
+      #{deckey,jdbcType=VARCHAR}, #{decvalue,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDectrl" >
-    insert into tb_dectrl
+  <insert id="insertSelective" parameterType="com.shcp.pojo.DeviceControl" >
+    insert into device_control
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="decid != null" >
         DECID,
       </if>
-      <if test="tid != null" >
-        TID,
+      <if test="detid != null" >
+        DETID,
       </if>
       <if test="decname != null" >
         DECNAME,
@@ -120,16 +120,16 @@
       <if test="deckey != null" >
         DECKEY,
       </if>
-      <if test="decvaluetype != null" >
-        DECVALUETYPE,
+      <if test="decvalue != null" >
+        DECVALUE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="decid != null" >
         #{decid,jdbcType=BIGINT},
       </if>
-      <if test="tid != null" >
-        #{tid,jdbcType=BIGINT},
+      <if test="detid != null" >
+        #{detid,jdbcType=BIGINT},
       </if>
       <if test="decname != null" >
         #{decname,jdbcType=VARCHAR},
@@ -137,25 +137,25 @@
       <if test="deckey != null" >
         #{deckey,jdbcType=VARCHAR},
       </if>
-      <if test="decvaluetype != null" >
-        #{decvaluetype,jdbcType=VARCHAR},
+      <if test="decvalue != null" >
+        #{decvalue,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbDectrlExample" resultType="java.lang.Integer" >
-    select count(*) from tb_dectrl
+  <select id="countByExample" parameterType="com.shcp.pojo.DeviceControlExample" resultType="java.lang.Integer" >
+    select count(*) from device_control
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_dectrl
+    update device_control
     <set >
       <if test="record.decid != null" >
         DECID = #{record.decid,jdbcType=BIGINT},
       </if>
-      <if test="record.tid != null" >
-        TID = #{record.tid,jdbcType=BIGINT},
+      <if test="record.detid != null" >
+        DETID = #{record.detid,jdbcType=BIGINT},
       </if>
       <if test="record.decname != null" >
         DECNAME = #{record.decname,jdbcType=VARCHAR},
@@ -163,8 +163,8 @@
       <if test="record.deckey != null" >
         DECKEY = #{record.deckey,jdbcType=VARCHAR},
       </if>
-      <if test="record.decvaluetype != null" >
-        DECVALUETYPE = #{record.decvaluetype,jdbcType=VARCHAR},
+      <if test="record.decvalue != null" >
+        DECVALUE = #{record.decvalue,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -172,21 +172,21 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_dectrl
+    update device_control
     set DECID = #{record.decid,jdbcType=BIGINT},
-      TID = #{record.tid,jdbcType=BIGINT},
+      DETID = #{record.detid,jdbcType=BIGINT},
       DECNAME = #{record.decname,jdbcType=VARCHAR},
       DECKEY = #{record.deckey,jdbcType=VARCHAR},
-      DECVALUETYPE = #{record.decvaluetype,jdbcType=VARCHAR}
+      DECVALUE = #{record.decvalue,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDectrl" >
-    update tb_dectrl
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.DeviceControl" >
+    update device_control
     <set >
-      <if test="tid != null" >
-        TID = #{tid,jdbcType=BIGINT},
+      <if test="detid != null" >
+        DETID = #{detid,jdbcType=BIGINT},
       </if>
       <if test="decname != null" >
         DECNAME = #{decname,jdbcType=VARCHAR},
@@ -194,18 +194,18 @@
       <if test="deckey != null" >
         DECKEY = #{deckey,jdbcType=VARCHAR},
       </if>
-      <if test="decvaluetype != null" >
-        DECVALUETYPE = #{decvaluetype,jdbcType=VARCHAR},
+      <if test="decvalue != null" >
+        DECVALUE = #{decvalue,jdbcType=VARCHAR},
       </if>
     </set>
     where DECID = #{decid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDectrl" >
-    update tb_dectrl
-    set TID = #{tid,jdbcType=BIGINT},
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.DeviceControl" >
+    update device_control
+    set DETID = #{detid,jdbcType=BIGINT},
       DECNAME = #{decname,jdbcType=VARCHAR},
       DECKEY = #{deckey,jdbcType=VARCHAR},
-      DECVALUETYPE = #{decvaluetype,jdbcType=VARCHAR}
+      DECVALUE = #{decvalue,jdbcType=VARCHAR}
     where DECID = #{decid,jdbcType=BIGINT}
   </update>
 </mapper>

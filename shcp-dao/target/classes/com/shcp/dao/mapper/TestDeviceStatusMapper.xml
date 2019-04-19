@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shcp.dao.mapper.TestDeviceStatusMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TestDeviceStatus" >
+    <id column="TDESID" property="tdesid" jdbcType="BIGINT" />
+    <result column="TDSID" property="tdsid" jdbcType="BIGINT" />
+    <result column="TDESNAME" property="tdesname" jdbcType="VARCHAR" />
+    <result column="TDESTYPE" property="tdestype" jdbcType="VARCHAR" />
+    <result column="TDESDEFAULTVALUE" property="tdesdefaultvalue" jdbcType="VARCHAR" />
+    <result column="TDESMINVALUE" property="tdesminvalue" jdbcType="VARCHAR" />
+    <result column="TDESMAXVALUE" property="tdesmaxvalue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TDESID, TDSID, TDESNAME, TDESTYPE, TDESDEFAULTVALUE, TDESMINVALUE, TDESMAXVALUE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TestDeviceStatusExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_device_status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from test_device_status
+    where TDESID = #{tdesid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from test_device_status
+    where TDESID = #{tdesid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TestDeviceStatusExample" >
+    delete from test_device_status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.TestDeviceStatus" >
+    insert into test_device_status (TDESID, TDSID, TDESNAME, 
+      TDESTYPE, TDESDEFAULTVALUE, TDESMINVALUE, 
+      TDESMAXVALUE)
+    values (#{tdesid,jdbcType=BIGINT}, #{tdsid,jdbcType=BIGINT}, #{tdesname,jdbcType=VARCHAR}, 
+      #{tdestype,jdbcType=VARCHAR}, #{tdesdefaultvalue,jdbcType=VARCHAR}, #{tdesminvalue,jdbcType=VARCHAR}, 
+      #{tdesmaxvalue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TestDeviceStatus" >
+    insert into test_device_status
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tdesid != null" >
+        TDESID,
+      </if>
+      <if test="tdsid != null" >
+        TDSID,
+      </if>
+      <if test="tdesname != null" >
+        TDESNAME,
+      </if>
+      <if test="tdestype != null" >
+        TDESTYPE,
+      </if>
+      <if test="tdesdefaultvalue != null" >
+        TDESDEFAULTVALUE,
+      </if>
+      <if test="tdesminvalue != null" >
+        TDESMINVALUE,
+      </if>
+      <if test="tdesmaxvalue != null" >
+        TDESMAXVALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tdesid != null" >
+        #{tdesid,jdbcType=BIGINT},
+      </if>
+      <if test="tdsid != null" >
+        #{tdsid,jdbcType=BIGINT},
+      </if>
+      <if test="tdesname != null" >
+        #{tdesname,jdbcType=VARCHAR},
+      </if>
+      <if test="tdestype != null" >
+        #{tdestype,jdbcType=VARCHAR},
+      </if>
+      <if test="tdesdefaultvalue != null" >
+        #{tdesdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="tdesminvalue != null" >
+        #{tdesminvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="tdesmaxvalue != null" >
+        #{tdesmaxvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.TestDeviceStatusExample" resultType="java.lang.Integer" >
+    select count(*) from test_device_status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update test_device_status
+    <set >
+      <if test="record.tdesid != null" >
+        TDESID = #{record.tdesid,jdbcType=BIGINT},
+      </if>
+      <if test="record.tdsid != null" >
+        TDSID = #{record.tdsid,jdbcType=BIGINT},
+      </if>
+      <if test="record.tdesname != null" >
+        TDESNAME = #{record.tdesname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tdestype != null" >
+        TDESTYPE = #{record.tdestype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tdesdefaultvalue != null" >
+        TDESDEFAULTVALUE = #{record.tdesdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tdesminvalue != null" >
+        TDESMINVALUE = #{record.tdesminvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tdesmaxvalue != null" >
+        TDESMAXVALUE = #{record.tdesmaxvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update test_device_status
+    set TDESID = #{record.tdesid,jdbcType=BIGINT},
+      TDSID = #{record.tdsid,jdbcType=BIGINT},
+      TDESNAME = #{record.tdesname,jdbcType=VARCHAR},
+      TDESTYPE = #{record.tdestype,jdbcType=VARCHAR},
+      TDESDEFAULTVALUE = #{record.tdesdefaultvalue,jdbcType=VARCHAR},
+      TDESMINVALUE = #{record.tdesminvalue,jdbcType=VARCHAR},
+      TDESMAXVALUE = #{record.tdesmaxvalue,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TestDeviceStatus" >
+    update test_device_status
+    <set >
+      <if test="tdsid != null" >
+        TDSID = #{tdsid,jdbcType=BIGINT},
+      </if>
+      <if test="tdesname != null" >
+        TDESNAME = #{tdesname,jdbcType=VARCHAR},
+      </if>
+      <if test="tdestype != null" >
+        TDESTYPE = #{tdestype,jdbcType=VARCHAR},
+      </if>
+      <if test="tdesdefaultvalue != null" >
+        TDESDEFAULTVALUE = #{tdesdefaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="tdesminvalue != null" >
+        TDESMINVALUE = #{tdesminvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="tdesmaxvalue != null" >
+        TDESMAXVALUE = #{tdesmaxvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TDESID = #{tdesid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TestDeviceStatus" >
+    update test_device_status
+    set TDSID = #{tdsid,jdbcType=BIGINT},
+      TDESNAME = #{tdesname,jdbcType=VARCHAR},
+      TDESTYPE = #{tdestype,jdbcType=VARCHAR},
+      TDESDEFAULTVALUE = #{tdesdefaultvalue,jdbcType=VARCHAR},
+      TDESMINVALUE = #{tdesminvalue,jdbcType=VARCHAR},
+      TDESMAXVALUE = #{tdesmaxvalue,jdbcType=VARCHAR}
+    where TDESID = #{tdesid,jdbcType=BIGINT}
+  </update>
+</mapper>

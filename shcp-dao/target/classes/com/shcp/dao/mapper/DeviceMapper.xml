@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shcp.dao.mapper.AdminMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.Admin" >
-    <id column="AID" property="aid" jdbcType="BIGINT" />
-    <result column="ANAME" property="aname" jdbcType="VARCHAR" />
-    <result column="APASSWORD" property="apassword" jdbcType="VARCHAR" />
-    <result column="AIMG" property="aimg" jdbcType="VARCHAR" />
+<mapper namespace="com.shcp.dao.mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.Device" >
+    <id column="DEID" property="deid" jdbcType="BIGINT" />
+    <result column="UID" property="uid" jdbcType="BIGINT" />
+    <result column="DETID" property="detid" jdbcType="BIGINT" />
+    <result column="DID" property="did" jdbcType="BIGINT" />
+    <result column="DENAME" property="dename" jdbcType="VARCHAR" />
+    <result column="DEIPADDR" property="deipaddr" jdbcType="CHAR" />
+    <result column="DEPORT" property="deport" jdbcType="INTEGER" />
+    <result column="DEMAC" property="demac" jdbcType="CHAR" />
     <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -68,15 +72,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    AID, ANAME, APASSWORD, AIMG, GMT_CREATE, GMT_MODIFY
+    DEID, UID, DETID, DID, DENAME, DEIPADDR, DEPORT, DEMAC, GMT_CREATE, GMT_MODIFY
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.AdminExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeviceExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from admin
+    from device
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,41 +91,55 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from admin
-    where AID = #{aid,jdbcType=BIGINT}
+    from device
+    where DEID = #{deid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from admin
-    where AID = #{aid,jdbcType=BIGINT}
+    delete from device
+    where DEID = #{deid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.AdminExample" >
-    delete from admin
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeviceExample" >
+    delete from device
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.Admin" >
-    insert into admin (AID, ANAME, APASSWORD, 
-      AIMG, GMT_CREATE, GMT_MODIFY
-      )
-    values (#{aid,jdbcType=BIGINT}, #{aname,jdbcType=VARCHAR}, #{apassword,jdbcType=VARCHAR}, 
-      #{aimg,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="com.shcp.pojo.Device" >
+    insert into device (DEID, UID, DETID, 
+      DID, DENAME, DEIPADDR, 
+      DEPORT, DEMAC, GMT_CREATE, 
+      GMT_MODIFY)
+    values (#{deid,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{detid,jdbcType=BIGINT}, 
+      #{did,jdbcType=BIGINT}, #{dename,jdbcType=VARCHAR}, #{deipaddr,jdbcType=CHAR}, 
+      #{deport,jdbcType=INTEGER}, #{demac,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.Admin" >
-    insert into admin
+  <insert id="insertSelective" parameterType="com.shcp.pojo.Device" >
+    insert into device
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="aid != null" >
-        AID,
+      <if test="deid != null" >
+        DEID,
       </if>
-      <if test="aname != null" >
-        ANAME,
+      <if test="uid != null" >
+        UID,
       </if>
-      <if test="apassword != null" >
-        APASSWORD,
+      <if test="detid != null" >
+        DETID,
       </if>
-      <if test="aimg != null" >
-        AIMG,
+      <if test="did != null" >
+        DID,
+      </if>
+      <if test="dename != null" >
+        DENAME,
+      </if>
+      <if test="deipaddr != null" >
+        DEIPADDR,
+      </if>
+      <if test="deport != null" >
+        DEPORT,
+      </if>
+      <if test="demac != null" >
+        DEMAC,
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE,
@@ -131,17 +149,29 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="aid != null" >
-        #{aid,jdbcType=BIGINT},
+      <if test="deid != null" >
+        #{deid,jdbcType=BIGINT},
       </if>
-      <if test="aname != null" >
-        #{aname,jdbcType=VARCHAR},
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
       </if>
-      <if test="apassword != null" >
-        #{apassword,jdbcType=VARCHAR},
+      <if test="detid != null" >
+        #{detid,jdbcType=BIGINT},
       </if>
-      <if test="aimg != null" >
-        #{aimg,jdbcType=VARCHAR},
+      <if test="did != null" >
+        #{did,jdbcType=BIGINT},
+      </if>
+      <if test="dename != null" >
+        #{dename,jdbcType=VARCHAR},
+      </if>
+      <if test="deipaddr != null" >
+        #{deipaddr,jdbcType=CHAR},
+      </if>
+      <if test="deport != null" >
+        #{deport,jdbcType=INTEGER},
+      </if>
+      <if test="demac != null" >
+        #{demac,jdbcType=CHAR},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -151,26 +181,38 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.AdminExample" resultType="java.lang.Integer" >
-    select count(*) from admin
+  <select id="countByExample" parameterType="com.shcp.pojo.DeviceExample" resultType="java.lang.Integer" >
+    select count(*) from device
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update admin
+    update device
     <set >
-      <if test="record.aid != null" >
-        AID = #{record.aid,jdbcType=BIGINT},
+      <if test="record.deid != null" >
+        DEID = #{record.deid,jdbcType=BIGINT},
       </if>
-      <if test="record.aname != null" >
-        ANAME = #{record.aname,jdbcType=VARCHAR},
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=BIGINT},
       </if>
-      <if test="record.apassword != null" >
-        APASSWORD = #{record.apassword,jdbcType=VARCHAR},
+      <if test="record.detid != null" >
+        DETID = #{record.detid,jdbcType=BIGINT},
       </if>
-      <if test="record.aimg != null" >
-        AIMG = #{record.aimg,jdbcType=VARCHAR},
+      <if test="record.did != null" >
+        DID = #{record.did,jdbcType=BIGINT},
+      </if>
+      <if test="record.dename != null" >
+        DENAME = #{record.dename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deipaddr != null" >
+        DEIPADDR = #{record.deipaddr,jdbcType=CHAR},
+      </if>
+      <if test="record.deport != null" >
+        DEPORT = #{record.deport,jdbcType=INTEGER},
+      </if>
+      <if test="record.demac != null" >
+        DEMAC = #{record.demac,jdbcType=CHAR},
       </if>
       <if test="record.gmtCreate != null" >
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -184,28 +226,44 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update admin
-    set AID = #{record.aid,jdbcType=BIGINT},
-      ANAME = #{record.aname,jdbcType=VARCHAR},
-      APASSWORD = #{record.apassword,jdbcType=VARCHAR},
-      AIMG = #{record.aimg,jdbcType=VARCHAR},
+    update device
+    set DEID = #{record.deid,jdbcType=BIGINT},
+      UID = #{record.uid,jdbcType=BIGINT},
+      DETID = #{record.detid,jdbcType=BIGINT},
+      DID = #{record.did,jdbcType=BIGINT},
+      DENAME = #{record.dename,jdbcType=VARCHAR},
+      DEIPADDR = #{record.deipaddr,jdbcType=CHAR},
+      DEPORT = #{record.deport,jdbcType=INTEGER},
+      DEMAC = #{record.demac,jdbcType=CHAR},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.Admin" >
-    update admin
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.Device" >
+    update device
     <set >
-      <if test="aname != null" >
-        ANAME = #{aname,jdbcType=VARCHAR},
+      <if test="uid != null" >
+        UID = #{uid,jdbcType=BIGINT},
       </if>
-      <if test="apassword != null" >
-        APASSWORD = #{apassword,jdbcType=VARCHAR},
+      <if test="detid != null" >
+        DETID = #{detid,jdbcType=BIGINT},
       </if>
-      <if test="aimg != null" >
-        AIMG = #{aimg,jdbcType=VARCHAR},
+      <if test="did != null" >
+        DID = #{did,jdbcType=BIGINT},
+      </if>
+      <if test="dename != null" >
+        DENAME = #{dename,jdbcType=VARCHAR},
+      </if>
+      <if test="deipaddr != null" >
+        DEIPADDR = #{deipaddr,jdbcType=CHAR},
+      </if>
+      <if test="deport != null" >
+        DEPORT = #{deport,jdbcType=INTEGER},
+      </if>
+      <if test="demac != null" >
+        DEMAC = #{demac,jdbcType=CHAR},
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -214,15 +272,19 @@
         GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where AID = #{aid,jdbcType=BIGINT}
+    where DEID = #{deid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.Admin" >
-    update admin
-    set ANAME = #{aname,jdbcType=VARCHAR},
-      APASSWORD = #{apassword,jdbcType=VARCHAR},
-      AIMG = #{aimg,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.Device" >
+    update device
+    set UID = #{uid,jdbcType=BIGINT},
+      DETID = #{detid,jdbcType=BIGINT},
+      DID = #{did,jdbcType=BIGINT},
+      DENAME = #{dename,jdbcType=VARCHAR},
+      DEIPADDR = #{deipaddr,jdbcType=CHAR},
+      DEPORT = #{deport,jdbcType=INTEGER},
+      DEMAC = #{demac,jdbcType=CHAR},
       GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP}
-    where AID = #{aid,jdbcType=BIGINT}
+    where DEID = #{deid,jdbcType=BIGINT}
   </update>
 </mapper>

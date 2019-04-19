@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shcp.dao.mapper.TbUserlimitMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbUserlimit" >
-    <id column="LID" property="lid" jdbcType="SMALLINT" />
-    <result column="LNAME" property="lname" jdbcType="CHAR" />
+<mapper namespace="com.shcp.dao.mapper.TestDeviceTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.TestDeviceType" >
+    <id column="TDSID" property="tdsid" jdbcType="BIGINT" />
+    <result column="TDSNAME" property="tdsname" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    LID, LNAME
+    TDSID, TDSNAME
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbUserlimitExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TestDeviceTypeExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_userlimit
+    from test_device_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -80,59 +80,59 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tb_userlimit
-    where LID = #{lid,jdbcType=SMALLINT}
+    from test_device_type
+    where TDSID = #{tdsid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
-    delete from tb_userlimit
-    where LID = #{lid,jdbcType=SMALLINT}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from test_device_type
+    where TDSID = #{tdsid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbUserlimitExample" >
-    delete from tb_userlimit
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.TestDeviceTypeExample" >
+    delete from test_device_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbUserlimit" >
-    insert into tb_userlimit (LID, LNAME)
-    values (#{lid,jdbcType=SMALLINT}, #{lname,jdbcType=CHAR})
+  <insert id="insert" parameterType="com.shcp.pojo.TestDeviceType" >
+    insert into test_device_type (TDSID, TDSNAME)
+    values (#{tdsid,jdbcType=BIGINT}, #{tdsname,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbUserlimit" >
-    insert into tb_userlimit
+  <insert id="insertSelective" parameterType="com.shcp.pojo.TestDeviceType" >
+    insert into test_device_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="lid != null" >
-        LID,
+      <if test="tdsid != null" >
+        TDSID,
       </if>
-      <if test="lname != null" >
-        LNAME,
+      <if test="tdsname != null" >
+        TDSNAME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="lid != null" >
-        #{lid,jdbcType=SMALLINT},
+      <if test="tdsid != null" >
+        #{tdsid,jdbcType=BIGINT},
       </if>
-      <if test="lname != null" >
-        #{lname,jdbcType=CHAR},
+      <if test="tdsname != null" >
+        #{tdsname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbUserlimitExample" resultType="java.lang.Integer" >
-    select count(*) from tb_userlimit
+  <select id="countByExample" parameterType="com.shcp.pojo.TestDeviceTypeExample" resultType="java.lang.Integer" >
+    select count(*) from test_device_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_userlimit
+    update test_device_type
     <set >
-      <if test="record.lid != null" >
-        LID = #{record.lid,jdbcType=SMALLINT},
+      <if test="record.tdsid != null" >
+        TDSID = #{record.tdsid,jdbcType=BIGINT},
       </if>
-      <if test="record.lname != null" >
-        LNAME = #{record.lname,jdbcType=CHAR},
+      <if test="record.tdsname != null" >
+        TDSNAME = #{record.tdsname,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -140,25 +140,25 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_userlimit
-    set LID = #{record.lid,jdbcType=SMALLINT},
-      LNAME = #{record.lname,jdbcType=CHAR}
+    update test_device_type
+    set TDSID = #{record.tdsid,jdbcType=BIGINT},
+      TDSNAME = #{record.tdsname,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbUserlimit" >
-    update tb_userlimit
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TestDeviceType" >
+    update test_device_type
     <set >
-      <if test="lname != null" >
-        LNAME = #{lname,jdbcType=CHAR},
+      <if test="tdsname != null" >
+        TDSNAME = #{tdsname,jdbcType=VARCHAR},
       </if>
     </set>
-    where LID = #{lid,jdbcType=SMALLINT}
+    where TDSID = #{tdsid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbUserlimit" >
-    update tb_userlimit
-    set LNAME = #{lname,jdbcType=CHAR}
-    where LID = #{lid,jdbcType=SMALLINT}
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TestDeviceType" >
+    update test_device_type
+    set TDSNAME = #{tdsname,jdbcType=VARCHAR}
+    where TDSID = #{tdsid,jdbcType=BIGINT}
   </update>
 </mapper>

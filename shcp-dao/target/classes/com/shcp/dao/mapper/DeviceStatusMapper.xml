@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shcp.dao.mapper.TbDevicestatusMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDevicestatus" >
+<mapper namespace="com.shcp.dao.mapper.DeviceStatusMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.DeviceStatus" >
     <id column="DESID" property="desid" jdbcType="BIGINT" />
-    <result column="TID" property="tid" jdbcType="BIGINT" />
+    <result column="DETID" property="detid" jdbcType="BIGINT" />
     <result column="DESNAME" property="desname" jdbcType="VARCHAR" />
     <result column="DESTYPE" property="destype" jdbcType="VARCHAR" />
     <result column="DESDEFAULTVALUE" property="desdefaultvalue" jdbcType="VARCHAR" />
@@ -69,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    DESID, TID, DESNAME, DESTYPE, DESDEFAULTVALUE, DESMINVALUE, DESMAXVALUE
+    DESID, DETID, DESNAME, DESTYPE, DESDEFAULTVALUE, DESMINVALUE, DESMAXVALUE
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbDevicestatusExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeviceStatusExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_devicestatus
+    from device_status
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,35 +88,35 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tb_devicestatus
+    from device_status
     where DESID = #{desid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tb_devicestatus
+    delete from device_status
     where DESID = #{desid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDevicestatusExample" >
-    delete from tb_devicestatus
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeviceStatusExample" >
+    delete from device_status
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbDevicestatus" >
-    insert into tb_devicestatus (DESID, TID, DESNAME, 
+  <insert id="insert" parameterType="com.shcp.pojo.DeviceStatus" >
+    insert into device_status (DESID, DETID, DESNAME, 
       DESTYPE, DESDEFAULTVALUE, DESMINVALUE, 
       DESMAXVALUE)
-    values (#{desid,jdbcType=BIGINT}, #{tid,jdbcType=BIGINT}, #{desname,jdbcType=VARCHAR}, 
+    values (#{desid,jdbcType=BIGINT}, #{detid,jdbcType=BIGINT}, #{desname,jdbcType=VARCHAR}, 
       #{destype,jdbcType=VARCHAR}, #{desdefaultvalue,jdbcType=VARCHAR}, #{desminvalue,jdbcType=VARCHAR}, 
       #{desmaxvalue,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDevicestatus" >
-    insert into tb_devicestatus
+  <insert id="insertSelective" parameterType="com.shcp.pojo.DeviceStatus" >
+    insert into device_status
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="desid != null" >
         DESID,
       </if>
-      <if test="tid != null" >
-        TID,
+      <if test="detid != null" >
+        DETID,
       </if>
       <if test="desname != null" >
         DESNAME,
@@ -138,8 +138,8 @@
       <if test="desid != null" >
         #{desid,jdbcType=BIGINT},
       </if>
-      <if test="tid != null" >
-        #{tid,jdbcType=BIGINT},
+      <if test="detid != null" >
+        #{detid,jdbcType=BIGINT},
       </if>
       <if test="desname != null" >
         #{desname,jdbcType=VARCHAR},
@@ -158,20 +158,20 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbDevicestatusExample" resultType="java.lang.Integer" >
-    select count(*) from tb_devicestatus
+  <select id="countByExample" parameterType="com.shcp.pojo.DeviceStatusExample" resultType="java.lang.Integer" >
+    select count(*) from device_status
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_devicestatus
+    update device_status
     <set >
       <if test="record.desid != null" >
         DESID = #{record.desid,jdbcType=BIGINT},
       </if>
-      <if test="record.tid != null" >
-        TID = #{record.tid,jdbcType=BIGINT},
+      <if test="record.detid != null" >
+        DETID = #{record.detid,jdbcType=BIGINT},
       </if>
       <if test="record.desname != null" >
         DESNAME = #{record.desname,jdbcType=VARCHAR},
@@ -194,9 +194,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_devicestatus
+    update device_status
     set DESID = #{record.desid,jdbcType=BIGINT},
-      TID = #{record.tid,jdbcType=BIGINT},
+      DETID = #{record.detid,jdbcType=BIGINT},
       DESNAME = #{record.desname,jdbcType=VARCHAR},
       DESTYPE = #{record.destype,jdbcType=VARCHAR},
       DESDEFAULTVALUE = #{record.desdefaultvalue,jdbcType=VARCHAR},
@@ -206,11 +206,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDevicestatus" >
-    update tb_devicestatus
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.DeviceStatus" >
+    update device_status
     <set >
-      <if test="tid != null" >
-        TID = #{tid,jdbcType=BIGINT},
+      <if test="detid != null" >
+        DETID = #{detid,jdbcType=BIGINT},
       </if>
       <if test="desname != null" >
         DESNAME = #{desname,jdbcType=VARCHAR},
@@ -230,9 +230,9 @@
     </set>
     where DESID = #{desid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDevicestatus" >
-    update tb_devicestatus
-    set TID = #{tid,jdbcType=BIGINT},
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.DeviceStatus" >
+    update device_status
+    set DETID = #{detid,jdbcType=BIGINT},
       DESNAME = #{desname,jdbcType=VARCHAR},
       DESTYPE = #{destype,jdbcType=VARCHAR},
       DESDEFAULTVALUE = #{desdefaultvalue,jdbcType=VARCHAR},

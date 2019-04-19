@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shcp.dao.mapper.DeviceLimitRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.DeviceLimitRelation" >
+    <id column="DEID" property="deid" jdbcType="BIGINT" />
+    <id column="DELID" property="delid" jdbcType="BIGINT" />
+    <result column="DELSTATUS" property="delstatus" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DEID, DELID, DELSTATUS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeviceLimitRelationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device_limit_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeviceLimitRelationKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_limit_relation
+    where DEID = #{deid,jdbcType=BIGINT}
+      and DELID = #{delid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.shcp.pojo.DeviceLimitRelationKey" >
+    delete from device_limit_relation
+    where DEID = #{deid,jdbcType=BIGINT}
+      and DELID = #{delid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeviceLimitRelationExample" >
+    delete from device_limit_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shcp.pojo.DeviceLimitRelation" >
+    insert into device_limit_relation (DEID, DELID, DELSTATUS
+      )
+    values (#{deid,jdbcType=BIGINT}, #{delid,jdbcType=BIGINT}, #{delstatus,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shcp.pojo.DeviceLimitRelation" >
+    insert into device_limit_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deid != null" >
+        DEID,
+      </if>
+      <if test="delid != null" >
+        DELID,
+      </if>
+      <if test="delstatus != null" >
+        DELSTATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deid != null" >
+        #{deid,jdbcType=BIGINT},
+      </if>
+      <if test="delid != null" >
+        #{delid,jdbcType=BIGINT},
+      </if>
+      <if test="delstatus != null" >
+        #{delstatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shcp.pojo.DeviceLimitRelationExample" resultType="java.lang.Integer" >
+    select count(*) from device_limit_relation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device_limit_relation
+    <set >
+      <if test="record.deid != null" >
+        DEID = #{record.deid,jdbcType=BIGINT},
+      </if>
+      <if test="record.delid != null" >
+        DELID = #{record.delid,jdbcType=BIGINT},
+      </if>
+      <if test="record.delstatus != null" >
+        DELSTATUS = #{record.delstatus,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device_limit_relation
+    set DEID = #{record.deid,jdbcType=BIGINT},
+      DELID = #{record.delid,jdbcType=BIGINT},
+      DELSTATUS = #{record.delstatus,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.DeviceLimitRelation" >
+    update device_limit_relation
+    <set >
+      <if test="delstatus != null" >
+        DELSTATUS = #{delstatus,jdbcType=BIT},
+      </if>
+    </set>
+    where DEID = #{deid,jdbcType=BIGINT}
+      and DELID = #{delid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.DeviceLimitRelation" >
+    update device_limit_relation
+    set DELSTATUS = #{delstatus,jdbcType=BIT}
+    where DEID = #{deid,jdbcType=BIGINT}
+      and DELID = #{delid,jdbcType=BIGINT}
+  </update>
+</mapper>

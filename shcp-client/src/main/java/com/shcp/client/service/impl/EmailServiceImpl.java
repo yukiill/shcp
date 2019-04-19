@@ -4,6 +4,9 @@ import com.shcp.client.pojo.CacheUser;
 import com.shcp.client.service.EmailService;
 import com.shcp.client.utils.*;
 import com.shcp.common.pojo.ShcpResult;
+import com.shcp.dao.mapper.UserMapper;
+import com.shcp.pojo.User;
+import com.shcp.pojo.UserExample;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -27,7 +30,7 @@ public class EmailServiceImpl implements EmailService{
     @Resource
     private JavaMailSender javaMailSender;
     @Resource
-    private TbUserMapper tbUserMapper;
+    private UserMapper tbUserMapper;
 
     @Override
     public ShcpResult checkForgetPass(Long time) {
@@ -41,7 +44,7 @@ public class EmailServiceImpl implements EmailService{
             log.info("verify forgetPass email expired");
             return ShcpResult.build(655, "超过验证时限，请重新发送验证邮件");
         }
-        tbUserMapper.updateByPrimaryKeySelective(cacheUser.getTbUser());
+        tbUserMapper.updateByPrimaryKeySelective(cacheUser.getUser());
         return ShcpResult.ok();
     }
 
@@ -57,7 +60,7 @@ public class EmailServiceImpl implements EmailService{
             log.info("userId:{} verify email expired", userId);
             return ShcpResult.build(655, "超过验证时限，请重新发送验证邮件");
         }
-        TbUser tbUser = cacheUser.getTbUser();
+        User tbUser = cacheUser.getUser();
         if(Objects.equals(tbUser.getUid(), userId)) {
             tbUserMapper.insertSelective(tbUser);
             FileUtil.mkdirForUser(tbUser.getUsername());
@@ -91,10 +94,10 @@ public class EmailServiceImpl implements EmailService{
         CacheUser cacheUser = forgetPasswordPool.get(time);
         if(Objects.isNull(cacheUser)){
             log.info("send forgetPass email to email:{}", email);
-            TbUserExample tbUserExample = new TbUserExample();
+            UserExample tbUserExample = new UserExample();
             tbUserExample.createCriteria()
-                    .andUemailEqualTo(email);
-            TbUser tbUser = tbUserMapper.selectByExample(tbUserExample).get(0);
+                    .andEmailEqualTo(email);
+            User tbUser = tbUserMapper.selectByExample(tbUserExample).get(0);
             if(Objects.isNull(tbUser)){
                 log.info("email:{} haven't opposite user", email);
                 return ShcpResult.build(715, "邮箱未绑定");

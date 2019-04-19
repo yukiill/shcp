@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shcp.dao.mapper.TbUserMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbUser" >
+<mapper namespace="com.shcp.dao.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.User" >
     <id column="UID" property="uid" jdbcType="BIGINT" />
     <result column="DID" property="did" jdbcType="BIGINT" />
-    <result column="LID" property="lid" jdbcType="SMALLINT" />
     <result column="USERNAME" property="username" jdbcType="VARCHAR" />
     <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
-    <result column="UINTRODUCE" property="uintroduce" jdbcType="VARCHAR" />
-    <result column="UEMAIL" property="uemail" jdbcType="VARCHAR" />
-    <result column="CDATE" property="cdate" jdbcType="TIMESTAMP" />
-    <result column="UHIMG" property="uhimg" jdbcType="VARCHAR" />
-    <result column="UBIRTH" property="ubirth" jdbcType="DATE" />
+    <result column="EMAIL" property="email" jdbcType="CHAR" />
+    <result column="BIRTH" property="birth" jdbcType="TIMESTAMP" />
+    <result column="IMG" property="img" jdbcType="CHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,15 +72,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    UID, DID, LID, USERNAME, PASSWORD, UINTRODUCE, UEMAIL, CDATE, UHIMG, UBIRTH
+    UID, DID, USERNAME, PASSWORD, EMAIL, BIRTH, IMG, introduce, GMT_CREATE, GMT_MODIFY
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbUserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.UserExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_user
+    from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,31 +91,31 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from tb_user
+    from user
     where UID = #{uid,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tb_user
+    delete from user
     where UID = #{uid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbUserExample" >
-    delete from tb_user
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.UserExample" >
+    delete from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbUser" >
-    insert into tb_user (UID, DID, LID, 
-      USERNAME, PASSWORD, UINTRODUCE, 
-      UEMAIL, CDATE, UHIMG, 
-      UBIRTH)
-    values (#{uid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{lid,jdbcType=SMALLINT}, 
-      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{uintroduce,jdbcType=VARCHAR}, 
-      #{uemail,jdbcType=VARCHAR}, #{cdate,jdbcType=TIMESTAMP}, #{uhimg,jdbcType=VARCHAR}, 
-      #{ubirth,jdbcType=DATE})
+  <insert id="insert" parameterType="com.shcp.pojo.User" >
+    insert into user (UID, DID, USERNAME, 
+      PASSWORD, EMAIL, BIRTH, 
+      IMG, introduce, GMT_CREATE, 
+      GMT_MODIFY)
+    values (#{uid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=CHAR}, #{birth,jdbcType=TIMESTAMP}, 
+      #{img,jdbcType=CHAR}, #{introduce,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbUser" >
-    insert into tb_user
+  <insert id="insertSelective" parameterType="com.shcp.pojo.User" >
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
         UID,
@@ -123,29 +123,29 @@
       <if test="did != null" >
         DID,
       </if>
-      <if test="lid != null" >
-        LID,
-      </if>
       <if test="username != null" >
         USERNAME,
       </if>
       <if test="password != null" >
         PASSWORD,
       </if>
-      <if test="uintroduce != null" >
-        UINTRODUCE,
+      <if test="email != null" >
+        EMAIL,
       </if>
-      <if test="uemail != null" >
-        UEMAIL,
+      <if test="birth != null" >
+        BIRTH,
       </if>
-      <if test="cdate != null" >
-        CDATE,
+      <if test="img != null" >
+        IMG,
       </if>
-      <if test="uhimg != null" >
-        UHIMG,
+      <if test="introduce != null" >
+        introduce,
       </if>
-      <if test="ubirth != null" >
-        UBIRTH,
+      <if test="gmtCreate != null" >
+        GMT_CREATE,
+      </if>
+      <if test="gmtModify != null" >
+        GMT_MODIFY,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -155,40 +155,40 @@
       <if test="did != null" >
         #{did,jdbcType=BIGINT},
       </if>
-      <if test="lid != null" >
-        #{lid,jdbcType=SMALLINT},
-      </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="uintroduce != null" >
-        #{uintroduce,jdbcType=VARCHAR},
+      <if test="email != null" >
+        #{email,jdbcType=CHAR},
       </if>
-      <if test="uemail != null" >
-        #{uemail,jdbcType=VARCHAR},
+      <if test="birth != null" >
+        #{birth,jdbcType=TIMESTAMP},
       </if>
-      <if test="cdate != null" >
-        #{cdate,jdbcType=TIMESTAMP},
+      <if test="img != null" >
+        #{img,jdbcType=CHAR},
       </if>
-      <if test="uhimg != null" >
-        #{uhimg,jdbcType=VARCHAR},
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
       </if>
-      <if test="ubirth != null" >
-        #{ubirth,jdbcType=DATE},
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbUserExample" resultType="java.lang.Integer" >
-    select count(*) from tb_user
+  <select id="countByExample" parameterType="com.shcp.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_user
+    update user
     <set >
       <if test="record.uid != null" >
         UID = #{record.uid,jdbcType=BIGINT},
@@ -196,29 +196,29 @@
       <if test="record.did != null" >
         DID = #{record.did,jdbcType=BIGINT},
       </if>
-      <if test="record.lid != null" >
-        LID = #{record.lid,jdbcType=SMALLINT},
-      </if>
       <if test="record.username != null" >
         USERNAME = #{record.username,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null" >
         PASSWORD = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.uintroduce != null" >
-        UINTRODUCE = #{record.uintroduce,jdbcType=VARCHAR},
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=CHAR},
       </if>
-      <if test="record.uemail != null" >
-        UEMAIL = #{record.uemail,jdbcType=VARCHAR},
+      <if test="record.birth != null" >
+        BIRTH = #{record.birth,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.cdate != null" >
-        CDATE = #{record.cdate,jdbcType=TIMESTAMP},
+      <if test="record.img != null" >
+        IMG = #{record.img,jdbcType=CHAR},
       </if>
-      <if test="record.uhimg != null" >
-        UHIMG = #{record.uhimg,jdbcType=VARCHAR},
+      <if test="record.introduce != null" >
+        introduce = #{record.introduce,jdbcType=VARCHAR},
       </if>
-      <if test="record.ubirth != null" >
-        UBIRTH = #{record.ubirth,jdbcType=DATE},
+      <if test="record.gmtCreate != null" >
+        GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModify != null" >
+        GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -226,29 +226,26 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_user
+    update user
     set UID = #{record.uid,jdbcType=BIGINT},
       DID = #{record.did,jdbcType=BIGINT},
-      LID = #{record.lid,jdbcType=SMALLINT},
       USERNAME = #{record.username,jdbcType=VARCHAR},
       PASSWORD = #{record.password,jdbcType=VARCHAR},
-      UINTRODUCE = #{record.uintroduce,jdbcType=VARCHAR},
-      UEMAIL = #{record.uemail,jdbcType=VARCHAR},
-      CDATE = #{record.cdate,jdbcType=TIMESTAMP},
-      UHIMG = #{record.uhimg,jdbcType=VARCHAR},
-      UBIRTH = #{record.ubirth,jdbcType=DATE}
+      EMAIL = #{record.email,jdbcType=CHAR},
+      BIRTH = #{record.birth,jdbcType=TIMESTAMP},
+      IMG = #{record.img,jdbcType=CHAR},
+      introduce = #{record.introduce,jdbcType=VARCHAR},
+      GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbUser" >
-    update tb_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.User" >
+    update user
     <set >
       <if test="did != null" >
         DID = #{did,jdbcType=BIGINT},
-      </if>
-      <if test="lid != null" >
-        LID = #{lid,jdbcType=SMALLINT},
       </if>
       <if test="username != null" >
         USERNAME = #{username,jdbcType=VARCHAR},
@@ -256,41 +253,44 @@
       <if test="password != null" >
         PASSWORD = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="uintroduce != null" >
-        UINTRODUCE = #{uintroduce,jdbcType=VARCHAR},
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=CHAR},
       </if>
-      <if test="uemail != null" >
-        UEMAIL = #{uemail,jdbcType=VARCHAR},
+      <if test="birth != null" >
+        BIRTH = #{birth,jdbcType=TIMESTAMP},
       </if>
-      <if test="cdate != null" >
-        CDATE = #{cdate,jdbcType=TIMESTAMP},
+      <if test="img != null" >
+        IMG = #{img,jdbcType=CHAR},
       </if>
-      <if test="uhimg != null" >
-        UHIMG = #{uhimg,jdbcType=VARCHAR},
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
       </if>
-      <if test="ubirth != null" >
-        UBIRTH = #{ubirth,jdbcType=DATE},
+      <if test="gmtCreate != null" >
+        GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null" >
+        GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
       </if>
     </set>
     where UID = #{uid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbUser" >
-    update tb_user
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.User" >
+    update user
     set DID = #{did,jdbcType=BIGINT},
-      LID = #{lid,jdbcType=SMALLINT},
       USERNAME = #{username,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
-      UINTRODUCE = #{uintroduce,jdbcType=VARCHAR},
-      UEMAIL = #{uemail,jdbcType=VARCHAR},
-      CDATE = #{cdate,jdbcType=TIMESTAMP},
-      UHIMG = #{uhimg,jdbcType=VARCHAR},
-      UBIRTH = #{ubirth,jdbcType=DATE}
+      EMAIL = #{email,jdbcType=CHAR},
+      BIRTH = #{birth,jdbcType=TIMESTAMP},
+      IMG = #{img,jdbcType=CHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+      GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP}
     where UID = #{uid,jdbcType=BIGINT}
   </update>
-  <select id="selectByUsername" parameterType="string" resultType="string">
-    select username from tb_user where username = #{username}
+  <select id="selectByEmail" parameterType="String" resultType="String">
+    select EMAIL from user where EMAIL = #{email}
   </select>
-  <select id="selectByEmail" parameterType="string" resultType="string">
-    select UEMAIL from tb_user where UEMAIL = #{email}
+  <select id="selectByUsername" parameterType="String" resultType="String">
+    select USERNAME from user where USERNAME = #{username}
   </select>
 </mapper>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shcp.dao.mapper.TbDevtestdevicetypeMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDevtestdevicetype" >
-    <result column="TID" property="tid" jdbcType="BIGINT" />
-    <result column="TNAME" property="tname" jdbcType="VARCHAR" />
+<mapper namespace="com.shcp.dao.mapper.UserLimitMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.UserLimit" >
+    <id column="ULID" property="ulid" jdbcType="SMALLINT" />
+    <result column="ULNAME" property="ulname" jdbcType="CHAR" />
+    <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    TID, TNAME
+    ULID, ULNAME, GMT_CREATE
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbDevtestdevicetypeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.UserLimitExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_devtestdevicetype
+    from user_limit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -80,49 +81,70 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDevtestdevicetypeExample" >
-    delete from tb_devtestdevicetype
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_limit
+    where ULID = #{ulid,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from user_limit
+    where ULID = #{ulid,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.UserLimitExample" >
+    delete from user_limit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbDevtestdevicetype" >
-    insert into tb_devtestdevicetype (TID, TNAME)
-    values (#{tid,jdbcType=BIGINT}, #{tname,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.shcp.pojo.UserLimit" >
+    insert into user_limit (ULID, ULNAME, GMT_CREATE
+      )
+    values (#{ulid,jdbcType=SMALLINT}, #{ulname,jdbcType=CHAR}, #{gmtCreate,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDevtestdevicetype" >
-    insert into tb_devtestdevicetype
+  <insert id="insertSelective" parameterType="com.shcp.pojo.UserLimit" >
+    insert into user_limit
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="tid != null" >
-        TID,
+      <if test="ulid != null" >
+        ULID,
       </if>
-      <if test="tname != null" >
-        TNAME,
+      <if test="ulname != null" >
+        ULNAME,
+      </if>
+      <if test="gmtCreate != null" >
+        GMT_CREATE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="tid != null" >
-        #{tid,jdbcType=BIGINT},
+      <if test="ulid != null" >
+        #{ulid,jdbcType=SMALLINT},
       </if>
-      <if test="tname != null" >
-        #{tname,jdbcType=VARCHAR},
+      <if test="ulname != null" >
+        #{ulname,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbDevtestdevicetypeExample" resultType="java.lang.Integer" >
-    select count(*) from tb_devtestdevicetype
+  <select id="countByExample" parameterType="com.shcp.pojo.UserLimitExample" resultType="java.lang.Integer" >
+    select count(*) from user_limit
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_devtestdevicetype
+    update user_limit
     <set >
-      <if test="record.tid != null" >
-        TID = #{record.tid,jdbcType=BIGINT},
+      <if test="record.ulid != null" >
+        ULID = #{record.ulid,jdbcType=SMALLINT},
       </if>
-      <if test="record.tname != null" >
-        TNAME = #{record.tname,jdbcType=VARCHAR},
+      <if test="record.ulname != null" >
+        ULNAME = #{record.ulname,jdbcType=CHAR},
+      </if>
+      <if test="record.gmtCreate != null" >
+        GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -130,11 +152,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_devtestdevicetype
-    set TID = #{record.tid,jdbcType=BIGINT},
-      TNAME = #{record.tname,jdbcType=VARCHAR}
+    update user_limit
+    set ULID = #{record.ulid,jdbcType=SMALLINT},
+      ULNAME = #{record.ulname,jdbcType=CHAR},
+      GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.UserLimit" >
+    update user_limit
+    <set >
+      <if test="ulname != null" >
+        ULNAME = #{ulname,jdbcType=CHAR},
+      </if>
+      <if test="gmtCreate != null" >
+        GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ULID = #{ulid,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.UserLimit" >
+    update user_limit
+    set ULNAME = #{ulname,jdbcType=CHAR},
+      GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP}
+    where ULID = #{ulid,jdbcType=SMALLINT}
   </update>
 </mapper>

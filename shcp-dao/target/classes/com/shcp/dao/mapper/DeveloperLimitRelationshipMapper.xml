@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shcp.dao.mapper.TbDeviceexamineMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbDeviceexamine" >
-    <id column="DSEXID" property="dsexid" jdbcType="BIGINT" />
-    <result column="DID" property="did" jdbcType="BIGINT" />
-    <result column="DSEXNAME1" property="dsexname1" jdbcType="VARCHAR" />
-    <result column="DSEXDATETIME" property="dsexdatetime" jdbcType="TIMESTAMP" />
-    <result column="DSEXSTATUS" property="dsexstatus" jdbcType="BIT" />
+<mapper namespace="com.shcp.dao.mapper.DeveloperLimitRelationshipMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.DeveloperLimitRelationship" >
+    <id column="DLID" property="dlid" jdbcType="SMALLINT" />
+    <id column="DID" property="did" jdbcType="BIGINT" />
+    <result column="DLSTATUS" property="dlstatus" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    DSEXID, DID, DSEXNAME1, DSEXDATETIME, DSEXSTATUS
+    DLID, DID, DLSTATUS
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbDeviceexamineExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeveloperLimitRelationshipExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_deviceexamine
+    from developer_limit_relationship
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,88 +81,72 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeveloperLimitRelationshipKey" >
     select 
     <include refid="Base_Column_List" />
-    from tb_deviceexamine
-    where DSEXID = #{dsexid,jdbcType=BIGINT}
+    from developer_limit_relationship
+    where DLID = #{dlid,jdbcType=SMALLINT}
+      and DID = #{did,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from tb_deviceexamine
-    where DSEXID = #{dsexid,jdbcType=BIGINT}
+  <delete id="deleteByPrimaryKey" parameterType="com.shcp.pojo.DeveloperLimitRelationshipKey" >
+    delete from developer_limit_relationship
+    where DLID = #{dlid,jdbcType=SMALLINT}
+      and DID = #{did,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbDeviceexamineExample" >
-    delete from tb_deviceexamine
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.DeveloperLimitRelationshipExample" >
+    delete from developer_limit_relationship
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbDeviceexamine" >
-    insert into tb_deviceexamine (DSEXID, DID, DSEXNAME1, 
-      DSEXDATETIME, DSEXSTATUS)
-    values (#{dsexid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{dsexname1,jdbcType=VARCHAR}, 
-      #{dsexdatetime,jdbcType=TIMESTAMP}, #{dsexstatus,jdbcType=BIT})
+  <insert id="insert" parameterType="com.shcp.pojo.DeveloperLimitRelationship" >
+    insert into developer_limit_relationship (DLID, DID, DLSTATUS
+      )
+    values (#{dlid,jdbcType=SMALLINT}, #{did,jdbcType=BIGINT}, #{dlstatus,jdbcType=BIT}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbDeviceexamine" >
-    insert into tb_deviceexamine
+  <insert id="insertSelective" parameterType="com.shcp.pojo.DeveloperLimitRelationship" >
+    insert into developer_limit_relationship
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="dsexid != null" >
-        DSEXID,
+      <if test="dlid != null" >
+        DLID,
       </if>
       <if test="did != null" >
         DID,
       </if>
-      <if test="dsexname1 != null" >
-        DSEXNAME1,
-      </if>
-      <if test="dsexdatetime != null" >
-        DSEXDATETIME,
-      </if>
-      <if test="dsexstatus != null" >
-        DSEXSTATUS,
+      <if test="dlstatus != null" >
+        DLSTATUS,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="dsexid != null" >
-        #{dsexid,jdbcType=BIGINT},
+      <if test="dlid != null" >
+        #{dlid,jdbcType=SMALLINT},
       </if>
       <if test="did != null" >
         #{did,jdbcType=BIGINT},
       </if>
-      <if test="dsexname1 != null" >
-        #{dsexname1,jdbcType=VARCHAR},
-      </if>
-      <if test="dsexdatetime != null" >
-        #{dsexdatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dsexstatus != null" >
-        #{dsexstatus,jdbcType=BIT},
+      <if test="dlstatus != null" >
+        #{dlstatus,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbDeviceexamineExample" resultType="java.lang.Integer" >
-    select count(*) from tb_deviceexamine
+  <select id="countByExample" parameterType="com.shcp.pojo.DeveloperLimitRelationshipExample" resultType="java.lang.Integer" >
+    select count(*) from developer_limit_relationship
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_deviceexamine
+    update developer_limit_relationship
     <set >
-      <if test="record.dsexid != null" >
-        DSEXID = #{record.dsexid,jdbcType=BIGINT},
+      <if test="record.dlid != null" >
+        DLID = #{record.dlid,jdbcType=SMALLINT},
       </if>
       <if test="record.did != null" >
         DID = #{record.did,jdbcType=BIGINT},
       </if>
-      <if test="record.dsexname1 != null" >
-        DSEXNAME1 = #{record.dsexname1,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dsexdatetime != null" >
-        DSEXDATETIME = #{record.dsexdatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.dsexstatus != null" >
-        DSEXSTATUS = #{record.dsexstatus,jdbcType=BIT},
+      <if test="record.dlstatus != null" >
+        DLSTATUS = #{record.dlstatus,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -172,40 +154,28 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_deviceexamine
-    set DSEXID = #{record.dsexid,jdbcType=BIGINT},
+    update developer_limit_relationship
+    set DLID = #{record.dlid,jdbcType=SMALLINT},
       DID = #{record.did,jdbcType=BIGINT},
-      DSEXNAME1 = #{record.dsexname1,jdbcType=VARCHAR},
-      DSEXDATETIME = #{record.dsexdatetime,jdbcType=TIMESTAMP},
-      DSEXSTATUS = #{record.dsexstatus,jdbcType=BIT}
+      DLSTATUS = #{record.dlstatus,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.TbDeviceexamine" >
-    update tb_deviceexamine
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.DeveloperLimitRelationship" >
+    update developer_limit_relationship
     <set >
-      <if test="did != null" >
-        DID = #{did,jdbcType=BIGINT},
-      </if>
-      <if test="dsexname1 != null" >
-        DSEXNAME1 = #{dsexname1,jdbcType=VARCHAR},
-      </if>
-      <if test="dsexdatetime != null" >
-        DSEXDATETIME = #{dsexdatetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="dsexstatus != null" >
-        DSEXSTATUS = #{dsexstatus,jdbcType=BIT},
+      <if test="dlstatus != null" >
+        DLSTATUS = #{dlstatus,jdbcType=BIT},
       </if>
     </set>
-    where DSEXID = #{dsexid,jdbcType=BIGINT}
+    where DLID = #{dlid,jdbcType=SMALLINT}
+      and DID = #{did,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TbDeviceexamine" >
-    update tb_deviceexamine
-    set DID = #{did,jdbcType=BIGINT},
-      DSEXNAME1 = #{dsexname1,jdbcType=VARCHAR},
-      DSEXDATETIME = #{dsexdatetime,jdbcType=TIMESTAMP},
-      DSEXSTATUS = #{dsexstatus,jdbcType=BIT}
-    where DSEXID = #{dsexid,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.DeveloperLimitRelationship" >
+    update developer_limit_relationship
+    set DLSTATUS = #{dlstatus,jdbcType=BIT}
+    where DLID = #{dlid,jdbcType=SMALLINT}
+      and DID = #{did,jdbcType=BIGINT}
   </update>
 </mapper>

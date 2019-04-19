@@ -31,7 +31,7 @@ public class DeviceController {
     @ResponseBody
     public Object bindDevice(@RequestParam(value = "Deid") Long dstID, Object bw){
         User user = (User) httpSession.getAttribute("user");
-        return CorsUtil.format(deviceService.bindDevice(dstID, User));
+        return CorsUtil.format(deviceService.bindDevice(dstID, user));
     }
 
     @RequestMapping("/user/device/show")

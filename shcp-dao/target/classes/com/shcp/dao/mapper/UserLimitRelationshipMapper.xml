@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shcp.dao.mapper.TbTestdevicesMapper" >
-  <resultMap id="BaseResultMap" type="com.shcp.pojo.TbTestdevices" >
-    <result column="DSEXID" property="dsexid" jdbcType="BIGINT" />
-    <result column="DID" property="did" jdbcType="BIGINT" />
-    <result column="DSTID" property="dstid" jdbcType="BIGINT" />
-    <result column="DSTNAME" property="dstname" jdbcType="VARCHAR" />
-    <result column="DSIPADDR" property="dsipaddr" jdbcType="CHAR" />
-    <result column="DSPORT" property="dsport" jdbcType="INTEGER" />
-    <result column="DSMAC" property="dsmac" jdbcType="CHAR" />
+<mapper namespace="com.shcp.dao.mapper.UserLimitRelationshipMapper" >
+  <resultMap id="BaseResultMap" type="com.shcp.pojo.UserLimitRelationship" >
+    <id column="ULID" property="ulid" jdbcType="SMALLINT" />
+    <id column="UID" property="uid" jdbcType="BIGINT" />
+    <result column="ULSTATUS" property="ulstatus" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    DSEXID, DID, DSTID, DSTNAME, DSIPADDR, DSPORT, DSMAC
+    ULID, UID, ULSTATUS
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TbTestdevicesExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.UserLimitRelationshipExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tb_testdevices
+    from user_limit_relationship
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,98 +81,72 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.shcp.pojo.TbTestdevicesExample" >
-    delete from tb_testdevices
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.shcp.pojo.UserLimitRelationshipKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_limit_relationship
+    where ULID = #{ulid,jdbcType=SMALLINT}
+      and UID = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.shcp.pojo.UserLimitRelationshipKey" >
+    delete from user_limit_relationship
+    where ULID = #{ulid,jdbcType=SMALLINT}
+      and UID = #{uid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shcp.pojo.UserLimitRelationshipExample" >
+    delete from user_limit_relationship
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shcp.pojo.TbTestdevices" >
-    insert into tb_testdevices (DSEXID, DID, DSTID, 
-      DSTNAME, DSIPADDR, DSPORT, 
-      DSMAC)
-    values (#{dsexid,jdbcType=BIGINT}, #{did,jdbcType=BIGINT}, #{dstid,jdbcType=BIGINT}, 
-      #{dstname,jdbcType=VARCHAR}, #{dsipaddr,jdbcType=CHAR}, #{dsport,jdbcType=INTEGER}, 
-      #{dsmac,jdbcType=CHAR})
+  <insert id="insert" parameterType="com.shcp.pojo.UserLimitRelationship" >
+    insert into user_limit_relationship (ULID, UID, ULSTATUS
+      )
+    values (#{ulid,jdbcType=SMALLINT}, #{uid,jdbcType=BIGINT}, #{ulstatus,jdbcType=BIT}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.shcp.pojo.TbTestdevices" >
-    insert into tb_testdevices
+  <insert id="insertSelective" parameterType="com.shcp.pojo.UserLimitRelationship" >
+    insert into user_limit_relationship
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="dsexid != null" >
-        DSEXID,
+      <if test="ulid != null" >
+        ULID,
       </if>
-      <if test="did != null" >
-        DID,
+      <if test="uid != null" >
+        UID,
       </if>
-      <if test="dstid != null" >
-        DSTID,
-      </if>
-      <if test="dstname != null" >
-        DSTNAME,
-      </if>
-      <if test="dsipaddr != null" >
-        DSIPADDR,
-      </if>
-      <if test="dsport != null" >
-        DSPORT,
-      </if>
-      <if test="dsmac != null" >
-        DSMAC,
+      <if test="ulstatus != null" >
+        ULSTATUS,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="dsexid != null" >
-        #{dsexid,jdbcType=BIGINT},
+      <if test="ulid != null" >
+        #{ulid,jdbcType=SMALLINT},
       </if>
-      <if test="did != null" >
-        #{did,jdbcType=BIGINT},
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
       </if>
-      <if test="dstid != null" >
-        #{dstid,jdbcType=BIGINT},
-      </if>
-      <if test="dstname != null" >
-        #{dstname,jdbcType=VARCHAR},
-      </if>
-      <if test="dsipaddr != null" >
-        #{dsipaddr,jdbcType=CHAR},
-      </if>
-      <if test="dsport != null" >
-        #{dsport,jdbcType=INTEGER},
-      </if>
-      <if test="dsmac != null" >
-        #{dsmac,jdbcType=CHAR},
+      <if test="ulstatus != null" >
+        #{ulstatus,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.shcp.pojo.TbTestdevicesExample" resultType="java.lang.Integer" >
-    select count(*) from tb_testdevices
+  <select id="countByExample" parameterType="com.shcp.pojo.UserLimitRelationshipExample" resultType="java.lang.Integer" >
+    select count(*) from user_limit_relationship
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tb_testdevices
+    update user_limit_relationship
     <set >
-      <if test="record.dsexid != null" >
-        DSEXID = #{record.dsexid,jdbcType=BIGINT},
+      <if test="record.ulid != null" >
+        ULID = #{record.ulid,jdbcType=SMALLINT},
       </if>
-      <if test="record.did != null" >
-        DID = #{record.did,jdbcType=BIGINT},
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=BIGINT},
       </if>
-      <if test="record.dstid != null" >
-        DSTID = #{record.dstid,jdbcType=BIGINT},
-      </if>
-      <if test="record.dstname != null" >
-        DSTNAME = #{record.dstname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dsipaddr != null" >
-        DSIPADDR = #{record.dsipaddr,jdbcType=CHAR},
-      </if>
-      <if test="record.dsport != null" >
-        DSPORT = #{record.dsport,jdbcType=INTEGER},
-      </if>
-      <if test="record.dsmac != null" >
-        DSMAC = #{record.dsmac,jdbcType=CHAR},
+      <if test="record.ulstatus != null" >
+        ULSTATUS = #{record.ulstatus,jdbcType=BIT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -184,16 +154,28 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tb_testdevices
-    set DSEXID = #{record.dsexid,jdbcType=BIGINT},
-      DID = #{record.did,jdbcType=BIGINT},
-      DSTID = #{record.dstid,jdbcType=BIGINT},
-      DSTNAME = #{record.dstname,jdbcType=VARCHAR},
-      DSIPADDR = #{record.dsipaddr,jdbcType=CHAR},
-      DSPORT = #{record.dsport,jdbcType=INTEGER},
-      DSMAC = #{record.dsmac,jdbcType=CHAR}
+    update user_limit_relationship
+    set ULID = #{record.ulid,jdbcType=SMALLINT},
+      UID = #{record.uid,jdbcType=BIGINT},
+      ULSTATUS = #{record.ulstatus,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shcp.pojo.UserLimitRelationship" >
+    update user_limit_relationship
+    <set >
+      <if test="ulstatus != null" >
+        ULSTATUS = #{ulstatus,jdbcType=BIT},
+      </if>
+    </set>
+    where ULID = #{ulid,jdbcType=SMALLINT}
+      and UID = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.UserLimitRelationship" >
+    update user_limit_relationship
+    set ULSTATUS = #{ulstatus,jdbcType=BIT}
+    where ULID = #{ulid,jdbcType=SMALLINT}
+      and UID = #{uid,jdbcType=BIGINT}
   </update>
 </mapper>
