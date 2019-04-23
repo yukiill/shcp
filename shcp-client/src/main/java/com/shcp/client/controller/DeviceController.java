@@ -1,5 +1,6 @@
 package com.shcp.client.controller;
 
+import com.shcp.client.annotation.ValidatePermission;
 import com.shcp.client.service.DeviceService;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
@@ -29,6 +30,7 @@ public class DeviceController {
 
     @RequestMapping("/user/bindDid")
     @ResponseBody
+    @ValidatePermission
     public Object bindDevice(@RequestParam(value = "Deid") Long dstID, Object bw){
         User user = (User) httpSession.getAttribute("user");
         return CorsUtil.format(deviceService.bindDevice(dstID, user));
@@ -43,7 +45,7 @@ public class DeviceController {
 
     @RequestMapping("/user/device/status")
     @ResponseBody
-    public Object getDeviceStatus(@RequestParam Long deviceID, Object bw){
+    public Object getDeviceStatus(@RequestParam Long deviceID, @RequestParam(required = false) Object bw){
         return CorsUtil.format(ShcpResult.ok());
     }
 

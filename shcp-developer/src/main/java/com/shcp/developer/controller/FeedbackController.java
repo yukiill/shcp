@@ -48,40 +48,44 @@ public class FeedbackController {
 
     @RequestMapping("/repies")
     @ResponseBody
-    public Object showReplies(@RequestParam(required = false) Long FID, @RequestParam(defaultValue = "10", required = false) int rows,
+    public Object showReplies(@RequestParam(defaultValue = "10", required = false) int rows,
                               @RequestParam(defaultValue = "1", required = false) int page){
         Developer tbDeveloper = (Developer) session.getAttribute("duser");
-        return CorsUtil.format(feedbackService.getAllRepies(tbDeveloper, FID, rows, page));
+        return CorsUtil.format(feedbackService.getAllRepies(tbDeveloper, rows, page));
     }
 
 
     @RequestMapping("/replyfb")
     @ResponseBody
-    public Object addReply(@RequestParam String FbId, @RequestParam String fbContent, @RequestParam(required = false) Object bw){
+    public Object addReply(@RequestParam Long FID, @RequestParam Long UID, @RequestParam String rContent,
+                           @RequestParam String rTitle, @RequestParam(required = false) Object bw){
+        if(StringUtils.isEmpty(rContent) || StringUtils.isEmpty(rTitle)){
+            return ShcpResult.build(736, "请填写完所有必填项");
+        }
         Developer tbDeveloper = (Developer) session.getAttribute("duser");
-        return CorsUtil.format(feedbackService.replyFeedback(tbDeveloper, FbId, fbContent));
+        return CorsUtil.format(feedbackService.replyFeedback(tbDeveloper, FID, UID, rContent, rTitle));
     }
 
     @RequestMapping("/showfb")
     @ResponseBody
-    public Object getFeedback(@RequestParam String FbId, @RequestParam(required = false) Object bw){
+    public Object getFeedbackById(@RequestParam Long FID, @RequestParam(required = false) Object bw){
         Developer tbDeveloper = (Developer) session.getAttribute("duser");
-        return CorsUtil.format(feedbackService.getFeedbackByFID(tbDeveloper, FbId));
+        return CorsUtil.format(feedbackService.getFeedbackByFID(FID));
     }
 
     @RequestMapping("/searchfb")
     @ResponseBody
     public Object searchFeedback(){
-        //TODO 需要修复
+        //TODO 关键字查找
         Developer tbDeveloper = (Developer) session.getAttribute("duser");
         return CorsUtil.format("asd");
     }
 
     @RequestMapping("/browsefb")
     @ResponseBody
-    public Object getAllReply(@RequestParam Long FID, @RequestParam(defaultValue = "10", required = false) int rows,
+    public Object getAllReply(@RequestParam(defaultValue = "10", required = false) int rows,
                               @RequestParam(defaultValue = "1", required = false) int page, @RequestParam(required = false) Object bw){
         Developer tbDeveloper = (Developer) session.getAttribute("duser");
-        return CorsUtil.format(feedbackService.getAllRepies(tbDeveloper, FID, rows, page));
+        return CorsUtil.format(feedbackService.getAllRepies(tbDeveloper, rows, page));
     }
 }

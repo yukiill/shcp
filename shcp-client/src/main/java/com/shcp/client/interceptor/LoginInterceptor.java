@@ -33,7 +33,8 @@ public class LoginInterceptor implements HandlerInterceptor{
         Object currentUser = session.getAttribute("user");
         if(Objects.isNull(currentUser)){
             try(PrintWriter writer = response.getWriter()){
-                writer.println(JsonUtil.objectToJson(ShcpResult.build(100, "用户未登录")));
+                writer.write(Objects.requireNonNull(JsonUtil.objectToJson(ShcpResult.build(100, "用户未登录"))));
+                writer.flush();
             } catch (IOException e){
                 log.error("interceptor response error {}", e.getMessage());
             }

@@ -36,13 +36,21 @@ public class UserController {
 
     @RequestMapping(value = "/changeInfo")
     @ResponseBody
-    public Object changeInfo(@RequestParam(required = false, defaultValue = "") String email,
+    public Object changeInfo(@RequestParam(required = false, defaultValue = "") String username,
+                            @RequestParam(required = false, defaultValue = "") String email,
                              @RequestParam(required = false, defaultValue = "") String birthday,
                              @RequestParam(required = false, defaultValue = "") String introduction,
                              @RequestParam(required = false, defaultValue = "") String sex,
                                  @RequestParam(required = false) Object bw){
+        if(Objects.equals("", username) && Objects.equals("", email) && Objects.equals("", birthday)
+                && Objects.equals("", introduction) && Objects.equals("", sex)){
+            return CorsUtil.format(ShcpResult.build(700, "没有需要修改的数据"));
+        }
+        if(userService.usernameIsPresent(username)){
+            return CorsUtil.format(ShcpResult.build(652, "用户名已被注册"));
+        }
         User user = (User) session.getAttribute("user");
-        if(userService.changeInfo(user, email, birthday, introduction, sex)){
+        if(userService.changeInfo(user, username, email, birthday, introduction, sex)){
             return CorsUtil.format(ShcpResult.ok());
         }
         return CorsUtil.format(ShcpResult.build(500, "服务器内部错误"));
@@ -60,7 +68,7 @@ public class UserController {
         }
         user.setImg(result);
         if(userService.changeImg(user)){
-            return ShcpResult.ok();
+            return ShcpResult.ok(result);
         } else {
             return CorsUtil.format(ShcpResult.build(660, "修改失败"));
         }
@@ -68,7 +76,7 @@ public class UserController {
 
     @RequestMapping("/cancellation")
     @ResponseBody
-    public Object cancellation(Long userId, Object bw){
+    public Object cancellation(Long userId, @RequestParam(required = false) Object bw){
         if(userService.cancellation(userId)){
             return CorsUtil.format(ShcpResult.ok());
         } else {
@@ -85,16 +93,13 @@ public class UserController {
 
     @RequestMapping(value = "/changePwd")
     @ResponseBody
-    public Object changePwd(String nPwd, String rPwd, String email, Object bw){
+    public Object changePwd(String nPwd, String rPwd, @RequestParam(required = false) Object bw){
         User user = (User) session.getAttribute("user");
         if(StringUtils.isEmpty(nPwd)){
             return CorsUtil.format(ShcpResult.build(706, "密码不能为空"));
         }
         if(!Objects.equals(nPwd, rPwd)){
             return CorsUtil.format(ShcpResult.build(707, "密码和重复密码不一致"));
-        }
-        if(!StringUtil.isCorrect(email)){
-            return CorsUtil.format(ShcpResult.build(708, "邮箱格式不正确"));
         }
         return CorsUtil.format(userService.changePwd(user, nPwd));
     }
@@ -112,7 +117,7 @@ public class UserController {
             }
         }
         if(!userService.emailIsPresent(email)){
-            return CorsUtil.format(ShcpResult.build(715, "邮箱未绑定"));
+            return CorsUtil.format(ShcpResult.build(659, "邮箱未绑定"));
         }
         CookieUtil.addCookie(request, response);
         return emailService.sendForgetPassEmail(Long.parseLong(CookieUtil.getCookieValue(request)), email, nPwd, false);

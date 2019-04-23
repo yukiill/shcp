@@ -4,14 +4,17 @@ import com.shcp.common.pojo.ShcpResult;
 import com.shcp.dao.mapper.DeveloperInfoMapper;
 import com.shcp.developer.pojo.ExamineStatus;
 import com.shcp.developer.service.ExamineService;
+import com.shcp.developer.utils.FileUtil;
 import com.shcp.developer.utils.IdGenerator;
 import com.shcp.pojo.Developer;
 import com.shcp.pojo.DeveloperInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.Objects;
 
 /**
@@ -32,10 +35,9 @@ public class ExamineServiceImpl implements ExamineService{
         developerinfo.setDcaddr(dcAddr);
         developerinfo.setDcname(dcName);
         developerinfo.setDid(tbDeveloper.getDid());
-        developerinfo.setDcstatus(ExamineStatus.AUDITING);
+        developerinfo.setDcstatus(ExamineStatus.NOT_EXAMINED);
         developerinfo.setDcnumber(dcNumber);
-//        developerinfo.setDe(IdGenerator.generateExamineId());
-//        developerinfo.setDcaid((long) 0);
+        developerinfo.setDfid(IdGenerator.generateExamineId());
         developerinfoMapper.insertSelective(developerinfo);
         log.info("developerinfo:{} insert success", developerinfo);
         return ShcpResult.ok();
@@ -68,6 +70,25 @@ public class ExamineServiceImpl implements ExamineService{
         }
         developerinfoMapper.updateByPrimaryKeySelective(developerinfo);
         log.info("developerId:{} modified examineInfo examineId:{} success", tbDeveloper.getDid(), developerinfo.getDfid());
+        return ShcpResult.ok();
+    }
+
+    @Override
+    public ShcpResult submitExamine(Developer tbDeveloper, String dcName, String dcAddr, String crType, String dcNumber, MultipartFile positive, MultipartFile negitive) {
+        //TODO 这个接口待测试
+        DeveloperInfo developerinfo = new DeveloperInfo();
+        developerinfo.setDcaddr(dcAddr);
+        developerinfo.setDcname(dcName);
+        developerinfo.setDid(tbDeveloper.getDid());
+        developerinfo.setDcstatus(ExamineStatus.NOT_EXAMINED);
+        developerinfo.setDcnumber(dcNumber);
+        developerinfo.setDfid(IdGenerator.generateExamineId());
+        String positivePath = FileUtil.uploadFile(tbDeveloper.getUsername(), positive);
+        String negitivePath = FileUtil.uploadFile(tbDeveloper.getUsername(), negitive);
+        developerinfo.setPositiveimg(positivePath);
+        developerinfo.setNegitiveimg(negitivePath);
+        developerinfoMapper.insertSelective(developerinfo);
+        log.info("developerinfo:{} insert success", developerinfo);
         return ShcpResult.ok();
     }
 }

@@ -11,21 +11,25 @@ import org.springframework.web.multipart.MultipartFile;
 public interface DeviceExamineService {
 
     /**
-     * 添加一个新的设备审核
-     * @param DSEName 审核设备的名称
-     * @param DESType 设备类型
-     * @param DSETestID 测试设备的ID
-     * @param DSEFile 设备审核的文件
+     * 添加一个设备的审核
+     * @param developer 提交审核的开发者
+     * @param examineName 审核名称
+     * @param testDeviceId 测试设备ID
+     * @param examineInfo 附带的文件
      * @return 响应信息
      */
-    ShcpResult addDeviceExamine(Developer tbDeveloper, String DSEName, String DESType, String DSETestID, MultipartFile DSEFile);
+    ShcpResult addDeviceExamine(Developer developer, String examineName, long testDeviceId, MultipartFile examineInfo);
 
     /**
      * 查看设备的审核状态，默认是所有，否则根据测试设备编号来检索
-     * @param DSEXID 设备审核编号
+     * @param developer 开发者
+     * @param page 页数
+     * @param rows 单页容量
      * @return 响应信息
      */
-    ShcpResult showDeviceExamineStatus(String DSEXID);
+    ShcpResult showDeviceExamine(Developer developer, int page, int rows);
 
+    ShcpResult findDeviceExamineById(long DEID);
 
+    ShcpResult modifyDeviceExamine(Developer developer, long DEID, String examineName, long testDeviceId, MultipartFile examineInfo);
 }

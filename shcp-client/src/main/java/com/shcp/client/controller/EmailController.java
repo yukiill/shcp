@@ -4,11 +4,13 @@ import com.shcp.client.service.EmailService;
 import com.shcp.client.service.UserService;
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
+import com.shcp.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
 /**
@@ -22,9 +24,10 @@ public class EmailController {
 
     @Resource
     private UserService userService;
-
     @Resource
     private EmailService emailService;
+    @Resource
+    private HttpSession httpSession;
 
     @PostMapping(value = "/sendCheck")
     public String sendEmail(@RequestParam(value = "userId") Long userId, @RequestParam(value = "email") String emailAddress,
@@ -46,6 +49,16 @@ public class EmailController {
             return ShcpResult.build(713, "缺乏必要的信息，邮箱验证失败");
         }
         return emailService.check(userId, time);
+    }
+
+    @RequestMapping("/changeEmail")
+    @ResponseBody
+    public Object sendChangeEmail(String email, Boolean type){
+        if(Objects.isNull(email)){
+            return ShcpResult.build(713, "缺乏必要的信息，邮箱验证失败");
+        }
+        User user = (User) httpSession.getAttribute("user");
+        return emailService.sendChangeEmail(user, email, type);
     }
 
     @RequestMapping("/sendForget")

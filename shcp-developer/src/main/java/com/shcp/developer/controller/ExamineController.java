@@ -56,8 +56,11 @@ public class ExamineController {
 
     @RequestMapping("/modifyExamine")
     @ResponseBody
-    public Object modifyExamineInfo(@RequestParam(defaultValue = "", required = false) String dcName, @RequestParam(defaultValue = "", required = false) String dcAddr,
-                                    @RequestParam(defaultValue = "", required = false) String dcNumber, @RequestParam(required = false) Object bw){
+    public Object modifyExamineInfo(@RequestParam(defaultValue = "", required = false) String dcName,
+                                    @RequestParam(defaultValue = "", required = false) String dcAddr,
+                                    @RequestParam(defaultValue = "", required = false) String crType,
+                                    @RequestParam(defaultValue = "", required = false) String dcNumber,
+                                    @RequestParam(required = false) Object bw){
         if(Objects.equals("", dcName) && Objects.equals("", dcAddr) && Objects.equals("", dcNumber)){
             return CorsUtil.format(ShcpResult.build(721, "请输入有效的修改"));
         }

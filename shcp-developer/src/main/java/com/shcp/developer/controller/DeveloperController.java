@@ -36,7 +36,7 @@ public class DeveloperController {
 
     @RequestMapping("/cancellation")
     @ResponseBody
-    public ShcpResult cancellation(@RequestParam Long devID, Object bw){
+    public ShcpResult cancellation(@RequestParam Long devID, @RequestParam(required = false) Object bw){
         if(developerService.devCancellation(devID)){
             return ShcpResult.ok();
         } else {
@@ -46,16 +46,13 @@ public class DeveloperController {
 
     @PostMapping(value = "/changePwd")
     @ResponseBody
-    public ShcpResult changePwd(String nPwd, String rPwd, String email, Object bw, HttpServletRequest request){
+    public ShcpResult changePwd(String nPwd, String rPwd, @RequestParam(required = false) Object bw){
         Developer tbDeveloper = (Developer) session.getAttribute("duser");
         if(StringUtils.isEmpty(nPwd)){
             return ShcpResult.build(706, "密码不能为空");
         }
         if(Objects.equals(nPwd, rPwd)){
             return ShcpResult.build(707, "密码和重复密码不一致");
-        }
-        if(!StringUtil.isCorrect(email)){
-            return ShcpResult.build(708, "邮箱格式不正确");
         }
         tbDeveloper.setPassword(nPwd);
         developerService.changePwd(tbDeveloper);
@@ -75,7 +72,7 @@ public class DeveloperController {
             }
         }
         if(!developerService.emailIsPresent(email)){
-            return CorsUtil.format(ShcpResult.build(715, "邮箱未绑定"));
+            return CorsUtil.format(ShcpResult.build(659, "用户未注册"));
         }
         CookieUtil.addCookie(request, response);
         return emailService.sendForgetPassEmail(Long.parseLong(CookieUtil.getCookieValue(request)), email, nPwd, false);

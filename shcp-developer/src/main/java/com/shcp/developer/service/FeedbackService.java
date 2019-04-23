@@ -11,13 +11,13 @@ public interface FeedbackService {
 
     ShcpResult submitDevFeedback(Developer tbDeveloper, String content, String title);
 
-    ShcpResult getAllRepies(Developer tbDeveloper, Long FID, int rows, int page);
+    ShcpResult getAllRepies(Developer tbDeveloper, int rows, int page);
 
     ShcpResult getAllFeedback(Developer tbDeveloper, int rows, int page);
 
-    ShcpResult getFeedbackByFID(Developer tbDeveloper, String FbId);
+    ShcpResult getFeedbackByFID(long FID);
 
     ShcpResult getFeedbackByWd(Developer tbDeveloper,String wd, int rows, int page);
 
-    ShcpResult replyFeedback(Developer tbDeveloper, String FbId, String fbContent);
+    ShcpResult replyFeedback(Developer developer, long FID, long UID, String rContent, String rTitle);
 }

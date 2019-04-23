@@ -2,6 +2,7 @@ package com.shcp.developer.service;
 
 import com.shcp.common.pojo.ShcpResult;
 import com.shcp.pojo.Developer;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Yuki
@@ -10,6 +11,9 @@ import com.shcp.pojo.Developer;
 public interface ExamineService {
 
     ShcpResult submitExamine(Developer tbDeveloper, String dcName, String dcAddr, String crType, String dcNumber);
+
+    ShcpResult submitExamine(Developer tbDeveloper, String dcName, String dcAddr,
+                             String crType, String dcNumber, MultipartFile positive, MultipartFile negitive);
 
     ShcpResult showDevExamineStatus(Developer tbDeveloper);
 

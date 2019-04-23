@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
 /**
@@ -31,12 +32,14 @@ public class LoginController {
     private UserService userService;
     @Resource
     private EmailService emailService;
+    @Resource
+    private HttpSession session;
 
     @RequestMapping(value = "/user/login")
     @ResponseBody
     public Object login(@RequestParam String userName, @RequestParam String password,
                         @RequestParam(required = false) String TerID, @RequestParam(required = false) String pageID,
-                        @RequestParam(required = false) Object bw, HttpServletRequest request){
+                        @RequestParam(required = false) Object bw){
         if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)){
             return CorsUtil.format(ShcpResult.build(650, "用户名或密码为空"));
         }
@@ -44,7 +47,7 @@ public class LoginController {
         if(Objects.isNull(user)){
             return CorsUtil.format(ShcpResult.build(651, "用户名或密码错误"));
         }
-        request.getSession().setAttribute("user", user);
+        session.setAttribute("user", user);
         return CorsUtil.format(ShcpResult.ok());
     }
 
@@ -59,8 +62,7 @@ public class LoginController {
     @ResponseBody
     public Object register(@RequestParam String userName, @RequestParam String password,
                            @RequestParam String repassword, @RequestParam String email, @RequestParam(required = false) String pageID,
-                           @RequestParam(required = false) String TerID, @RequestParam(required = false) Object bw,
-                           Model model){
+                           @RequestParam(required = false) String TerID, @RequestParam(required = false) Object bw){
         RegisterCachePool registerCachePool = RegisterCachePool.getInstance();
         if(StringUtils.isEmpty(userName)){
             return CorsUtil.format(ShcpResult.build(710, "用户名为空"));

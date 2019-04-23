@@ -11,11 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -30,7 +33,7 @@ public class EmailServiceImpl implements EmailService{
     @Resource
     private JavaMailSender javaMailSender;
     @Resource
-    private UserMapper tbUserMapper;
+    private UserMapper userMapper;
 
     @Override
     public ShcpResult checkForgetPass(Long time) {
@@ -44,7 +47,7 @@ public class EmailServiceImpl implements EmailService{
             log.info("verify forgetPass email expired");
             return ShcpResult.build(655, "超过验证时限，请重新发送验证邮件");
         }
-        tbUserMapper.updateByPrimaryKeySelective(cacheUser.getUser());
+        userMapper.updateByPrimaryKeySelective(cacheUser.getUser());
         return ShcpResult.ok();
     }
 
@@ -62,13 +65,36 @@ public class EmailServiceImpl implements EmailService{
         }
         User tbUser = cacheUser.getUser();
         if(Objects.equals(tbUser.getUid(), userId)) {
-            tbUserMapper.insertSelective(tbUser);
+            userMapper.insertSelective(tbUser);
             FileUtil.mkdirForUser(tbUser.getUsername());
             log.info("userId:{} time:{} check successful verification", userId, time);
             registerCachePool.remove(time);
             return ShcpResult.ok();
         }
         return ShcpResult.build(714, "验证失败");
+    }
+
+    @Override
+    public boolean checkChangeEmail(long userId, long time, String email) {
+        ChangeEmailPool changeEmailPool = ChangeEmailPool.getInstance();
+        CacheUser cacheUser = changeEmailPool.get(time);
+        if(Objects.isNull(cacheUser)){
+            log.info("this is no corresponding object userId:{} time:{}", userId, time);
+            return false;
+        }
+        if(cacheUser.isExpired()){
+            log.info("userId:{} verify email expired", userId);
+            return false;
+        }
+        User tbUser = cacheUser.getUser();
+        if(Objects.equals(tbUser.getUid(), userId)) {
+            tbUser.setEmail(email);
+            userMapper.updateByPrimaryKeySelective(tbUser);
+            log.info("userId:{} time:{} change email successful", userId, time);
+            changeEmailPool.remove(time);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -97,7 +123,7 @@ public class EmailServiceImpl implements EmailService{
             UserExample tbUserExample = new UserExample();
             tbUserExample.createCriteria()
                     .andEmailEqualTo(email);
-            User tbUser = tbUserMapper.selectByExample(tbUserExample).get(0);
+            User tbUser = userMapper.selectByExample(tbUserExample).get(0);
             if(Objects.isNull(tbUser)){
                 log.info("email:{} haven't opposite user", email);
                 return ShcpResult.build(715, "邮箱未绑定");
@@ -117,6 +143,21 @@ public class EmailServiceImpl implements EmailService{
         }
         log.info("excess to send forgetPass email");
         return ShcpResult.build(712, "在短时间内请求过多，请等一段时间后再尝试");
+    }
+
+    @Override
+    public ShcpResult sendChangeEmail(User user, String email, boolean type) {
+        if(Objects.equals(user.getEmail(), email)){
+            return ShcpResult.build(735, "邮箱不能为空");
+        }
+        if(!StringUtils.isEmpty(userMapper.selectByEmail(email))){
+            return ShcpResult.build(712, "邮箱已被绑定");
+        }
+        sendEmail(TextTemplate.getCheckEmailSubject(),
+                TextTemplate.getChangeEmailTemplate(user.getUid(), new Date().getTime(), email), email, type);
+        ChangeEmailPool changeEmailPool = ChangeEmailPool.getInstance();
+        changeEmailPool.add(user, new Date().getTime());
+        return ShcpResult.ok();
     }
 
     @Override

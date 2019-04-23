@@ -4,6 +4,7 @@ import com.gracelie.shcp.cpcsconn.config.Configuration;
 import com.gracelie.shcp.cpcsconn.config.sendmessage.Message;
 import com.gracelie.shcp.cpcsconn.config.sendmessage.MessageUtils;
 import com.gracelie.shcp.cpcsconn.config.sendmessage.SendMessage;
+import com.shcp.client.annotation.ValidatePermission;
 import com.shcp.client.service.DeviceService;
 import com.shcp.client.utils.MessageUtil;
 import com.shcp.common.pojo.ShcpResult;

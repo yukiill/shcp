@@ -9,5 +9,5 @@ import com.shcp.pojo.Developer;
  */
 public interface ProtocolService {
 
-    ShcpResult agreeDevProtocol(Developer tbDeveloper, String isAgree);
+    ShcpResult agreeDevProtocol(Developer tbDeveloper, Integer isAgree);
 }

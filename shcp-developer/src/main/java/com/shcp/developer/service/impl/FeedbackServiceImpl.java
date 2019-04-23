@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Yuki
@@ -27,31 +28,36 @@ public class FeedbackServiceImpl implements FeedbackService{
     @Resource
     private ReplyMapper replyMapper;
 
+    private static final byte INIT_CHECK = 0;
+    private static final byte INIT_REPLY = 0;
+    private static final byte DEVELOPER_TYPE = 0;
+    private static final long TO_MANAGER = 0;
+
     @Override
     public ShcpResult submitDevFeedback(Developer tbDeveloper, String content, String title) {
         Feedback feedback = new Feedback();
         feedback.setFcontent(content);
         feedback.setFid(IdGenerator.generateFeedbackId());
-        feedback.setFromUserType((byte) 2);
-        feedback.setToUserId((long) 0);
+        feedback.setFromUserType(DEVELOPER_TYPE);
+        feedback.setToUserId(TO_MANAGER);
         feedback.setFromUserId(tbDeveloper.getDid());
-        feedback.setIsCheck((byte) 0);
-        feedback.setIsReply((byte) 0);
+        feedback.setIsCheck(INIT_CHECK);
+        feedback.setIsReply(INIT_REPLY);
         feedbackMapper.insertSelective(feedback);
         log.info("devID:{} submit feedback success", tbDeveloper.getDid());
         return ShcpResult.ok();
     }
 
     @Override
-    public ShcpResult getAllRepies(Developer tbDeveloper, Long FID, int rows, int page) {
-        //TODO 拆分成分页和单独查询
+    public ShcpResult getAllRepies(Developer tbDeveloper, int rows, int page) {
         PageHelper.startPage(page, rows);
         ReplyExample example = new ReplyExample();
         example.createCriteria()
                 .andToUserIdEqualTo(tbDeveloper.getDid());
         List<Reply> tbReplyList = replyMapper.selectByExample(example);
         PageInfo<Reply> pageInfo = new PageInfo<>(tbReplyList);
-        return ShcpResult.ok(pageInfo.getList());
+        log.info("devId:{} get page:{} rows:{} replyData success", tbDeveloper.getDid(), page, rows);
+        return ShcpResult.ok(pageInfo);
     }
 
     @Override
@@ -71,40 +77,23 @@ public class FeedbackServiceImpl implements FeedbackService{
     }
 
     @Override
-    public ShcpResult replyFeedback(Developer tbDeveloper, String FbId, String fbContent) {
+    public ShcpResult replyFeedback(Developer developer, long FID, long UID, String rContent, String rTitle) {
         Reply tbReply = new Reply();
-        long FID;
-        try {
-            FID = Long.parseLong(FbId);
-        } catch (NumberFormatException e) {
-            log.info("input FID:{} is invalid", FbId);
-            return ShcpResult.build(726, "没有相应的反馈编号");
-        }
         tbReply.setFid(FID);
-        tbReply.setDid(tbDeveloper.getDid());
-        tbReply.setRcontent(fbContent);
-        //TODO 添加一个标题的普通用户ID
-        tbReply.setToUserId(new Long(0));
+        tbReply.setDid(developer.getDid());
+        tbReply.setRcontent(rContent);
+        tbReply.setRtitle(rContent);
+        tbReply.setToUserId(UID);
+        tbReply.setRid(IdGenerator.generateReplyId());
         replyMapper.insertSelective(tbReply);
-        log.info("devId:{} insert new reply to FID:{} success", tbDeveloper.getDid(), FID);
+        log.info("devId:{} insert new reply to FID:{} success", developer.getDid(), FID);
         return ShcpResult.ok();
     }
 
     @Override
-    public ShcpResult getFeedbackByFID(Developer tbDeveloper, String FbId) {
-        //TODO 接口作用不清晰，需要切分
-        long FID;
-        try {
-            FID = Long.parseLong(FbId);
-        } catch (NumberFormatException e) {
-            FID = 0;
-        }
-        FeedbackExample tbUserfeedbackExample = new FeedbackExample();
-        tbUserfeedbackExample.createCriteria()
-                .andToUserIdEqualTo(tbDeveloper.getDid())
-                .andFidEqualTo(FID);
-        Feedback tbUserfeedback = feedbackMapper.selectByExample(tbUserfeedbackExample).get(0);
-        log.info("devId:{} get feedback FID:{} success", tbDeveloper.getDid(), FID);
-        return ShcpResult.ok(tbUserfeedback);
+    public ShcpResult getFeedbackByFID(long FID) {
+        Feedback feedback = feedbackMapper.selectByPrimaryKey(FID);
+        log.info("feedback FID:{} success", FID);
+        return ShcpResult.ok(feedback);
     }
 }

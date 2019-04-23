@@ -30,10 +30,6 @@ public class UserServiceImpl implements UserService{
 
     @Resource
     private UserMapper userMapper;
-    @Resource
-    private FeedbackMapper feedbackMapper;
-    @Resource
-    private ReplyMapper replyMapper;
 
     @Override
     public User login(String userName, String password, String TerID) {
@@ -70,9 +66,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Boolean changeInfo(User user, String email, String birthday, String introduction, String sex) {
+    public Boolean changeInfo(User user, String username, String email, String birthday, String introduction, String sex) {
         boolean isChanged = false;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        if(!StringUtils.isEmpty(username) && !Objects.equals(email, user.getUsername())){
+            isChanged = true;
+            user.setUsername(username);
+        }
         if(!StringUtils.isEmpty(email) && !Objects.equals(email, user.getEmail())){
             isChanged = true;
             user.setEmail(email);
@@ -112,22 +112,6 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ShcpResult submitFeedback(User user, String content, String title, Short type) {
-        //TODO 应该新加一个开发者ID参数
-        Feedback feedback = new Feedback();
-        feedback.setFcontent(content);
-        feedback.setFromUserId(user.getUid());
-        feedback.setFromUserType((byte) 1);
-        feedback.setFid(IdGenerator.generateFeedbackId());
-        feedback.setFtitle(title);
-        feedback.setIsCheck((byte) 0);
-        feedback.setIsReply((byte) 0);
-        feedbackMapper.insertSelective(feedback);
-        log.info("userId:{} submit feedback success", user.getUid());
-        return ShcpResult.ok();
-    }
-
-    @Override
     public ShcpResult getUserInfo(Long userId) {
         if(Objects.isNull(userId)){
             return ShcpResult.build(705, "用户状态异常");
@@ -157,22 +141,6 @@ public class UserServiceImpl implements UserService{
             return ShcpResult.build(659, "用户未注册");
         }
         return ShcpResult.ok();
-    }
-
-    @Override
-    public ShcpResult getAllReplies(Long UID, String UfbID) {
-        Long FID = null;
-        if(!StringUtils.isEmpty(UfbID)){
-            FID = Long.parseLong(UfbID);
-        }
-//        List<Reply> tbReplies = replyMapper.getAllRepliesWithBLOBs(UID, FID);
-        //TODO 应该拆分成分页和单独查询。
-        ReplyExample replyExample = new ReplyExample();
-        replyExample.createCriteria()
-                .andToUserIdEqualTo(UID);
-        List<Reply> tbReplies = replyMapper.selectByExample(replyExample);
-        log.info("UID:{} query replyID:{} success", UID, UfbID);
-        return ShcpResult.ok(tbReplies);
     }
 
     @Override

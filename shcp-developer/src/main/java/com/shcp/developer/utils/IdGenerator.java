@@ -51,5 +51,13 @@ public class IdGenerator {
         return System.nanoTime() * 9;
     }
 
+    public synchronized  static long generateReplyId(){
+        return System.currentTimeMillis();
+    }
+
+    public synchronized  static long generateDeviceExamineId(){
+        return System.currentTimeMillis() * 2;
+    }
+
 
 }

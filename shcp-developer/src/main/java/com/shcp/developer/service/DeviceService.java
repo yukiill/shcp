@@ -10,15 +10,15 @@ import com.shcp.pojo.Device;
  */
 public interface DeviceService {
 
-    Device searchDevice(String Dsid);
+    Device searchDevice(long deid);
 
-    ShcpResult addDevice(Developer tbDeveloper, String Dsid, String DSname, String DStype, String DSmac, boolean isTest);
+    ShcpResult addDevice(Developer tbDeveloper, String deName, String deMac, long DETID, long DEID);
 
-    ShcpResult deleteDevice(String Dsid);
+    ShcpResult deleteDevice(long DEID);
 
     ShcpResult addDeviceType(String DSTypeName);
 
-    ShcpResult addDeviceStatus(Long tid, String desname, String destype, String defaultValue, String minValue, String maxValue);
+    ShcpResult addDeviceStatus(Long DETID, String desname, String destype, String defaultValue, String minValue, String maxValue);
 
-    ShcpResult addDevCtrl(Long DSTypeID, String DsCtrlName, String DsCtrlKey, String DsCtrlValue, String DsCtrlValTy);
+    ShcpResult addDevCtrl(Long DETID, String decName, String decKey, String decValue, String decType);
 }

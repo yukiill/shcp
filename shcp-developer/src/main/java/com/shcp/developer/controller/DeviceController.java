@@ -27,8 +27,8 @@ public class DeviceController {
 
     @RequestMapping("/duser/searchdevice")
     @ResponseBody
-    public Object searchDevice(@RequestParam String Dsid, @RequestParam(required = false) Object bw){
-        if(StringUtils.isEmpty(Dsid)){
+    public Object searchDevice(@RequestParam(defaultValue = "0") Long Dsid, @RequestParam(required = false) Object bw){
+        if(Dsid == 0){
             return CorsUtil.format(ShcpResult.build(723, "输入的设备编号无效"));
         }
         Device tbDevice = deviceService.searchDevice(Dsid);
@@ -37,9 +37,9 @@ public class DeviceController {
 
     @RequestMapping("/duser/delDervice")
     @ResponseBody
-    public Object deleteDevice(@RequestParam String Dsid, @RequestParam(required = false) Object bw){
-        if(StringUtils.isEmpty(Dsid)){
-            return CorsUtil.format(ShcpResult.build(723, "输入的设备编号无效"));
+    public Object deleteDevice(@RequestParam Long Dsid, @RequestParam(required = false) Object bw){
+        if(Dsid == 0){
+            return CorsUtil.format(ShcpResult.build(664, "输入的设备编号无效"));
         }
         return CorsUtil.format(deviceService.deleteDevice(Dsid));
     }
@@ -83,7 +83,7 @@ public class DeviceController {
     public Object addDeviceCtrl(@RequestParam Long DSTypeID, @RequestParam String DsCtrlName, @RequestParam String DsCtrlkey,
                                 @RequestParam String DsCtrlValue, @RequestParam String DsCtrlValTy, @RequestParam(required = false) Object bw){
         if(Objects.isNull(DSTypeID)){
-            return CorsUtil.format(ShcpResult.build(727, "请选择正确的设备类型"));
+            return CorsUtil.format(ShcpResult.build(666, "请选择正确的设备类型"));
         }
         if(StringUtils.isEmpty(DsCtrlName)){
             return CorsUtil.format(ShcpResult.build(728, "控制字段名称不能为空"));

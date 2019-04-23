@@ -17,13 +17,11 @@ public interface UserService {
 
     Boolean emailIsPresent(String email);
 
-    Boolean changeInfo(User user, String email, String birthday, String introduction, String sex);
+    Boolean changeInfo(User user, String username, String email, String birthday, String introduction, String sex);
 
     Boolean changeImg(User user);
 
     Boolean cancellation(Long userId);
-
-    ShcpResult submitFeedback(User user, String content, String title, Short type);
 
     ShcpResult getUserInfo(Long userId);
 
@@ -31,5 +29,4 @@ public interface UserService {
 
     ShcpResult forgetPwd(String newPass, String email);
 
-    ShcpResult getAllReplies(Long UID, String UfbID);
 }

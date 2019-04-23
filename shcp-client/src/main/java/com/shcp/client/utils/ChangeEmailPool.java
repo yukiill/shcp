@@ -8,26 +8,26 @@ import java.util.*;
 
 /**
  * @author Yuki
- * @date 2019/4/10 13:13
+ * @date 2019/4/23 15:28
  */
 @Slf4j
-public class ForgetPasswordPool {
+public class ChangeEmailPool {
 
-    private static Map<Long, CacheUser> forgetCache = Collections.synchronizedMap(new HashMap<>());
+    private static Map<Long, CacheUser> changeEmailCache = Collections.synchronizedMap(new HashMap<>());
 
-    private static final Class CLASS_LOCK = ForgetPasswordPool.class;
+    private static final Class CLASS_LOCK = ChangeEmailPool.class;
 
-    private volatile static ForgetPasswordPool forgetPasswordPool;
+    private volatile static ChangeEmailPool changeEmailPool;
 
-    private ForgetPasswordPool(){}
+    private ChangeEmailPool(){}
 
-    public static ForgetPasswordPool getInstance(){
-        if(forgetPasswordPool == null){
+    public static ChangeEmailPool getInstance(){
+        if(changeEmailPool == null){
             synchronized (CLASS_LOCK){
-                forgetPasswordPool = new ForgetPasswordPool();
+                changeEmailPool = new ChangeEmailPool();
             }
         }
-        return forgetPasswordPool;
+        return changeEmailPool;
     }
 
     public synchronized CacheUser add(User user, Long time){
@@ -36,7 +36,7 @@ public class ForgetPasswordPool {
         }
         CacheUser cacheUser = get(time);
         if(Objects.isNull(cacheUser)){
-            cacheUser = forgetCache.put(time, new CacheUser(user, new Date()));
+            cacheUser = changeEmailCache.put(time, new CacheUser(user, new Date()));
         }
         log.info("put userId:{} into forgetCache", user.getUid());
         return cacheUser;
@@ -47,7 +47,7 @@ public class ForgetPasswordPool {
             log.error("time is null");
             return null;
         }
-        return forgetCache.get(time);
+        return changeEmailCache.get(time);
     }
 
     public synchronized boolean remove(Long time){
@@ -55,6 +55,7 @@ public class ForgetPasswordPool {
             return false;
         }
         log.info("key:{} remove from registerCache", time);
-        return forgetPasswordPool.remove(time);
+        return changeEmailPool.remove(time);
     }
+
 }

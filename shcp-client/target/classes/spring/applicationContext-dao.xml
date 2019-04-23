@@ -32,7 +32,7 @@
             <property name="maxPoolSize" value="15"/>
         </bean>
 
-        <!--配置sqlSessionFactory-->
+        <!--&lt;!&ndash;配置sqlSessionFactory&ndash;&gt;-->
         <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
             <property name="dataSource" ref="dataSource"/>
             <!--加载mybaits全局配置文件-->
@@ -43,6 +43,5 @@
             <property name="basePackage" value="com.shcp.dao.mapper"/>
             <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         </bean>
-
 
 </beans>

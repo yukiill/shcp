@@ -34,7 +34,7 @@ public class LoginController {
     @Resource
     private HttpSession session;
 
-    @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(value = "/login")
     @ResponseBody
     public Object login(@RequestParam String userName, @RequestParam String password,
                         @RequestParam(required = false) String TerID, @RequestParam(required = false) String pageID,

@@ -1,10 +1,16 @@
 package com.shcp.developer.service.impl;
 
+import com.mysql.cj.api.Session;
 import com.shcp.common.pojo.ShcpResult;
+import com.shcp.dao.mapper.DeveloperMapper;
 import com.shcp.developer.service.ProtocolService;
 import com.shcp.pojo.Developer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Yuki
@@ -14,9 +20,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProtocolServiceImpl implements ProtocolService{
 
+    @Resource
+    private DeveloperMapper developerMapper;
+
     @Override
-    public ShcpResult agreeDevProtocol(Developer tbDeveloper, String isAgree) {
-        //TODO 等待新的表结构后，将同意的记录插入到数据库中
-        return null;
+    public ShcpResult agreeDevProtocol(Developer tbDeveloper, Integer isAgree) {
+        tbDeveloper.setIsAgree(isAgree.byteValue());
+        developerMapper.updateByPrimaryKeySelective(tbDeveloper);
+        log.info("devId:{} agree developerProtocol", tbDeveloper.getDid());
+        return ShcpResult.ok();
     }
 }

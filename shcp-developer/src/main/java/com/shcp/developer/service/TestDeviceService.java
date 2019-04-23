@@ -20,13 +20,6 @@ public interface TestDeviceService {
      */
     ShcpResult addTestDevice(Developer tbDeveloper, String tdeName, String ipaddr, int port, String tdemac);
 
-    /**
-     * 根据参数是否为0来判断是查询一个还是查询全部
-     * @param tdeID 测试设备编号
-     * @return 响应内容
-     */
-    ShcpResult searchTestDevice(Long tdeID);
-
     ShcpResult addTestDeviceType(Developer tbDeveloper, String tdesName);
 
     ShcpResult addTestDeviceStatus(Long tdsID, String tdesName, String tdesType, String tdesDefaultValue, String tdesMinValue, String tdesMaxValue);
@@ -34,4 +27,29 @@ public interface TestDeviceService {
     ShcpResult addTestDeviceLimit(Long tdsID, String tdelName, String tdelKey, String tdelValue);
 
     ShcpResult addTestDeviceControl(Long tdsID, String tdecName, String tdecKey, String tdecValue);
+
+    /**
+     * 根据参数是否为0来判断是查询一个还是查询全部
+     * @param tdeID 测试设备编号
+     * @return 响应内容
+     */
+    ShcpResult searchTestDevice(Long tdeID);
+
+    ShcpResult searchTestDeviceType(long TDSID);
+
+    ShcpResult searchTestDeviceStatus(long TDESID);
+
+    ShcpResult searchTestDeviceControl(long TDECID);
+
+    ShcpResult searchTestDeviceLimit(long TDELID);
+
+    ShcpResult getAllTestDeviceTypes(Developer developer);
+
+    ShcpResult searchTestDevice(Developer developer, int page, int rows);
+
+    ShcpResult searchTestDeviceStatus(long TDSID, int page, int rows);
+
+    ShcpResult searchTestDeviceControl(long TDSID, int page, int rows);
+
+    ShcpResult searchTestDeviceLimit(long TDSID, int page, int rows);
 }

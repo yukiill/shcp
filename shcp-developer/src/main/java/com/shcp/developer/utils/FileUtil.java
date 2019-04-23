@@ -38,7 +38,7 @@ public class FileUtil {
         }
     }
 
-    public static String uploadHeadImage(String username, MultipartFile multipartFile) {
+    public static String uploadFile(String username, MultipartFile multipartFile) {
         if(Objects.isNull(multipartFile)){
             log.error("username:{} input files is null", username);
             throw new RuntimeException("input file should not be null");
