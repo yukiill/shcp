@@ -4,6 +4,7 @@ import com.shcp.common.pojo.ShcpResult;
 import com.shcp.common.utils.CorsUtil;
 import com.shcp.manager.service.DeveloperService;
 import com.shcp.manager.service.DeviceService;
+import com.shcp.pojo.Developer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -35,8 +36,7 @@ public class DeveloperController {
             return CorsUtil.format(ShcpResult.build(723, "输入的设备编号无效"));
         }
         Long _did = deviceService.searchDevice(DVid).getDid();
-        TbDeveloper tbDeveloper = developerService.searchDeveloper( _did.toString());
-//        System.out.println(tbDeveloper.getDevname());
+        Developer tbDeveloper = developerService.searchDeveloper( _did.toString());
         return ShcpResult.ok(tbDeveloper);
 
     }
