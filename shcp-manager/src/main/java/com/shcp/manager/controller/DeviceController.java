@@ -167,7 +167,7 @@ public class DeviceController {
 
     @RequestMapping("/control/{DECID}")
     @ResponseBody
-    public Object getDeviceControl(Long DECID){
+    public Object getDeviceControl(@PathVariable Long DECID){
         return CorsUtil.format(deviceService.getDeviceControlsById(DECID));
     }
 

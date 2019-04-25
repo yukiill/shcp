@@ -295,6 +295,136 @@ public class DeviceExamineExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsPassIsNull() {
+            addCriterion("is_pass is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassIsNotNull() {
+            addCriterion("is_pass is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassEqualTo(Byte value) {
+            addCriterion("is_pass =", value, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassNotEqualTo(Byte value) {
+            addCriterion("is_pass <>", value, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassGreaterThan(Byte value) {
+            addCriterion("is_pass >", value, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassGreaterThanOrEqualTo(Byte value) {
+            addCriterion("is_pass >=", value, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassLessThan(Byte value) {
+            addCriterion("is_pass <", value, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassLessThanOrEqualTo(Byte value) {
+            addCriterion("is_pass <=", value, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassIn(List<Byte> values) {
+            addCriterion("is_pass in", values, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassNotIn(List<Byte> values) {
+            addCriterion("is_pass not in", values, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassBetween(Byte value1, Byte value2) {
+            addCriterion("is_pass between", value1, value2, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPassNotBetween(Byte value1, Byte value2) {
+            addCriterion("is_pass not between", value1, value2, "isPass");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonIsNull() {
+            addCriterion("reason is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonIsNotNull() {
+            addCriterion("reason is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonEqualTo(String value) {
+            addCriterion("reason =", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotEqualTo(String value) {
+            addCriterion("reason <>", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonGreaterThan(String value) {
+            addCriterion("reason >", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonGreaterThanOrEqualTo(String value) {
+            addCriterion("reason >=", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonLessThan(String value) {
+            addCriterion("reason <", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonLessThanOrEqualTo(String value) {
+            addCriterion("reason <=", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonLike(String value) {
+            addCriterion("reason like", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotLike(String value) {
+            addCriterion("reason not like", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonIn(List<String> values) {
+            addCriterion("reason in", values, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotIn(List<String> values) {
+            addCriterion("reason not in", values, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonBetween(String value1, String value2) {
+            addCriterion("reason between", value1, value2, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotBetween(String value1, String value2) {
+            addCriterion("reason not between", value1, value2, "reason");
+            return (Criteria) this;
+        }
+
         public Criteria andGmtCreateIsNull() {
             addCriterion("GMT_CREATE is null");
             return (Criteria) this;

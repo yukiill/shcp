@@ -5,6 +5,8 @@ public class TestDeviceType {
 
     private String tdsname;
 
+    private Long did;
+
     public Long getTdsid() {
         return tdsid;
     }
@@ -19,5 +21,13 @@ public class TestDeviceType {
 
     public void setTdsname(String tdsname) {
         this.tdsname = tdsname == null ? null : tdsname.trim();
+    }
+
+    public Long getDid() {
+        return did;
+    }
+
+    public void setDid(Long did) {
+        this.did = did;
     }
 }

@@ -51,8 +51,8 @@ public class DeviceServiceImpl implements DeviceService {
             } catch (NumberFormatException e) {
                 return ShcpResult.build(702, "输入的数据不合法");
             }
-            User user = userMapper.selectByPrimaryKey(deid);
-            return ShcpResult.ok(user);
+            Device device = deviceMapper.selectByPrimaryKey(deid);
+            return ShcpResult.ok(device);
         } else  if(Objects.equals("p", type)){
             //设备名称
             DeviceExample example = new DeviceExample();

@@ -31,6 +31,7 @@
             <tx:method name="create*" propagation="REQUIRED"/>
             <tx:method name="delete*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="modify*" propagation="REQUIRED"/>
             <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
             <tx:method name="select*" propagation="REQUIRED" read-only="true"/>
             <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
@@ -39,6 +40,6 @@
     <!--切面-->
     <aop:config>
         <!--第一个*是任意返回值，第二个*是任意包，第三个*是任意方法，(..)是任意参数-->
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.shcp.client.service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.shcp.manager.service.*.*(..))"/>
     </aop:config>
 </beans>

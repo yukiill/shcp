@@ -233,6 +233,66 @@ public class TestDeviceTypeExample {
             addCriterion("TDSNAME not between", value1, value2, "tdsname");
             return (Criteria) this;
         }
+
+        public Criteria andDidIsNull() {
+            addCriterion("DID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidIsNotNull() {
+            addCriterion("DID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidEqualTo(Long value) {
+            addCriterion("DID =", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidNotEqualTo(Long value) {
+            addCriterion("DID <>", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidGreaterThan(Long value) {
+            addCriterion("DID >", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidGreaterThanOrEqualTo(Long value) {
+            addCriterion("DID >=", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidLessThan(Long value) {
+            addCriterion("DID <", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidLessThanOrEqualTo(Long value) {
+            addCriterion("DID <=", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidIn(List<Long> values) {
+            addCriterion("DID in", values, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidNotIn(List<Long> values) {
+            addCriterion("DID not in", values, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidBetween(Long value1, Long value2) {
+            addCriterion("DID between", value1, value2, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidNotBetween(Long value1, Long value2) {
+            addCriterion("DID not between", value1, value2, "did");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

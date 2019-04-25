@@ -9,6 +9,10 @@ public class DeviceExamine {
 
     private String ename;
 
+    private Byte isPass;
+
+    private String reason;
+
     private Date gmtCreate;
 
     private Date gmtModify;
@@ -37,6 +41,22 @@ public class DeviceExamine {
 
     public void setEname(String ename) {
         this.ename = ename == null ? null : ename.trim();
+    }
+
+    public Byte getIsPass() {
+        return isPass;
+    }
+
+    public void setIsPass(Byte isPass) {
+        this.isPass = isPass;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason == null ? null : reason.trim();
     }
 
     public Date getGmtCreate() {

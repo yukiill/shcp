@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.shcp.pojo.TestDeviceType" >
     <id column="TDSID" property="tdsid" jdbcType="BIGINT" />
     <result column="TDSNAME" property="tdsname" jdbcType="VARCHAR" />
+    <result column="DID" property="did" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    TDSID, TDSNAME
+    TDSID, TDSNAME, DID
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.TestDeviceTypeExample" >
     select
@@ -97,8 +98,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.shcp.pojo.TestDeviceType" >
-    insert into test_device_type (TDSID, TDSNAME)
-    values (#{tdsid,jdbcType=BIGINT}, #{tdsname,jdbcType=VARCHAR})
+    insert into test_device_type (TDSID, TDSNAME, DID
+      )
+    values (#{tdsid,jdbcType=BIGINT}, #{tdsname,jdbcType=VARCHAR}, #{did,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.shcp.pojo.TestDeviceType" >
     insert into test_device_type
@@ -109,6 +112,9 @@
       <if test="tdsname != null" >
         TDSNAME,
       </if>
+      <if test="did != null" >
+        DID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tdsid != null" >
@@ -116,6 +122,9 @@
       </if>
       <if test="tdsname != null" >
         #{tdsname,jdbcType=VARCHAR},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -134,6 +143,9 @@
       <if test="record.tdsname != null" >
         TDSNAME = #{record.tdsname,jdbcType=VARCHAR},
       </if>
+      <if test="record.did != null" >
+        DID = #{record.did,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -142,7 +154,8 @@
   <update id="updateByExample" parameterType="map" >
     update test_device_type
     set TDSID = #{record.tdsid,jdbcType=BIGINT},
-      TDSNAME = #{record.tdsname,jdbcType=VARCHAR}
+      TDSNAME = #{record.tdsname,jdbcType=VARCHAR},
+      DID = #{record.did,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -153,12 +166,16 @@
       <if test="tdsname != null" >
         TDSNAME = #{tdsname,jdbcType=VARCHAR},
       </if>
+      <if test="did != null" >
+        DID = #{did,jdbcType=BIGINT},
+      </if>
     </set>
     where TDSID = #{tdsid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.shcp.pojo.TestDeviceType" >
     update test_device_type
-    set TDSNAME = #{tdsname,jdbcType=VARCHAR}
+    set TDSNAME = #{tdsname,jdbcType=VARCHAR},
+      DID = #{did,jdbcType=BIGINT}
     where TDSID = #{tdsid,jdbcType=BIGINT}
   </update>
 </mapper>
