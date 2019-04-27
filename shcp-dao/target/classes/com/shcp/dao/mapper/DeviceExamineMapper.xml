@@ -5,6 +5,8 @@
     <id column="DEID" property="deid" jdbcType="BIGINT" />
     <result column="TDEID" property="tdeid" jdbcType="BIGINT" />
     <result column="ENAME" property="ename" jdbcType="VARCHAR" />
+    <result column="is_pass" property="isPass" jdbcType="TINYINT" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
     <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
     <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" />
     <result column="EINFO" property="einfo" jdbcType="VARCHAR" />
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    DEID, TDEID, ENAME, GMT_CREATE, GMT_MODIFY, EINFO
+    DEID, TDEID, ENAME, is_pass, reason, GMT_CREATE, GMT_MODIFY, EINFO
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shcp.pojo.DeviceExamineExample" >
     select
@@ -102,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.shcp.pojo.DeviceExamine" >
     insert into device_examine (DEID, TDEID, ENAME, 
-      GMT_CREATE, GMT_MODIFY, EINFO
-      )
+      is_pass, reason, GMT_CREATE, 
+      GMT_MODIFY, EINFO)
     values (#{deid,jdbcType=BIGINT}, #{tdeid,jdbcType=BIGINT}, #{ename,jdbcType=VARCHAR}, 
-      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP}, #{einfo,jdbcType=VARCHAR}
-      )
+      #{isPass,jdbcType=TINYINT}, #{reason,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
+      #{gmtModify,jdbcType=TIMESTAMP}, #{einfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.shcp.pojo.DeviceExamine" >
     insert into device_examine
@@ -119,6 +121,12 @@
       </if>
       <if test="ename != null" >
         ENAME,
+      </if>
+      <if test="isPass != null" >
+        is_pass,
+      </if>
+      <if test="reason != null" >
+        reason,
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE,
@@ -139,6 +147,12 @@
       </if>
       <if test="ename != null" >
         #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="isPass != null" >
+        #{isPass,jdbcType=TINYINT},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -169,6 +183,12 @@
       <if test="record.ename != null" >
         ENAME = #{record.ename,jdbcType=VARCHAR},
       </if>
+      <if test="record.isPass != null" >
+        is_pass = #{record.isPass,jdbcType=TINYINT},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
       <if test="record.gmtCreate != null" >
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
@@ -188,6 +208,8 @@
     set DEID = #{record.deid,jdbcType=BIGINT},
       TDEID = #{record.tdeid,jdbcType=BIGINT},
       ENAME = #{record.ename,jdbcType=VARCHAR},
+      is_pass = #{record.isPass,jdbcType=TINYINT},
+      reason = #{record.reason,jdbcType=VARCHAR},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{record.gmtModify,jdbcType=TIMESTAMP},
       EINFO = #{record.einfo,jdbcType=VARCHAR}
@@ -203,6 +225,12 @@
       </if>
       <if test="ename != null" >
         ENAME = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="isPass != null" >
+        is_pass = #{isPass,jdbcType=TINYINT},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null" >
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -220,6 +248,8 @@
     update device_examine
     set TDEID = #{tdeid,jdbcType=BIGINT},
       ENAME = #{ename,jdbcType=VARCHAR},
+      is_pass = #{isPass,jdbcType=TINYINT},
+      reason = #{reason,jdbcType=VARCHAR},
       GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
       GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
       EINFO = #{einfo,jdbcType=VARCHAR}
